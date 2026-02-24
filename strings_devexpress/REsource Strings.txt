@@ -1,0 +1,531 @@
+
+Skip to content
+
+    Pricing
+
+Sign in
+Sign up
+bsf /
+boosterfw
+Public
+
+Code
+Issues 1
+Pull requests
+Actions
+Projects
+Wiki
+Security
+
+    Insights
+
+boosterfw/Sources/ShellLayout/UILocalization.pas
+@bsf
+bsf move ShellLayout module
+Latest commit 943a967 Jan 24, 2013
+History
+1 contributor
+528 lines (430 sloc) 22.6 KB
+unit UILocalization;
+
+interface
+uses cxClasses, dxNavBarConsts, cxGridStrs, cxFilterControlStrs, cxFilterConsts,
+  cxGridPopupMenuConsts, cxEditConsts, coreClasses, UIStr,
+  ShellIntf, ShellNavBar, ShellLayoutStr;
+
+procedure Localization(const ALocale: string);
+
+implementation
+
+
+procedure Localization_ru;
+begin
+  //Booster Frame Work
+  //ShellIntf
+  SetLocaleString(@MENU_GROUP_FILE, 'Ôàéë');
+  SetLocaleString(@MENU_GROUP_SERVICE, 'Ñåðâèñ');
+
+  //ShellLayout
+  SetLocaleString(@MAIN_MENU_CAPTION, 'Ãëàâíîå ìåíþ');
+  SetLocaleString(@VIEW_USER_PREFERENCES_TITLE, 'Ïðåäïî÷òåíèÿ');
+  SetLocaleString(@COMMAND_CLOSE_APP_CAPTION, 'Âûõîä');
+  SetLocaleString(@VIEW_ABOUT_TITLE, 'Î ïðîãðàììå...');
+  SetLocaleString(@COMMAND_SHOW_ABOUT_CAPTION, 'Î ïðîãðàììå...');
+  SetLocaleString(@MAIN_MENU_CAPTION,  'Ãëàâíîå ìåíþ');
+  SetLocaleString(@StrWaitMessage, 'Çàãðóçêà äàííûõ. Ïîäîæäèòå ïîæàëóéñòà...');
+  SetLocaleString(@COMMAND_RESET_CAPTION,  'Ñáðîñèòü');
+  SetLocaleString(@VIEW_NOTIFYSENDER_TITLE, 'Ðàññûëêà óâåäîìëåíèé');
+  SetLocaleString(@CloseApplicationQuestion, 'Çàêðûòü ïðîãðàììó?');
+  SetLocaleString(@strToolWinCmdHideTabs, 'Ñêðûòü çàêëàäêè');
+  SetLocaleString(@strToolWinCmdTabsTop, 'Çàêëàäêè ââåðõó');
+  SetLocaleString(@strToolWinCmdTabsBottom, 'Çàêëàäêè ñíèçó');
+  SetLocaleString(@strToolWinCmdCloseAll, 'Çàêðûòü âñå');
+
+
+  //UIClasses
+  SetLocaleString(@COMMAND_CLOSE_CAPTION, 'Çàêðûòü');
+  SetLocaleString(@COMMAND_SAVE_CAPTION, 'Ñîõðàíèòü');
+  SetLocaleString(@COMMAND_NEXT_CAPTION, 'Äàëåå >>');
+  SetLocaleString(@COMMAND_OK_CAPTION, 'OK');
+  SetLocaleString(@COMMAND_CANCEL_CAPTION, 'Îòìåíà');
+  SetLocaleString(@COMMAND_RELOAD_CAPTION, 'Îáíîâèòü');
+  SetLocaleString(@COMMAND_OPEN_CAPTION, 'Îòêðûòü');
+  SetLocaleString(@COMMAND_NEW_CAPTION, 'Äîáàâèòü');
+  SetLocaleString(@COMMAND_DELETE_CAPTION, 'Óäàëèòü');
+  SetLocaleString(@COMMAND_DETAIL_OPEN_CAPTION, 'Îòêðûòü çàïèñü');
+  SetLocaleString(@COMMAND_DETAIL_NEW_CAPTION, 'Äîáàâèòü çàïèñü');
+  SetLocaleString(@COMMAND_DETAIL_DELETE_CAPTION, 'Óäàëèòü çàïèñü');
+  SetLocaleString(@COMMAND_STATE_CHANGE_CAPTION, 'Ñìåíèòü ñîñòîÿíèå');
+  SetLocaleString(@COMMAND_STATE_CHANGE_NEXT_CAPTION, 'Ñëåäóþùåå ñîñòîÿíèå');
+  SetLocaleString(@COMMAND_STATE_CHANGE_PREV_CAPTION, 'Ïðåäûäóùåå ñîñòîÿíèå');
+  SetLocaleString(@COMMAND_SELECTOR_CAPTION, 'Îòáîð');
+  SetLocaleString(@COMMAND_EXECUTE_CAPTION, 'Âûïîëíèòü');
+
+
+  //HelperGridCtrl
+  cxSetResourceString(@cxGridExportToExcel, 'Ýêñïîðò â Excel');
+  cxSetResourceString(@cxGridAdjustColumnWidths, 'Ïî øèðèíå òàáëèöû');
+  cxSetResourceString(@cxGridQuickFilter, 'Ôèëüòð ïî âûäåëåííîìó');
+
+
+//cxEditConsts;
+
+  // TODO
+  cxSetResourceString(@cxSEditCheckBoxChecked, 'Èñòèíà');
+  cxSetResourceString(@cxSEditCheckBoxGrayed, '');
+  cxSetResourceString(@cxSEditCheckBoxUnchecked, 'Ëîæü');
+  cxSetResourceString(@cxSRadioGroupDefaultCaption, '');
+
+  cxSetResourceString(@cxSTextTrue, 'Èñòèíà');
+  cxSetResourceString(@cxSTextFalse, 'Ëîæü');
+
+  // blob
+  cxSetResourceString(@cxSBlobButtonOK, 'OK');
+  cxSetResourceString(@cxSBlobButtonCancel, 'Îòìåíà');
+  cxSetResourceString(@cxSBlobButtonClose, 'Çàêðûòü');
+  cxSetResourceString(@cxSBlobMemo, '(MEMO)');
+  cxSetResourceString(@cxSBlobMemoEmpty, '(memo)');
+  cxSetResourceString(@cxSBlobPicture, '(PICTURE)');
+  cxSetResourceString(@cxSBlobPictureEmpty, '(picture)');
+
+  // popup menu items
+  cxSetResourceString(@cxSMenuItemCaptionCut, 'Âûðåçàòü');
+  cxSetResourceString(@cxSMenuItemCaptionCopy, 'Êîïèðîâàòü');
+  cxSetResourceString(@cxSMenuItemCaptionPaste, 'Âñòàâèòü');
+  cxSetResourceString(@cxSMenuItemCaptionDelete, 'Óäàëèòü');
+  cxSetResourceString(@cxSMenuItemCaptionLoad,  'Çàãðóçèòü...');
+  cxSetResourceString(@cxSMenuItemCaptionSave, 'Ñîõðàíèòü êàê...');
+
+  // date
+  cxSetResourceString(@cxSDatePopupClear, 'Î÷èñòèòü');
+  cxSetResourceString(@cxSDatePopupNow, 'Ñåé÷àñ');
+  cxSetResourceString(@cxSDatePopupOK, 'OK');
+  cxSetResourceString(@cxSDatePopupToday, 'Ñåãîäíÿ');
+  cxSetResourceString(@cxSDateError, 'Íå êîððåêòíàÿ äàòà');
+
+  // calculator
+  cxSetResourceString(@scxSCalcError, 'Îøèáêà');
+
+
+{*-------------------------- NAV BAR -------------------------------------------
+  sdxNavigationPaneOverflowPanelCustomizeHint = 'Configure buttons';
+  sdxNavigationPaneMinimizeNavPaneSignHint = 'Minimize Navigation Pane';
+  sdxNavigationPaneExpandNavPaneSignHint = 'Expand Navigation Pane';
+  sdxNavigationPaneCollapseBarHint = 'Click to expand Navigation Pane';
+  sdxNavigationPaneCollapseBar = 'Navigation Pane';
+//Exception messages
+  sdxInvalideGroupControl = 'Invalid the TdxNavBarGroupControl parent or group.';
+  sdxInvalidLink = 'You cannot create a link to the ''%s'' item within the ''%s'' group because they belong to different NavBar controls';
+  sdxCannotFindView = 'Cannot find view with ID = %d.';
+  sdxViewAlreadyExists = 'ID of view = %d is already exists.';
+//Office11Views popup menu captions
+  sdxNavBarOffice11ShowMoreButtons = 'Show &More Buttons';
+  sdxNavBarOffice11ShowFewerButtons = 'Show &Fewer Buttons';
+  sdxNavBarOffice11AddRemoveButtons = '&Add or Remove Buttons';
+------------------------------------------------------------------------------*}
+
+  cxSetResourceString(@sdxNavigationPaneOverflowPanelCustomizeHint, 'Íàñòðîéêà êíîïîê');
+  cxSetResourceString(@sdxNavigationPaneMinimizeNavPaneSignHint, 'Ñâåðíóòü îáëàñòü ïåðåõîäîâ');
+  cxSetResourceString(@sdxNavigationPaneExpandNavPaneSignHint, 'Ðàçâåðíóòü îáëàñòü ïåðåõîäîâ');
+  cxSetResourceString(@sdxNavigationPaneCollapseBarHint, 'Ùåëêíèòå äëÿ ðàçâåðòûâàíèÿ îáëàñòè ïåðåõîäîâ');
+  cxSetResourceString(@sdxNavigationPaneCollapseBar, 'Îáëàñòü ïåðåõîäîâ');
+
+
+{*------------------------ GRID ------------------------------------------------
+scxGridRecursiveLevels = 'You cannot create recursive levels';
+  scxGridDeletingConfirmationCaption = 'Confirm';
+  scxGridDeletingFocusedConfirmationText = 'Delete record?';
+  scxGridDeletingSelectedConfirmationText = 'Delete all selected records?';
+  scxGridNoDataInfoText = '<No data to display>';
+  scxGridFilterRowInfoText = 'Click here to define a filter';
+  scxGridNewItemRowInfoText = 'Click here to add a new row';
+  scxGridFilterIsEmpty = '<Filter is Empty>';
+  scxGridCustomizationFormCaption = 'Customization';
+  scxGridCustomizationFormColumnsPageCaption = 'Columns';
+  scxGridGroupByBoxCaption = 'Drag a column header here to group by that column';
+  scxGridFilterApplyButtonCaption = 'Apply Filter';
+  scxGridFilterCustomizeButtonCaption = 'Customize...';
+  scxGridColumnsQuickCustomizationHint = 'Click here to show/hide/move columns';
+  scxGridCustomizationFormBandsPageCaption = 'Bands';
+  scxGridBandsQuickCustomizationHint = 'Click here to show/hide/move bands';
+  scxGridCustomizationFormRowsPageCaption = 'Rows';
+  scxGridConverterIntermediaryMissing = 'Missing an intermediary component!'#13#10'Please add a %s component to the form.';
+  scxGridConverterNotExistGrid = 'cxGrid does not exist';
+  scxGridConverterNotExistComponent = 'Component does not exist';
+  scxImportErrorCaption = 'Import error';
+  scxNotExistGridView = 'Grid view does not exist';
+  scxNotExistGridLevel = 'Active grid level does not exist';
+  scxCantCreateExportOutputFile = 'Can''t create the export output file';
+  cxSEditRepositoryExtLookupComboBoxItem = 'ExtLookupComboBox|Represents an ultra-advanced lookup using the QuantumGrid as its drop down control';
+  // date ranges
+  scxGridYesterday = 'Yesterday';
+  scxGridToday = 'Today';
+  scxGridTomorrow = 'Tomorrow';
+  scxGridLast30Days = 'Last 30 days';
+  scxGridLast14Days = 'Last 14 days';
+  scxGridLast7Days = 'Last 7 days';
+  scxGridNext7Days = 'Next 7 days';
+  scxGridNext14Days = 'Next 14 days';
+  scxGridNext30Days = 'Next 30 days';
+  scxGridLastTwoWeeks = 'Last two weeks';
+  scxGridLastWeek = 'Last week';
+  scxGridThisWeek = 'This week';
+  scxGridNextWeek = 'Next week';
+  scxGridNextTwoWeeks = 'Next two weeks';
+  scxGridLastMonth = 'Last month';
+  scxGridThisMonth = 'This month';
+  scxGridNextMonth = 'Next month';
+  scxGridLastYear = 'Last year';
+  scxGridThisYear = 'This year';
+  scxGridNextYear = 'Next year';
+  scxGridPast = 'Past';
+  scxGridFuture = 'Future';
+  scxGridMonthFormat = 'mmmm yyyy';
+  scxGridYearFormat = 'yyyy';
+  // ChartView
+  
+  scxGridChartCategoriesDisplayText = 'Data';
+  scxGridChartValueHintFormat = '%s for %s is %s';  // series display text, category, value
+  scxGridChartPercentValueTickMarkLabelFormat = '0%';
+  scxGridChartToolBoxDataLevels = 'Data Levels:';
+  scxGridChartToolBoxDataLevelSelectValue = 'select value';
+  scxGridChartToolBoxCustomizeButtonCaption = 'Customize Chart';
+  scxGridChartNoneDiagramDisplayText = 'No diagram';
+  scxGridChartColumnDiagramDisplayText = 'Column diagram';
+  scxGridChartBarDiagramDisplayText = 'Bar diagram';
+  scxGridChartLineDiagramDisplayText = 'Line diagram';
+  scxGridChartAreaDiagramDisplayText = 'Area diagram';
+  scxGridChartPieDiagramDisplayText = 'Pie diagram';
+  scxGridChartCustomizationFormSeriesPageCaption = 'Series';
+  scxGridChartCustomizationFormSortBySeries = 'Sort by:';
+  scxGridChartCustomizationFormNoSortedSeries = '<none series>';
+  scxGridChartCustomizationFormDataGroupsPageCaption = 'Data Groups';
+  scxGridChartCustomizationFormOptionsPageCaption = 'Options';
+  scxGridChartLegend = 'Legend';
+  scxGridChartLegendKeyBorder = 'Key Border';
+  scxGridChartPosition = 'Position';
+  scxGridChartPositionDefault = 'Default';
+  scxGridChartPositionNone = 'None';
+  scxGridChartPositionLeft = 'Left';
+  scxGridChartPositionTop = 'Top';
+  scxGridChartPositionRight = 'Right';
+  scxGridChartPositionBottom = 'Bottom';
+  scxGridChartAlignment = 'Alignment';
+  scxGridChartAlignmentDefault = 'Default';
+  scxGridChartAlignmentStart = 'Start';
+  scxGridChartAlignmentCenter = 'Center';
+  scxGridChartAlignmentEnd = 'End';
+  scxGridChartOrientation = 'Orientation';
+  scxGridChartOrientationDefault = 'Default';
+  scxGridChartOrientationHorizontal = 'Horizontal';
+  scxGridChartOrientationVertical = 'Vertical';
+  scxGridChartBorder = 'Border';
+  scxGridChartTitle = 'Title';
+  scxGridChartToolBox = 'ToolBox';
+  scxGridChartDiagramSelector = 'Diagram Selector';
+  scxGridChartOther = 'Other';
+  scxGridChartValueHints = 'Value Hints';
+------------------------------------------------------------------------------*}
+
+  cxSetResourceString(@scxGridNoDataInfoText, 'Íåò äàííûõ äëÿ îòîáðàæåíèÿ');
+
+  cxSetResourceString(@scxGridFilterRowInfoText, 'Ùåëêíèòå äëÿ äîáàâëåíèÿ ôèëüòðà');
+  cxSetResourceString(@scxGridNewItemRowInfoText, 'Ùåëêíèòå äëÿ äîáàâëåíèÿ ñòðîêè');
+
+  cxSetResourceString(@scxGridFilterIsEmpty, '<Ôèëüòð ïóñò>');
+
+  cxSetResourceString(@scxGridCustomizationFormCaption, 'Íàñòðîéêà');
+  cxSetResourceString(@scxGridCustomizationFormColumnsPageCaption, 'Ïîëÿ');
+  cxSetResourceString(@scxGridGroupByBoxCaption, 'Ïåðåòàùèòå ïîëå äëÿ ãðóïïèðîâêè');
+  cxSetResourceString(@scxGridFilterApplyButtonCaption, 'Ïðèìåíèòü ôèëüòð');
+  cxSetResourceString(@scxGridFilterCustomizeButtonCaption, 'Íàñòðîéêà...');
+  cxSetResourceString(@scxGridColumnsQuickCustomizationHint, 'Ùåëêíèòå ÷òî áû îòîáðàçèòü/ñêðûòü/ïåðåìåñòèòü ïîëÿ');
+
+  cxSetResourceString(@scxGridCustomizationFormBandsPageCaption, 'Ãðóïïû ïîëåé');
+  cxSetResourceString(@scxGridBandsQuickCustomizationHint, 'Ùåëêíèòå ÷òî áû îòîáðàçèòü/ñêðûòü/ïåðåìåñòèòü ãðóïïó ïîëåé');
+
+  cxSetResourceString(@scxGridCustomizationFormRowsPageCaption, 'Ñòðîêè');
+
+
+(*------------------- GRID POPUPMENU ----------------------------------------
+  // Header popup menu item captions
+  cxSGridSortColumnAsc = 'Sort Ascending';
+  cxSGridSortColumnDesc = 'Sort Descending';
+  cxSGridClearSorting = 'Clear Sorting';
+  cxSGridGroupByThisField = 'Group By This Field';
+  cxSGridRemoveThisGroupItem = 'Remove from grouping';
+  cxSGridGroupByBox = 'Group By Box';
+  cxSGridAlignmentSubMenu = 'Alignment';
+  cxSGridAlignLeft = 'Align Left';
+  cxSGridAlignRight = 'Align Right';
+  cxSGridAlignCenter = 'Align Center';
+  cxSGridRemoveColumn = 'Remove This Column';
+  cxSGridFieldChooser = 'Field Chooser';
+  cxSGridBestFit = 'Best Fit';
+  cxSGridBestFitAllColumns = 'Best Fit (all columns)';
+  cxSGridShowFooter = 'Footer';
+  cxSGridShowGroupFooter = 'Group Footers';
+  // Footer popup menu item captions
+  cxSGridNoneMenuItem = 'None';
+  cxSGridSumMenuItem = 'Sum';
+  cxSGridMinMenuItem = 'Min';
+  cxSGridMaxMenuItem = 'Max';
+  cxSGridCountMenuItem = 'Count';
+  cxSGridAvgMenuItem = 'Average';
+  // Group row popup menu item captions
+  cxSGridSortByGroupValues = 'Sort by Group Value';
+  cxSGridSortBySummaryCaption = 'Sort by Group Summary:';
+  cxSGridSortBySummary = '%s for %s';
+----------------------------------------------------------------------------*)
+  // Header popup menu item captions
+
+  cxSetResourceString(@cxSGridSortColumnAsc, 'Ñîðòèðîâêà îò À äî ß');
+  cxSetResourceString(@cxSGridSortColumnDesc, 'Ñîðòèðîâêà îò ß äî À');
+  cxSetResourceString(@cxSGridClearSorting, 'Îòìåíèòü ñîðòèðîâêó');
+  cxSetResourceString(@cxSGridGroupByThisField, 'Ãðóïïèðîâàòü ïî ýòîìó ïîëþ');
+  cxSetResourceString(@cxSGridRemoveThisGroupItem, 'Óáðàòü èç ãðóïïèðîâêè');
+  cxSetResourceString(@cxSGridGroupByBox, 'Îáëàñòü ãðóïïèðîâêè');
+  cxSetResourceString(@cxSGridAlignmentSubMenu, 'Âûðàâíèâàíèå');
+  cxSetResourceString(@cxSGridAlignLeft, 'Ïî ëåâîìó êðàþ');
+  cxSetResourceString(@cxSGridAlignRight, 'Ïî ïðàâîìó êðàþ');
+  cxSetResourceString(@cxSGridAlignCenter, 'Ïî öåíòðó');
+  cxSetResourceString(@cxSGridRemoveColumn, 'Óäàëèòü ïîëå');
+  cxSetResourceString(@cxSGridFieldChooser, 'Âûáîð ïîëåé');
+  cxSetResourceString(@cxSGridBestFit, 'Ïîäîáðàòü øèðèíó');
+  cxSetResourceString(@cxSGridBestFitAllColumns, 'Ïîäîáðàòü øèðèíó(âñå ïîëÿ)');
+  cxSetResourceString(@cxSGridShowFooter, 'Èòîãè');
+  cxSetResourceString(@cxSGridShowGroupFooter, 'Èòîãè ïî ãðóïïå');
+
+  // Footer popup menu item captions
+
+  cxSetResourceString(@cxSGridNoneMenuItem, 'Íè÷åãî');
+  cxSetResourceString(@cxSGridSumMenuItem, 'Ñóììà');
+  cxSetResourceString(@cxSGridMinMenuItem, 'Ìèíèìóì');
+  cxSetResourceString(@cxSGridMaxMenuItem, 'Ìàêñèìóì');
+  cxSetResourceString(@cxSGridCountMenuItem, 'Êîë-âî');
+  cxSetResourceString(@cxSGridAvgMenuItem, 'Ñðåäíåå');
+
+  // Group row popup menu item captions
+
+  cxSetResourceString(@cxSGridSortByGroupValues, 'Ñîðòèðîâàòü ïî çíà÷åíèþ ãðóïïû');
+  cxSetResourceString(@cxSGridSortBySummaryCaption, 'Ñîðòèðîâàòü ïî èòîãàì ãðóïïû:');
+  cxSetResourceString(@cxSGridSortBySummary, '%s äëÿ %s');
+
+(*--------------- FILTER DIALOG -----------------------------------------------
+  // cxFilterBoolOperator
+  cxSFilterBoolOperatorAnd = 'AND';        // all
+  cxSFilterBoolOperatorOr = 'OR';          // any
+  cxSFilterBoolOperatorNotAnd = 'NOT AND'; // not all
+  cxSFilterBoolOperatorNotOr = 'NOT OR';   // not any
+  //
+  cxSFilterRootButtonCaption = 'Filter';
+  cxSFilterAddCondition = 'Add &Condition';
+  cxSFilterAddGroup = 'Add &Group';
+  cxSFilterRemoveRow = '&Remove Row';
+  cxSFilterClearAll = 'Clear &All';
+  cxSFilterFooterAddCondition = 'press the button to add a new condition';
+  cxSFilterGroupCaption = 'applies to the following conditions';
+  cxSFilterRootGroupCaption = '<root>';
+  cxSFilterControlNullString = '<empty>';
+  cxSFilterErrorBuilding = 'Can''t build filter from source';
+  //FilterDialog
+  cxSFilterDialogCaption = 'Custom Filter';
+  cxSFilterDialogInvalidValue = 'Invalid value';
+  cxSFilterDialogUse = 'Use';
+  cxSFilterDialogSingleCharacter = 'to represent any single character';
+  cxSFilterDialogCharactersSeries = 'to represent any series of characters';
+  cxSFilterDialogOperationAnd = 'AND';
+  cxSFilterDialogOperationOr = 'OR';
+  cxSFilterDialogRows = 'Show rows where:';
+  // FilterControlDialog
+  cxSFilterControlDialogCaption = 'Filter builder';
+  cxSFilterControlDialogNewFile = 'untitled.flt';
+  cxSFilterControlDialogOpenDialogCaption = 'Open an existing filter';
+  cxSFilterControlDialogSaveDialogCaption = 'Save the active filter to file';
+  cxSFilterControlDialogActionSaveCaption = '&Save As...';
+  cxSFilterControlDialogActionOpenCaption = '&Open...';
+  cxSFilterControlDialogActionApplyCaption = '&Apply';
+  cxSFilterControlDialogActionOkCaption = 'OK';
+  cxSFilterControlDialogActionCancelCaption = 'Cancel';
+  cxSFilterControlDialogFileExt = 'flt';
+  cxSFilterControlDialogFileFilter = 'Filters (*.flt)|*.flt';
+-----------------------------------------------------------------------------*)
+
+  cxSetResourceString(@cxSFilterBoolOperatorAnd,  'È');
+  cxSetResourceString(@cxSFilterBoolOperatorOr, 'ÈËÈ');
+  cxSetResourceString(@cxSFilterBoolOperatorNotAnd,  'ÍÅ È');
+  cxSetResourceString(@cxSFilterBoolOperatorNotOr, 'ÍÅ ÈËÈ');
+
+  cxSetResourceString(@cxSFilterRootButtonCaption, 'Ôèëüòð');
+  cxSetResourceString(@cxSFilterAddCondition, 'Äîáàâèòü óñëîâèå');
+  cxSetResourceString(@cxSFilterAddGroup, 'Äîáàâèòü ãðóïïó');
+  cxSetResourceString(@cxSFilterRemoveRow, 'Óäàëèòü ñòðîêó');
+  cxSetResourceString(@cxSFilterClearAll, 'Î÷èñòèòü âñå');
+  cxSetResourceString(@cxSFilterFooterAddCondition, 'íàæìè êíîïêó äëÿ äîáàâëåíèÿ óñëîâèÿ');
+
+  cxSetResourceString(@cxSFilterGroupCaption, 'ïðèìåíèòü ê ñëåäóþùåìó óñëîâèþ');
+  cxSetResourceString(@cxSFilterRootGroupCaption, '<êîðåíü>');
+  cxSetResourceString(@cxSFilterControlNullString, '<ïóñòî>');
+
+  cxSetResourceString(@cxSFilterErrorBuilding, 'Can''t build filter from source');
+
+  //FilterDialog
+  cxSetResourceString(@cxSFilterDialogCaption, 'Íàñòðîéêà ôèëüòðà');
+  cxSetResourceString(@cxSFilterDialogInvalidValue, 'Îøèáî÷íîå çíà÷åíèå');
+  cxSetResourceString(@cxSFilterDialogUse, 'Èñïîëüçîâàòü');
+  cxSetResourceString(@cxSFilterDialogSingleCharacter, 'äëÿ ïîäñòàíîâêè ëþáîãî îäèíî÷íîãî ñèìâîëà');
+  cxSetResourceString(@cxSFilterDialogCharactersSeries, 'äëÿ ïîäñòàíîâêè ëþáûõ ñèìâîëîâ');
+  cxSetResourceString(@cxSFilterDialogOperationAnd, 'È');
+  cxSetResourceString(@cxSFilterDialogOperationOr, 'ÈËÈ');
+  cxSetResourceString(@cxSFilterDialogRows, 'Îòîáðàçèòü ñòðîêè ãäå:');
+
+
+  cxSetResourceString(@cxSFilterControlDialogCaption,'Ïîñòðîèòåëü ôèëüòðîâ');
+  cxSetResourceString(@cxSFilterControlDialogNewFile,  'untitled.flt');
+  cxSetResourceString(@cxSFilterControlDialogOpenDialogCaption, 'Îòêðûòü ñîõðàíåííûé ôèëüòð');
+  cxSetResourceString(@cxSFilterControlDialogSaveDialogCaption,'Ñîõðàíèòü òåêóùèé ôèëüòð â ôàéë');
+  cxSetResourceString(@cxSFilterControlDialogActionSaveCaption, '&Ñîõðàíèòü êàê...');
+  cxSetResourceString(@cxSFilterControlDialogActionOpenCaption, '&Îòêðûòü...');
+  cxSetResourceString(@cxSFilterControlDialogActionApplyCaption, '&Ïðèìåíèòü');
+  cxSetResourceString(@cxSFilterControlDialogActionOkCaption, 'OK');
+  cxSetResourceString(@cxSFilterControlDialogActionCancelCaption, 'Îòìåíà');
+  cxSetResourceString(@cxSFilterControlDialogFileExt, 'flt');
+  cxSetResourceString(@cxSFilterControlDialogFileFilter, 'Filters (*.flt)|*.flt');
+
+(*------------------------- FILTER -------------------------------------------
+  // base operators
+  cxSFilterOperatorEqual = 'equals';
+  cxSFilterOperatorNotEqual = 'does not equal';
+  cxSFilterOperatorLess = 'is less than';
+  cxSFilterOperatorLessEqual = 'is less than or equal to';
+  cxSFilterOperatorGreater = 'is greater than';
+  cxSFilterOperatorGreaterEqual = 'is greater than or equal to';
+  cxSFilterOperatorLike = 'like';
+  cxSFilterOperatorNotLike = 'not like';
+  cxSFilterOperatorBetween = 'between';
+  cxSFilterOperatorNotBetween = 'not between';
+  cxSFilterOperatorInList = 'in';
+  cxSFilterOperatorNotInList = 'not in';
+  cxSFilterOperatorYesterday = 'is yesterday';
+  cxSFilterOperatorToday = 'is today';
+  cxSFilterOperatorTomorrow = 'is tomorrow';
+  cxSFilterOperatorLast7Days = 'is last 7 days';
+  cxSFilterOperatorLastWeek = 'is last week';
+  cxSFilterOperatorLast14Days = 'is last 14 days';
+  cxSFilterOperatorLastTwoWeeks = 'is last two weeks';
+  cxSFilterOperatorLast30Days = 'is last 30 days';
+  cxSFilterOperatorLastMonth = 'is last month';
+  cxSFilterOperatorLastYear = 'is last year';
+  cxSFilterOperatorPast = 'is past';
+  cxSFilterOperatorThisWeek = 'is this week';
+  cxSFilterOperatorThisMonth = 'is this month';
+  cxSFilterOperatorThisYear = 'is this year';
+  cxSFilterOperatorNext7Days = 'is next 7 days';
+  cxSFilterOperatorNextWeek = 'is next week';
+  cxSFilterOperatorNext14Days = 'is next 14 days';
+  cxSFilterOperatorNextTwoWeeks = 'is next two weeks';
+  cxSFilterOperatorNext30Days = 'is next 30 days';
+  cxSFilterOperatorNextMonth = 'is next month';
+  cxSFilterOperatorNextYear = 'is next year';
+  cxSFilterOperatorFuture = 'is future';
+  cxSFilterAndCaption = 'and';
+  cxSFilterOrCaption = 'or';
+  cxSFilterNotCaption = 'not';
+  cxSFilterBlankCaption = 'blank';
+  // derived
+  cxSFilterOperatorIsNull = 'is blank';
+  cxSFilterOperatorIsNotNull = 'is not blank';
+  cxSFilterOperatorBeginsWith = 'begins with';
+  cxSFilterOperatorDoesNotBeginWith = 'does not begin with';
+  cxSFilterOperatorEndsWith = 'ends with';
+  cxSFilterOperatorDoesNotEndWith = 'does not end with';
+  cxSFilterOperatorContains = 'contains';
+  cxSFilterOperatorDoesNotContain = 'does not contain';
+  // filter listbox's values
+  cxSFilterBoxAllCaption = '(All)';
+  cxSFilterBoxCustomCaption = '(Custom...)';
+  cxSFilterBoxBlanksCaption = '(Blanks)';
+  cxSFilterBoxNonBlanksCaption = '(NonBlanks)';
+-----------------------------------------------------------------------------*)
+
+  cxSetResourceString(@cxSFilterOperatorEqual, 'ðàâíî');
+  cxSetResourceString(@cxSFilterOperatorNotEqual, 'íå ðàâíî');
+  cxSetResourceString(@cxSFilterOperatorLess, 'ìåøüøå ÷åì');
+  cxSetResourceString(@cxSFilterOperatorLessEqual, 'ìåøüøå èëè ðàâíî ÷åì');
+  cxSetResourceString(@cxSFilterOperatorGreater, 'áîëüøå ÷åì');
+  cxSetResourceString(@cxSFilterOperatorGreaterEqual, 'áîëüøå èëè ðàâíî ÷åì');
+  cxSetResourceString(@cxSFilterOperatorLike, 'ñîäåðæèò');
+  cxSetResourceString(@cxSFilterOperatorNotLike, 'íå ñîäåðæèò');
+  cxSetResourceString(@cxSFilterOperatorBetween, 'between');
+  cxSetResourceString(@cxSFilterOperatorNotBetween, 'not between');
+  cxSetResourceString(@cxSFilterOperatorInList, 'in');
+  cxSetResourceString(@cxSFilterOperatorNotInList, 'not in');
+
+
+
+  cxSetResourceString(@cxSFilterAndCaption, 'è');
+  cxSetResourceString(@cxSFilterOrCaption, 'èëè');
+  cxSetResourceString(@cxSFilterNotCaption, 'íå');
+  cxSetResourceString(@cxSFilterBlankCaption, 'ïóñòî');
+
+  cxSetResourceString(@cxSFilterOperatorIsNull, 'ïóñòî');
+  cxSetResourceString(@cxSFilterOperatorIsNotNull, 'íå ïóñòî');
+  cxSetResourceString(@cxSFilterOperatorBeginsWith, 'íà÷èíàåòñÿ ñ');
+  cxSetResourceString(@cxSFilterOperatorDoesNotBeginWith, 'íå íà÷èíàåòñÿ ñ');
+  cxSetResourceString(@cxSFilterOperatorEndsWith, 'çàêàí÷èâàåòñÿ íà');
+  cxSetResourceString(@cxSFilterOperatorDoesNotEndWith, 'íå çàêàí÷èâàåòñÿ íà');
+  cxSetResourceString(@cxSFilterOperatorContains, 'ñîäåðæèò');
+  cxSetResourceString(@cxSFilterOperatorDoesNotContain, 'íå ñîäåðæèò');
+
+  cxSetResourceString(@cxSFilterBoxAllCaption, '(Âñå)');
+  cxSetResourceString(@cxSFilterBoxCustomCaption, '(Íàñòðîèòü...)');
+  cxSetResourceString(@cxSFilterBoxBlanksCaption, '(Ïóñòî)');
+  cxSetResourceString(@cxSFilterBoxNonBlanksCaption, '(Íå ïóñòî)');
+
+
+end;
+
+
+procedure Localization(const ALocale: string);
+begin
+  if ALocale = 'ru-RU' then
+    Localization_ru;
+end;
+
+end.
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+

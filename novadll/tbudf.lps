@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="tbudf.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="723"/>
+        <CursorPos X="69" Y="740"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="util.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="135"/>
+        <CursorPos Y="172"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="consts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="27" Y="11"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="fb.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="31" Y="12"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="C:\Program Files (x86)\Embarcadero\Studio\17.0\lib\componentes\acbr\Fontes\ACBrComum\ACBr.inc"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="251"/>
+        <CursorPos X="35" Y="280"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="714" Column="31" TopLine="683"/>
+      </Position1>
+      <Position2>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="700" Column="10" TopLine="681"/>
+      </Position2>
+      <Position3>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="683" Column="19" TopLine="669"/>
+      </Position3>
+      <Position4>
+        <Filename Value="tbudf.lpr"/>
+      </Position4>
+      <Position5>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="683" Column="19" TopLine="652"/>
+      </Position5>
+      <Position6>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="741" Column="19" TopLine="710"/>
+      </Position6>
+      <Position7>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="1123" TopLine="1104"/>
+      </Position7>
+      <Position8>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="700" TopLine="681"/>
+      </Position8>
+      <Position9>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="1171" TopLine="1134"/>
+      </Position9>
+      <Position10>
+        <Filename Value="tbudf.lpr"/>
+      </Position10>
+      <Position11>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="683" Column="19" TopLine="652"/>
+      </Position11>
+      <Position12>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="741" Column="19" TopLine="710"/>
+      </Position12>
+      <Position13>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="1123" TopLine="1091"/>
+      </Position13>
+      <Position14>
+        <Filename Value="tbudf.lpr"/>
+      </Position14>
+      <Position15>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="700" TopLine="681"/>
+      </Position15>
+      <Position16>
+        <Filename Value="tbudf.lpr"/>
+      </Position16>
+      <Position17>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="683" Column="19" TopLine="652"/>
+      </Position17>
+      <Position18>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="700" Column="19" TopLine="669"/>
+      </Position18>
+      <Position19>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="741" Column="19" TopLine="710"/>
+      </Position19>
+      <Position20>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="1082" Column="31" TopLine="1076"/>
+      </Position20>
+      <Position21>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="1122" Column="86" TopLine="1092"/>
+      </Position21>
+      <Position22>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="700" Column="66" TopLine="684"/>
+      </Position22>
+      <Position23>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="719" Column="90" TopLine="696"/>
+      </Position23>
+      <Position24>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="700" Column="59" TopLine="690"/>
+      </Position24>
+      <Position25>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="743" Column="5" TopLine="691"/>
+      </Position25>
+      <Position26>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="709" Column="3" TopLine="689"/>
+      </Position26>
+      <Position27>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="720" Column="55" TopLine="700"/>
+      </Position27>
+      <Position28>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="719" Column="16" TopLine="700"/>
+      </Position28>
+      <Position29>
+        <Filename Value="tbudf.lpr"/>
+        <Caret Line="710" Column="50" TopLine="694"/>
+      </Position29>
+      <Position30>
+        <Filename Value="C:\Program Files (x86)\Embarcadero\Studio\17.0\lib\componentes\acbr\Fontes\ACBrComum\ACBr.inc"/>
+        <Caret Line="8" Column="70"/>
+      </Position30>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

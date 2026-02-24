@@ -1,0 +1,650 @@
+inherited frm_baixa_manual: Tfrm_baixa_manual
+  Left = 198
+  Top = 225
+  Caption = 'Lan'#231'amentos de baixas manuais no estoque'
+  ClientHeight = 260
+  ClientWidth = 764
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pn_principal: TPanel
+    Width = 764
+    Height = 200
+    ExplicitWidth = 764
+    ExplicitHeight = 200
+    object Panel1: TPanel [0]
+      Left = -7
+      Top = 2
+      Width = 694
+      Height = 41
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 16
+        Top = 0
+        Width = 44
+        Height = 13
+        Caption = 'C'#243'digo:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+    inherited pn_codigo: TPanel
+      Tag = 99
+      Width = 762
+      Height = 41
+      Color = clBlack
+      TabOrder = 1
+      ExplicitWidth = 762
+      ExplicitHeight = 41
+      inherited bt_pesquisa: TSpeedButton
+        Left = 60
+        Top = -28
+        ExplicitLeft = 60
+        ExplicitTop = -28
+      end
+      object Label10: TLabel [1]
+        Left = 190
+        Top = 7
+        Width = 362
+        Height = 29
+        Caption = 'BAIXAS MANUAIS DE ESTOQUE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clLime
+        Font.Height = -24
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+      end
+      inherited ed_codigo: TMaskEdit
+        Left = 1
+        Top = -26
+        Width = 56
+        ExplicitLeft = 1
+        ExplicitTop = -26
+        ExplicitWidth = 56
+      end
+    end
+    object pn_campos: TPanel
+      Left = 1
+      Top = 43
+      Width = 768
+      Height = 230
+      TabOrder = 2
+      object Label6: TLabel
+        Left = 3
+        Top = 13
+        Width = 59
+        Height = 13
+        Caption = 'C'#243'd. '#205'tem:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object bt_pesq_item_estoque_cod: TSpeedButton
+        Left = 57
+        Top = 27
+        Width = 24
+        Height = 22
+        Flat = True
+        Glyph.Data = {
+          DE010000424DDE01000000000000760000002800000024000000120000000100
+          0400000000006801000000000000000000001000000010000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00666666666666
+          6666666666666666666666660000666666666666666666666666666666666666
+          0000666666666666666666666666666666666666000060000066666000006668
+          8888666668888866000060800066666080006668788866666878886600006080
+          00666660800066687888666668788866000060000000F00000006668888888F8
+          8888886600006080000000800000666878888888788888660000608000006080
+          0000666878888868788888660000608000006080000066687888886878888866
+          0000660000000000000666668888888888888666000066608000F08000666666
+          687888F878886666000066600000600000666666688888688888666600006666
+          00066600066666666688866688866666000066668F06668F06666666668F8666
+          8F86666600006666000666000666666666888666888666660000666666666666
+          6666666666666666666666660000666666666666666666666666666666666666
+          0000}
+        NumGlyphs = 2
+        OnClick = botao_pesquisaClick
+      end
+      object bt_pesq_un_saida: TSpeedButton
+        Left = 136
+        Top = 64
+        Width = 24
+        Height = 22
+        Flat = True
+        Glyph.Data = {
+          DE010000424DDE01000000000000760000002800000024000000120000000100
+          0400000000006801000000000000000000001000000010000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00666666666666
+          6666666666666666666666660000666666666666666666666666666666666666
+          0000666666666666666666666666666666666666000060000066666000006668
+          8888666668888866000060800066666080006668788866666878886600006080
+          00666660800066687888666668788866000060000000F00000006668888888F8
+          8888886600006080000000800000666878888888788888660000608000006080
+          0000666878888868788888660000608000006080000066687888886878888866
+          0000660000000000000666668888888888888666000066608000F08000666666
+          687888F878886666000066600000600000666666688888688888666600006666
+          00066600066666666688866688866666000066668F06668F06666666668F8666
+          8F86666600006666000666000666666666888666888666660000666666666666
+          6666666666666666666666660000666666666666666666666666666666666666
+          0000}
+        NumGlyphs = 2
+        OnClick = botao_pesquisaClick
+      end
+      object Label8: TLabel
+        Left = 84
+        Top = 49
+        Width = 69
+        Height = 13
+        Caption = 'Unid. baixa:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 9
+        Top = 51
+        Width = 40
+        Height = 13
+        Caption = 'Qtde. :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 4
+        Top = 91
+        Width = 57
+        Height = 13
+        Caption = 'Cod. Hist.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object btPesqTipoBaixa: TSpeedButton
+        Left = 55
+        Top = 105
+        Width = 24
+        Height = 22
+        Flat = True
+        Glyph.Data = {
+          DE010000424DDE01000000000000760000002800000024000000120000000100
+          0400000000006801000000000000000000001000000010000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00666666666666
+          6666666666666666666666660000666666666666666666666666666666666666
+          0000666666666666666666666666666666666666000060000066666000006668
+          8888666668888866000060800066666080006668788866666878886600006080
+          00666660800066687888666668788866000060000000F00000006668888888F8
+          8888886600006080000000800000666878888888788888660000608000006080
+          0000666878888868788888660000608000006080000066687888886878888866
+          0000660000000000000666668888888888888666000066608000F08000666666
+          687888F878886666000066600000600000666666688888688888666600006666
+          00066600066666666688866688866666000066668F06668F06666666668F8666
+          8F86666600006666000666000666666666888666888666660000666666666666
+          6666666666666666666666660000666666666666666666666666666666666666
+          0000}
+        NumGlyphs = 2
+        OnClick = botao_pesquisaClick
+      end
+      object Label17: TLabel
+        Left = 422
+        Top = 90
+        Width = 79
+        Height = 13
+        Caption = 'Observa'#231#245'es:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object ed_cod_item: TEdit
+        Left = 4
+        Top = 27
+        Width = 52
+        Height = 21
+        CharCase = ecUpperCase
+        TabOrder = 0
+        OnEnter = Edit1Enter
+        OnExit = Edit1Exit
+        OnKeyDown = Edit1KeyDown
+      end
+      object pn_informacoes2: TPanel
+        Left = 86
+        Top = 8
+        Width = 675
+        Height = 43
+        BevelOuter = bvNone
+        Enabled = False
+        TabOrder = 1
+        object Label7: TLabel
+          Left = 5
+          Top = 6
+          Width = 105
+          Height = 13
+          Caption = 'Descri'#231#227'o do '#237'tem'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label2: TLabel
+          Left = 318
+          Top = 4
+          Width = 130
+          Height = 13
+          Caption = 'Estoque atual do '#237'tem:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object ed_desc_item: TEdit
+          Left = 4
+          Top = 19
+          Width = 306
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clBlack
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clYellow
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MaxLength = 30
+          ParentFont = False
+          TabOrder = 0
+        end
+        object edEstoqueCompletoItem: TEdit
+          Left = 319
+          Top = 18
+          Width = 357
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clBlack
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clYellow
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MaxLength = 30
+          ParentFont = False
+          TabOrder = 1
+        end
+      end
+      object ed_cod_un_saida: TEdit
+        Left = 83
+        Top = 64
+        Width = 52
+        Height = 21
+        CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        MaxLength = 2
+        ParentFont = False
+        TabOrder = 4
+        OnEnter = Edit1Enter
+        OnExit = Edit1Exit
+        OnKeyDown = Edit1KeyDown
+      end
+      object Panel3: TPanel
+        Left = 180
+        Top = 47
+        Width = 371
+        Height = 41
+        BevelOuter = bvNone
+        Enabled = False
+        TabOrder = 6
+        object Label4: TLabel
+          Left = 5
+          Top = 4
+          Width = 62
+          Height = 13
+          Caption = 'Descri'#231#227'o:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object ed_desc_un_saida: TEdit
+          Left = 3
+          Top = 18
+          Width = 352
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clBlack
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clYellow
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MaxLength = 30
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object Panel4: TPanel
+        Left = 88
+        Top = 88
+        Width = 330
+        Height = 41
+        BevelOuter = bvNone
+        Enabled = False
+        TabOrder = 7
+        object Label5: TLabel
+          Left = 3
+          Top = 4
+          Width = 154
+          Height = 13
+          Caption = 'Hist'#243'rico do tipo de ajuste:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object edDescricaoTipoBaixaEstoque: TEdit
+          Left = 2
+          Top = 20
+          Width = 323
+          Height = 21
+          CharCase = ecUpperCase
+          Color = clBlack
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clYellow
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MaxLength = 30
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object edCodTipoBaixaEstoque: TEdit
+        Left = 5
+        Top = 106
+        Width = 47
+        Height = 21
+        CharCase = ecUpperCase
+        TabOrder = 5
+        OnEnter = Edit1Enter
+        OnExit = Edit1Exit
+        OnKeyDown = Edit1KeyDown
+      end
+      object memo_obs: TMemo
+        Left = 420
+        Top = 104
+        Width = 327
+        Height = 49
+        Hint = 'Observa'#231#245'es'
+        TabOrder = 8
+        OnEnter = ed_codigoEnter
+        OnExit = ed_codigoExit
+        OnKeyDown = ed_codigoKeyDown
+      end
+      object rdTipoAcerto: TRadioGroup
+        Left = 549
+        Top = 53
+        Width = 201
+        Height = 33
+        Caption = 'Tipo do ajuste:'
+        Columns = 2
+        Enabled = False
+        ItemIndex = 0
+        Items.Strings = (
+          'Baixa'
+          'Ajuste positivo')
+        TabOrder = 2
+        Visible = False
+      end
+      object ed_quantidade: TCurrencyEdit
+        Tag = 3
+        Left = 7
+        Top = 65
+        Width = 59
+        Height = 21
+        AutoSize = False
+        DisplayFormat = '0.000'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        MaxLength = 30
+        ParentFont = False
+        TabOrder = 3
+        OnEnter = Edit1Enter
+        OnExit = Edit1Exit
+        OnKeyDown = Edit1KeyDown
+      end
+    end
+  end
+  inherited pn_botoes: TPanel
+    Top = 200
+    Width = 764
+    Height = 60
+    ExplicitTop = 200
+    ExplicitWidth = 764
+    ExplicitHeight = 60
+    inherited bt_novo: TBitBtn
+      Width = 191
+      Height = 58
+      ExplicitWidth = 191
+      ExplicitHeight = 58
+    end
+    inherited bt_alterar: TBitBtn
+      Tag = -1
+      Left = 173
+      Top = -38
+      Width = 86
+      Height = 36
+      ExplicitLeft = 173
+      ExplicitTop = -38
+      ExplicitWidth = 86
+      ExplicitHeight = 36
+    end
+    inherited bt_gravar: TBitBtn
+      Left = 193
+      Width = 191
+      Height = 57
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333330000333333333333333333333333F33333333333
+        00003333344333333333333333377F3333333333000033334224333333333333
+        337337F3333333330000333422224333333333333733337F3333333300003342
+        222224333333333373333337F3333333000034222A22224333333337F337F333
+        7F33333300003222A3A2224333333337F3737F337F33333300003A2A333A2224
+        33333337F73337F337F33333000033A33333A222433333337333337F337F3333
+        0000333333333A222433333333333337F337F33300003333333333A222433333
+        333333337F337F33000033333333333A222433333333333337F337F300003333
+        33333333A222433333333333337F337F00003333333333333A22433333333333
+        3337F37F000033333333333333A223333333333333337F730000333333333333
+        333A333333333333333337330000333333333333333333333333333333333333
+        0000}
+      ExplicitLeft = 193
+      ExplicitWidth = 191
+      ExplicitHeight = 57
+    end
+    inherited bt_cancelar: TBitBtn
+      Left = 384
+      Width = 191
+      Height = 57
+      ExplicitLeft = 384
+      ExplicitWidth = 191
+      ExplicitHeight = 57
+    end
+    inherited bt_sair: TBitBtn
+      Left = 576
+      Width = 187
+      Height = 57
+      Glyph.Data = {
+        360C0000424D360C000000000000360000002800000020000000200000000100
+        180000000000000C0000130B0000130B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F6
+        F6E6E6E6E1E1E1ECECECF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9F9D4D4
+        D4979797888888A3A3A3C7C7C7E1E1E1F1F1F1FCFCFCFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFCFCFCF9F9F9F9F9F9FDFDFDFFFFFFD0E3EA3292
+        BA2086B0547F9162696C6E6E6E8D8D8DB3B3B3D4D4D4E9E9E9F7F7F7FEFEFEFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFF9F9F9DEDEDEC9C9C9CBCBCBD4D4D4DADADA83BAD00C97
+        C60A9ECD018DC00381B33886A85F78826364657A7A7A9E9E9EC3C3C3DEDEDEEF
+        EFEFFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFEFEFEDBDBDB9999997878786D6D6D6F6F6F7777776494A615A4
+        CF13A8D500A0D300A0D30092C50083B6137EA94E7F95616C716B6B6B888888AE
+        AEAED1D1D1EAEAEAFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFF7F7F78B8B8B6969696767676767676A6A6A706C6C536E7716A7
+        D415A9D700A0D300A0D300A1D400A3D6009BCE008ABD027BAE3082A65C788563
+        6566787878A6A6A6E1E1E1FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFD8D8D87878787D7D7D6F6E6E858485AEA9ACAFA8AB8D9DA616A9
+        D419ABD800A2D500A2D500A2D500A1D400A2D500A1D400A3D60092C50180B30F
+        74A05C727C6D6D6DB9B9B9F2F2F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFC1C1C18D8D8D7B7B7B706B6F6AAB7F83D09D95CFA683C1B11BAC
+        D719AEDB00A4D700A3D600A3D600A3D600A3D600A2D500A3D600A2D500A3D600
+        A1D724586E6F6E6EA8A8A8EDEDEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFBCBCBC8F8F8F7B7B7B726A7052CA7A4FF18552F1843EDC8F23AD
+        DB1CB1DC00A5D800A5D800A5D800A5D800A4D700A4D700A3D600A3D600A2D500
+        A7DC235F786D6D6CA4A4A4ECECECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFBBBBBB9393937D7D7D746B724FC7764DE9814EE77F3AD48E28B2
+        DD21B4DF00A7DA00A7DA00A7DA00A6D900A6D900A5D800A5D800A4D700A3D600
+        A8DE23637D6E6D6CA2A2A2EBEBEBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFB9B9B99696967E7E7E756C7348C47247E27B48E17935CE8C2EB7
+        DF22B6E100A9DC00A9DC00A8DB00A8DC00A7D900A7DB00A6D900A6D900A5D800
+        A9DE2268836F6D6DA0A0A0EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFB4B4B49B9B9B7E7E7E776F7443C56E41DC7442DB7330C98A32BA
+        E229B9E300AADD00AADD00ABDE00A5D600A4D600A8DB00A9DC00A7DA00A7DA00
+        ABE0226C8A706E6D9E9E9EE9E9E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFB2B2B2A0A0A07B7B7B776E743CC26A3BD56E3ED66E29C58838BE
+        E429BAE400ACDF00ADE200A7DD009FD200A4D400A6D800AADD00A9DC00A8DB00
+        ABE02272906F6D6C9B9B9BE9E9E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFAFAFAFA6A6A67A7A7A776E7432BE5E31CF6234CF6020C0823EC3
+        E627BAE600AEE338AACB7B8D92788689009FCE00A5D600A9DC00AADD00AADD00
+        AEE2217695716F6E989898E8E8E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFAEAEAEACACAC797979746C6F72E2C472EEC871EBC048D2C340C5
+        E429BDE81FB5DFCCBAB5C7C4C2BDB2B03B9CB800ABDE00AEE100ACDF00ABDE00
+        AEE21F7B9C716E6D969696E7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFABABABAFAFAF797979716A6BABF8FAB1FFFFB5FFFF73E0F545C9
+        E42ABFEA35BDE2EEDDD8F5F1F0DED0CC3DABCB00B0E400AEE100ADE000ACDF00
+        AEE31E7FA173706F949494E6E6E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFA9A9A9B2B2B27A7A7A6D6969CAFDFDCCFFFFD0FFFF81E0F249CD
+        E530C1EB00B1E687CEE2ACC8D195BAC400B1E500B0E300B0E300AFE200AEE100
+        B1E51D83A8736F6E929292E6E6E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFA5A5A5B6B6B67B7B7B6B6969EEFFFFEAFFFFF0FFFF92DEF24ED0
+        E831C3ED00B4E800B3E800B4E800B3E800B3E700B2E500B1E400B0E300AFE200
+        B1E51C87AC74706F909090E5E5E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFA6A6A6BABABA7C7C7C696969FFFFFFFFFEFDFFFFFD9BDEF155D4
+        EA34C5EF00B6E900B6E900B6E900B5E800B4E700B4E700B3E600B2E500B1E400
+        B2E6188BB27673708D8D8DE4E4E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFA3A3A3BBBBBB7D7D7D6B6B6BFFFFFCFFF9F4FFFBF494DAED5DD9
+        EC2FC5EF00B8EB00B8EB00B7EA00B7EA00B6E900B5E800B4E700B3E600B2E500
+        B4E81790B87873718C8C8CE3E3E3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFA1A1A1BDBDBD7F7F7F6E6F70FFFFF6FFF5ECFFF7EC91D8E964DE
+        EE2EC7F000BAED00BAED00B9EC00B8EB00B8EB00B7EA00B6E900B4E700B3E600
+        B5E81594BD7A75728A8A8AE2E2E2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF9F9F9FC0C0C0818181727374FFFAEDFFF1E4FFF3E48AD4E670E4
+        F12FC8F300BCEF00BBEF00BBEF00BAEE00B9EC00B8EB00B7EA00B6E900B4E700
+        B5E91297C37A7472888888E1E1E1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF9E9E9EC4C4C4838383797877FFF6E3FFEDDCFFEFDC84D1E376E7
+        F32ECAF300BEF228BCE72BBEE800B6EA00B7ED00B8ED00B7EC00B7EB00B6EA00
+        B6EA109CC77A7471858585E1E1E1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF9C9C9CC4C4C48687877D7B7BFFF0DBFFE9D4FFEAD481D1E082EC
+        F62ECAF600BEF38FCAE1FFECE7FFE7E5EEDDE2BDD3E08BCAE15FC3E226BBE600
+        B7EB0C9FCD7C7573838383E0E0E0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF9B9B9BC8C8C8888888817F7EFFECD3FFE5CCFFE7CD7ACEDD8BF1
+        F62ECDF600C0F58AC8E0FFEFEDFFE9E9FFE6E5FFE2E1FFDEDDFFDBD8CECCD600
+        B5EB09A2D17C7572818181DFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF9A9A9ACBCBCB8A8A8A86817EFFE7C7FFE0C3FFE1C275CDDA94F6
+        F92ACEF900C3F894C9DFFFF8F5FFF0EFFFEAE9FFE6E5FFE0E0FFDBDACAC8D400
+        B5EC07A6D87C74717F7F7FDEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF9A9A9ACDCDCD8C8C8C898480FFE2BCFFDBB9FFDCB873CCD79DF9
+        FC25CDF900C4F941AED48CC5DDA5C8D9C2CDD9E0D5DDFDDCDDFFE1DBDDC9D100
+        B4EA03AADC7F76737D7D7DDEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF999999CFCFCF8E8E8F908880FFE2B6FFDCB2FFDCAF72CED8A4FD
+        FD22CFFA00C6F900C6FA00C3F800C2F800BEF300B5EB00ADE300A8DE0DA8D900
+        B7EB01ADE07F75727B7B7BDDDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF999999D1D1D191919284817F8C82779086799D887841AFC6B3FF
+        FF4FDAFF15CEFE00C7FA00C4F800C3F700C1F500BFF300BDF100BCF000BAEE00
+        B9EC01B1E6817774797979DCDCDCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF979797D3D3D38F8F8F9292928F90908C8E8E8D8A8A5A9DAD3FBE
+        DC44C4DF51CBE759D2ED50D6F543D6FA3AD5FB36D1F82FCFF729CCF624CAF51B
+        C7F301B6EE807774838383E0E0E0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF989898DADADABCBCBCBFBFBFBDBDBDB6B6B6B5B4B4B4AEADAFA6
+        A6AFA5A4ABA2A1A39B99A399969E959291919288969A7C969D6E949E6697A557
+        92A462848E7C7B7AB3B3B3EEEEEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFC2C2C2A3A3A3A1A1A19E9E9E9B9B9B9B9B9B9B9B9B9898989595
+        959494949292929292928F8F8F8C8C8C8C8C8B8A89898A89888684838783828B
+        8786918F8EB4B4B4EEEEEEFCFCFCFFFFFFFFFFFFFFFFFFFFFFFF}
+      NumGlyphs = 1
+      ExplicitLeft = 576
+      ExplicitWidth = 187
+      ExplicitHeight = 57
+    end
+    inherited bt_excluir: TBitBtn
+      Tag = -1
+      Left = 173
+      Top = -38
+      Width = 86
+      Height = 36
+      ExplicitLeft = 173
+      ExplicitTop = -38
+      ExplicitWidth = 86
+      ExplicitHeight = 36
+    end
+    inherited bt_consultar: TBitBtn
+      Left = 125
+      Top = -54
+      Width = 123
+      Height = 41
+      Visible = False
+      ExplicitLeft = 125
+      ExplicitTop = -54
+      ExplicitWidth = 123
+      ExplicitHeight = 41
+    end
+    inherited bt_imprimir: TBitBtn
+      Tag = -1
+      Left = 173
+      Top = -38
+      Width = 86
+      Height = 36
+      ExplicitLeft = 173
+      ExplicitTop = -38
+      ExplicitWidth = 86
+      ExplicitHeight = 36
+    end
+  end
+end

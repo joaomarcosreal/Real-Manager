@@ -1,0 +1,209 @@
+unit uuCadClientesReduzido;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uu_modelo, StdCtrls, Buttons, Mask, ExtCtrls, DBCtrls, RxLookup;
+
+type
+  TfrmCadastroClientesReduzido = class(Tfrm_modelo_cadastro)
+    pn_campos: TPanel;
+    edRg: TDBEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    edDtNasc: TDBEdit;
+    edNome: TDBEdit;
+    Label3: TLabel;
+    Label5: TLabel;
+    edTelefone: TDBEdit;
+    Label4: TLabel;
+    edEmail: TDBEdit;
+    procedure bt_novoClick(Sender: TObject);
+    function validaInformacoes() : boolean;
+    procedure gravarInformacoes();
+    procedure bt_gravarClick(Sender: TObject);
+    procedure bt_pesquisaClick(Sender: TObject);
+    procedure retornaInformacoes(cod_cliente : string);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroClientesReduzido: TfrmCadastroClientesReduzido;
+
+implementation
+
+uses uu_data_module, uu_frm_principal, uu_modelo_vazio;
+
+{$R *.dfm}
+
+procedure TfrmCadastroClientesReduzido.bt_novoClick(Sender: TObject);
+begin
+  inherited;
+  pn_principal.Enabled:=true;
+  pn_campos.Enabled:=true;
+  dm.qry_clientes.Active:=true;
+  dm.qry_clientes.Append;
+  dm.qry_clientesSITUACAO.Value:=1;
+  edRg.SetFocus;
+end;
+
+
+
+function TfrmCadastroClientesReduzido.validaInformacoes() : boolean;
+begin
+
+   if trim(edNome.Text) = '' then
+    begin
+     showmessage('Nome inválido!');
+     edNome.SetFocus;
+     Result:=false;
+     exit;
+    end;
+
+
+
+   if trim(edRg.Text) = '' then
+    begin
+     showmessage('RG inválido!');
+     edRg.SetFocus;
+     Result:=false;
+     exit;
+    end;
+
+
+   if trim(edTelefone.Text) = '' then
+    begin
+     showmessage('Telefone inválido!');
+     edTelefone.SetFocus;
+     Result:=false;
+     exit;
+    end;
+
+   try
+     FormatDateTime('DD/MM/YY',dm.qry_clientesDTNASCIMENTO.Value); 
+   except
+    begin
+      ShowMessage('Data de nascimento inválida!');
+      Result:=false;
+      exit;
+    end;
+   end;
+
+
+   if verificaExistenciaClienteRG(edRg.Text) then
+   begin
+     dm.exibe_painel_erro('RG JÁ CADASTRADO','Tecle enter pra continuar...');
+     Result:=false;
+     exit;
+   end;
+
+ result:=true;
+end;
+
+
+
+procedure TfrmCadastroClientesReduzido.gravarInformacoes();
+begin
+   if (evento = 1) then
+   begin
+
+     ed_codigo.Text:=dm.geraCodigo('G_CLIENTES',6);
+
+     dm.qry_clientesPRAZO_PAGAMENTO.Value:=10;
+     dm.qry_clientesCREDITO.Value:=0;
+     dm.qry_clientesCOD_CLI.Value:=ed_codigo.Text;
+     dm.qry_clientesDATA_CADASTRO.Value:=data_do_sistema;
+     dm.qry_clientesDATA_ULTIMA_COMPRA.Value:=data_do_sistema;
+     string_auxiliar:=dm.qry_clientesRG.Value;
+   end;
+
+
+  if ( (evento = 1) or (evento = 2)) then
+   begin
+    dm.qry_clientes.Post;
+    dm.dbrestaurante.ApplyUpdates([dm.qry_clientes]);
+   end
+  else
+    begin
+      if ( evento = 3) then
+       if MessageDlg('Confirma exclusão do cliente ?',mtConfirmation,[mbYes,mbNo],0) = Mryes then
+         begin
+            dm.qry_clientes.Delete;
+            dm.dbrestaurante.ApplyUpdates([dm.qry_clientes]);
+
+         end;
+
+    end;
+
+end;
+
+
+
+procedure TfrmCadastroClientesReduzido.bt_gravarClick(Sender: TObject);
+begin
+if (validaInformacoes = true) then
+  begin
+    gravarInformacoes;
+    inherited;
+  end;
+  close;
+
+end;
+
+procedure TfrmCadastroClientesReduzido.bt_pesquisaClick(Sender: TObject);
+begin
+  inherited;
+  pesquisaClienteReduzido;
+  ed_codigo.Text:=string_auxiliar;
+
+  if verificaExistenciaCliente(ed_codigo.text) then
+    retornaInformacoes(ed_codigo.Text)
+
+
+end;
+
+
+
+procedure TfrmCadastroClientesReduzido.retornaInformacoes(cod_cliente : string);
+begin
+
+  dm.qry_clientes.Cancel;
+  dm.qry_clientes.CancelUpdates;
+  dm.qry_clientes.Active:=false;
+  dm.qry_clientes.Open;
+
+  dm.qry_clientes.Active:=false;
+  dm.qry_clientes.SQL.Clear;
+  dm.qry_clientes.SQL.add(' select  cli.* ');
+  dm.qry_clientes.SQL.add('from clientes cli');
+  dm.qry_clientes.SQL.Add(' where cli.cod_cli='+Quotedstr(cod_cliente));
+  dm.qry_clientes.active:=true;
+  
+  if (evento = 2)then
+    begin
+     dm.qry_clientes.Edit;
+     pn_campos.Enabled:=true;
+    end;
+
+  if ((evento=2) or (evento = 3)) then
+    bt_gravar.Enabled:=true;
+
+end;
+procedure TfrmCadastroClientesReduzido.FormActivate(Sender: TObject);
+begin
+  inherited;
+  if trim(string_auxiliar) <> '' then
+   begin
+      bt_novo.Click;
+      edRg.Text := string_auxiliar;
+      edDtNasc.SetFocus;
+   end;
+
+end;
+
+end.

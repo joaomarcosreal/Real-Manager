@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="E:\lazarus\fpc\3.2.0\bin\i386-win32\fpc.exe" Date="1357350198"/>
+  <Params Value=" -Tlinux -Px86_64 -MObjFPC -Scghi -Cg -O1 -g -gl -l -vewnhibq &quot;-FiC:\fontes\Real Manager\real\novadll\lib\x86_64-linux&quot; &quot;-FuC:\fontes\Real Manager\real\novadll\&quot; &quot;-FUC:\fontes\Real Manager\real\novadll\lib\x86_64-linux\&quot; &quot;-FEC:\fontes\Real Manager\real\novadll\&quot; &quot;-oC:\fontes\Real Manager\real\novadll\libtbudf.so&quot; tbudf.lpr"/>
+  <Complete Value="False"/>
+</CONFIG>

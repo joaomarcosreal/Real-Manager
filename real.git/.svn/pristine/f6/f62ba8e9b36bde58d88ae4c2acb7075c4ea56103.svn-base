@@ -1,0 +1,37 @@
+[GERAL]
+quantidadeCanais=2
+
+[TERMINAL0]
+colunasDisplay=16
+tituloInicial=Informe a mesa:
+impresoraCozinha=
+impressoraBar=
+impressoraExtrato=
+
+
+[TERMINAL0]
+tituloInicial=Passe o cartao
+impresoraCozinha=
+impressoraBar=
+impressoraExtrato=
+
+[TERMINAL1]
+tituloInicial=Passe o cartao
+impresoraCozinha=
+impressoraBar=
+impressoraExtrato=
+
+
+[TERMINAL2]
+tituloInicial=Passe o cartao
+impresoraCozinha=
+impressoraBar=
+impressoraExtrato=
+
+
+
+[TERMINAL3]
+tituloInicial=Passe o cartao
+impresoraCozinha=
+impressoraBar=
+impressoraExtrato=

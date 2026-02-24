@@ -1,0 +1,4225 @@
+unit uu_encerramento;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, ACBrTEFComum, Variants, Classes, Graphics,
+  Controls, Forms, RealFramework, IBX.IBQuery, pcnConversaoNFE, pcnConversao,
+  ACBrPosPrinter, ACBrUtil, Dialogs, StdCtrls, Buttons, IBX.IBDatabase, ExtCtrls,
+  DB, uu_modelo_vazio, ACBrNFe, ACBrDevice, DateUtils, Types, ACBrCalculadora,
+  JvExControls, jpeg, JvCtrls, uuDmVendas, cxGraphics, cxControls,
+  dxActivityIndicator, dxGDIPlusClasses, AdvOfficeImage, JvValidateEdit,
+  FireDAC.Comp.Client, cxStyles, cxDataStorage, cxGridLevel, cxClasses,
+  cxGridDBTableView, cxGrid, PngSpeedButton, Vcl.DBCGrids, Vcl.ActnList,
+  JvPageList, ACBrValidador, FormaPagamento, FormaPagamentoController,
+  Recebimento, cxLookAndFeels, cxLookAndFeelPainters, cxEdit, cxNavigator,
+  cxDBData, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, System.Actions, FireDAC.Comp.DataSet,
+  cxGridCustomTableView, cxGridTableView, cxGridCustomView, JvExStdCtrls, JvEdit,
+  AdvSmoothTouchKeyBoard, cxCustomData, cxFilter, cxData, dxDateRanges,
+  dxScrollbarAnnotations, FireDAC.Phys.Intf, FireDAC.DApt.Intf, System.ImageList,
+  Vcl.ImgList, ACBrBase, AdvGlassButton;
+
+type
+  Tfrm_encerramento = class(Tfrm_modelo_vazio)
+    pn_faturamento: TPanel;
+    Label6: TLabel;
+    Panel4: TPanel;
+    bt_confirma_fatura: TBitBtn;
+    bt_cancelar: TBitBtn;
+    Panel3: TPanel;
+    SpeedButton2: TSpeedButton;
+    Label5: TLabel;
+    Label10: TLabel;
+    Panel5: TPanel;
+    Label7: TLabel;
+    ed_cod_cliente: TEdit;
+    ed_desc_cliente: TEdit;
+    Panel2: TPanel;
+    dsFormasPagtoTemp: TDataSource;
+    ACBrCalculadora1: TACBrCalculadora;
+    ImageList1: TImageList;
+    gp_desconto: TGroupBox;
+    Timer2: TTimer;
+    Timer1: TTimer;
+    timerTempoMensagem: TTimer;
+    Panel1: TPanel;
+    lbTitMesa: TLabel;
+    lb_mesa: TLabel;
+    lblTitulo: TLabel;
+    Label16: TLabel;
+    tbFormasPagamentoTemp: TFDMemTable;
+    tbFormasPagamentoTempcodForma: TStringField;
+    tbFormasPagamentoTempdescricaoForma: TStringField;
+    tbFormasPagamentoTempvalorForma: TCurrencyField;
+    tbFormasPagamentoTempcodCliFaturado: TStringField;
+    tbFormasPagamentoTempobservacoesFaturado: TStringField;
+    tbFormasPagamentoTempNSU: TStringField;
+    tbFormasPagamentoTemprede: TStringField;
+    tbFormasPagamentoTempAutorizacaoTEF: TStringField;
+    tbFormasPagamentoTempDataVencimento: TDateField;
+    dsFormasPagamentoTemp: TDataSource;
+    cxStyleRepository1: TcxStyleRepository;
+    cxStyle1: TcxStyle;
+    ActionList1: TActionList;
+    actAdicionaFormaPagamento: TAction;
+    ACBrValidador1: TACBrValidador;
+    pnTeclado: TPanel;
+    AdvOfficeImage8: TAdvOfficeImage;
+    pgControles: TJvPageList;
+    pgValorForma: TJvStandardPage;
+    Panel15: TPanel;
+    Label18: TLabel;
+    Panel17: TPanel;
+    pgOpcoes: TJvStandardPage;
+    btApagarForma: TPngSpeedButton;
+    btCpfNota: TPngSpeedButton;
+    btDesconto: TPngSpeedButton;
+    PngSpeedButton3: TPngSpeedButton;
+    btEncerrarVenda: TPngSpeedButton;
+    PngSpeedButton5: TPngSpeedButton;
+    PngSpeedButton4: TPngSpeedButton;
+    pnFormasPagamento: TPanel;
+    pn_fiscal: TPanel;
+    Label2: TLabel;
+    Label4: TLabel;
+    lbTaxaServico: TLabel;
+    Memo1: TMemo;
+    ed_codigo_forma: TEdit;
+    ed_valor_tx_serv: TJvValidateEdit;
+    ed_valor_forma: TJvValidateEdit;
+    Panel14: TPanel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1DBTableView1Column1: TcxGridDBColumn;
+    cxGrid1DBTableView1Column2: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+    pgDesconto: TJvStandardPage;
+    Panel18: TPanel;
+    Label8: TLabel;
+    Label9: TLabel;
+    rdPercentual: TRadioButton;
+    rdValor: TRadioButton;
+    edValorDesconto: TJvValidateEdit;
+    pgCPFCliente: TJvStandardPage;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label24: TLabel;
+    edCpf: TEdit;
+    edNomeCliente: TEdit;
+    Panel19: TPanel;
+    Label22: TLabel;
+    Label23: TLabel;
+    edEndereco: TEdit;
+    pgModeloNFE: TJvStandardPage;
+    PngSpeedButton1: TPngSpeedButton;
+    PngSpeedButton2: TPngSpeedButton;
+    Panel20: TPanel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    tmEncerrarConta: TTimer;
+    Panel13: TPanel;
+    Label17: TLabel;
+    AdvOfficeImage6: TAdvOfficeImage;
+    ed_valor_troco: TJvValidateEdit;
+    pgNomeClienteProducao: TJvStandardPage;
+    Panel21: TPanel;
+    Label3: TLabel;
+    Label28: TLabel;
+    edNomeClienteProducaoComanda: TEdit;
+    Label29: TLabel;
+    JvPageList1: TJvPageList;
+    pgFormasPagamentoPrincipal: TJvStandardPage;
+    pgMensagensErro: TJvStandardPage;
+    PanelFormasPagamentoPrincipal: TPanel;
+    pgList: TJvPageList;
+    pgMensagens: TJvStandardPage;
+    pnMensagens: TPanel;
+    memoMensagens: TMemo;
+    pgTotais: TJvStandardPage;
+    Panel6: TPanel;
+    Label11: TLabel;
+    AdvOfficeImage2: TAdvOfficeImage;
+    ed_valor_bruto: TJvValidateEdit;
+    Panel7: TPanel;
+    Label12: TLabel;
+    AdvOfficeImage3: TAdvOfficeImage;
+    ed_total_tx_serv: TJvValidateEdit;
+    Panel8: TPanel;
+    Label13: TLabel;
+    AdvOfficeImage4: TAdvOfficeImage;
+    ed_total_entrega: TJvValidateEdit;
+    Panel10: TPanel;
+    Label14: TLabel;
+    AdvOfficeImage1: TAdvOfficeImage;
+    ed_total_desconto: TJvValidateEdit;
+    Panel9: TPanel;
+    Label1: TLabel;
+    AdvOfficeImage7: TAdvOfficeImage;
+    ed_total_pago: TJvValidateEdit;
+    Panel11: TPanel;
+    Label15: TLabel;
+    AdvOfficeImage5: TAdvOfficeImage;
+    ed_total_conta: TJvValidateEdit;
+    Panel12: TPanel;
+    DBCtrlGrid1: TDBCtrlGrid;
+    Label30: TLabel;
+    tbFormasPagamentoTempComprovanteEstabelecimento: TStringField;
+    tbFormasPagamentoTempComprovanteCliente: TStringField;
+    pnMensagensErro: TPanel;
+    imgPainelErro: TImage;
+    lbTituloMensagem: TPanel;
+    lbTempoMensagem: TLabel;
+    Memo2: TMemo;
+    ActivityIndicator: TdxActivityIndicator;
+    lbMensagemErro: TMemo;
+    tbFormasPagamentoTempidConfigPagamento: TSmallintField;
+    AdvSmoothTouchKeyBoard1: TAdvSmoothTouchKeyBoard;
+    AdvSmoothTouchKeyBoard2: TAdvSmoothTouchKeyBoard;
+    AdvTouchKeyboard1: TAdvSmoothTouchKeyBoard;
+    edValorFormaTouch: TJvValidateEdit;
+    tbFormasPagamentoTempbandeira: TStringField;
+    timerFecharForm: TTimer;
+    btSelecionar: TAdvGlassButton;
+    procedure calcula_valores();
+    function gravar_venda: boolean;
+    procedure MakeRounded(Control: TWinControl);
+    procedure on_exit(Sender: TObject);
+    procedure busca_movimento_da_mesa;
+    procedure ed_valor_tx_servEnter(Sender: TObject);
+    procedure bt_adicionarKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function emitir_comprovante(codVenda: string): boolean;
+    function verificaValidadeEncerramentoDaVenda(): boolean;
+    procedure buscaRecebimentosParciaisMesa;
+    procedure bt_pesquisa_formaClick(Sender: TObject);
+    procedure bt_imprimir_cupomKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function imp_FormasPagtoComprovante(marca: integer; modelo: integer): boolean;
+    function verificaSeTemMovimento(): boolean;
+    function verificaValidadeFaturamento(): boolean;
+    procedure bt_confirma_faturaClick(Sender: TObject);
+    procedure bt_cancelarClick(Sender: TObject);
+    function verificaValidadeForma(cod_forma: string): boolean;
+    procedure ed_valor_formaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function emitirCupomSATCFE(): boolean;
+    function emitirNFCE(NumNFe: string): boolean;
+    function emitirNFE(): boolean;
+    function verificaPossibilidadeCancelarVenda(): Boolean;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure edNomeClienteProducaoComandaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure iniciarEncerramentoDaConta();
+    procedure ed_valor_tx_servChange(Sender: TObject);
+    procedure ed_valor_tx_servExit(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure Timer2Timer(Sender: TObject);
+    procedure btCancelarClick(Sender: TObject);
+    procedure timerTempoMensagemTimer(Sender: TObject);
+    procedure btIniciaEmissaoCupomClick(Sender: TObject);
+    procedure botaoClickFormaClick(Sender: TObject);
+    procedure DBCtrlGrid1PaintPanel(DBCtrlGrid: TDBCtrlGrid; Index: Integer);
+    procedure DBCtrlGrid1Click(Sender: TObject);
+    procedure edNomeClienteProducaoComandaEnter(Sender: TObject);
+    procedure edValorFormaTouchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure actAdicionaFormaPagamentoExecute(Sender: TObject);
+    procedure btApagarFormaClick(Sender: TObject);
+    procedure btCpfNotaClick(Sender: TObject);
+    procedure btDescontoClick(Sender: TObject);
+    procedure PngSpeedButton5Click(Sender: TObject);
+    procedure PngSpeedButton3Click(Sender: TObject);
+    procedure edValorDescontoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure rdValorClick(Sender: TObject);
+    procedure rdPercentualClick(Sender: TObject);
+    procedure PngSpeedButton1Click(Sender: TObject);
+    procedure PngSpeedButton2Click(Sender: TObject);
+    procedure PngSpeedButton4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btEncerrarVendaClick(Sender: TObject);
+    procedure btSelecionarClick(Sender: TObject);
+    procedure edCpfExit(Sender: TObject);
+    procedure edNomeClienteExit(Sender: TObject);
+    procedure tmEncerrarContaTimer(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+    LDataHoraInicioPagamento: string;
+    LCodPedidoBalcaoAtual: string;
+    LISNFETransferencia: Boolean;
+    tipoVenda: Smallint;
+    nPessoas: smallint;
+    retornoForma: boolean;
+    valorForma: double;
+    codDiverso: string;
+    codigo_venda: string;
+    codigoPedidoDelivery: string;
+    podeFecharFormulario: boolean;
+    transacaoTEFIniciada: boolean;
+    codClienteNFE55: string;
+    nomeClienteNFE55: string;
+    tempoEmissaoNota: smallint;
+    modeloComprovanteFiscal: integer;
+    valorTaxaServicoCalculada: double;
+    jaChamouFinalizacaoVenda: Boolean;
+    procedure encerrarVenda(ASolicitaConfirmacao: boolean);
+    procedure recalculavalorTaxaServico;
+    procedure setCPFCliente;
+    procedure finalizarVenda;
+    procedure abrirGaveta;
+    procedure exibirMensagemDeTroco;
+    procedure emitirCupomSAT;
+    procedure imprimirDanfe(AModeloNota: TpcnModeloDF);
+    procedure FinalizaTransacoesDeTEF;
+    procedure imprimirComprovantesTEF;
+    procedure adicionar_pagamento(ARecebimento: TRecebimento);
+    procedure registraFormaPagto(ARecebimento: TRecebimento);
+    function verificaDisponibilidadeDeTroco(ATrocoNecessario: Double): Boolean;
+    procedure BuscaProdutosDaNota(AQuery: TIBQuery; AMesa: string);
+    function RegistrarItensDaNotaFiscal(AMesa: string): boolean;
+    function CfopToCSCON(ACFOP: integer): TpcnCSOSNIcms;
+    procedure registraFormaPagtoTEF(AFormaPagamento: TFormaPagamento);
+    procedure DrawTextWithWordWrap(Canvas: TCanvas; const Rect: TRect; const Text: string);
+    function QuebrarString(const Texto: string; MaximoCaracteresPorLinha: Integer): string;
+    procedure DesenharTextoComQuebraManual(Canvas: TCanvas; const Texto: string; MaxCaracteresPorLinha, X, Y: Integer);
+    function QuebrarEmLinhas(const Texto: string; MaxCaracteresPorLinha: Integer): TArray<string>;
+  public
+    veioDoCheckin: boolean;
+    codClienteFaturado: string;
+    observacaoFaturamento: string;
+    dataVencimentoFaturamento: TDate;
+
+    { Public declarations }
+
+    procedure setMensagemOperador(mensagem: string);
+    procedure exibirMensagemPainelInformacoes(titulo: string; mensagem: string; tempo: smallint; tipoMensagem: smallint; progresso: boolean);
+    procedure SetMensagemPainelInformacoes(titulo: string; mensagem: string; tempo: smallint; tipoMensagem: smallint; progresso: boolean);
+    procedure fecharPainelInformacoes;
+    function getMensagemOperador: string;
+    function gettotalVenda: double;
+    function getTotalPago: double;
+    procedure exibirMensagemInformacao(mensagem: string; tempo: Integer; fonte: Integer; urgencia: Boolean);
+    procedure setRetornoForma(ret: boolean);
+    function getRetornoForma(): boolean;
+    function getValorFormaPagamento(): double;
+    procedure setCodPedidoDelivery(codPedido: string);
+    function getCodPedidoDelivery(): string;
+    procedure setTipoVenda(ATipoVenda: smallint);
+  end;
+
+const
+  UM_ACTIVATED = WM_USER + 1;
+
+var
+  frm_encerramento: Tfrm_encerramento;
+  tx_serv: double;
+  valor_tx_serv: double;
+  valor_desconto: double;
+  total_couvert: double;
+  impressora_fiscal: integer;
+  total_descontos: double;
+  jaChamouActivate: Boolean;
+  dataMovimentoEcf: string;
+  HoraEcf: string;
+
+implementation
+
+uses
+  uu_data_module, uu_frm_principal, uu_cs_formas_pagto, uu_pagamento_faturado,
+  Math, uuEmissaoNFEEncerramento, uuSelecionaAdquirente;
+
+
+
+{$R *.dfm}
+
+procedure Tfrm_encerramento.on_exit(Sender: TObject);
+var
+  trocoNecessario: double;
+  trocopossivel: double;
+  statusTransacaoTEF: boolean;
+  numeroTransacao: smallint;
+  operacaoTEF: string;
+begin
+
+  statusTransacaoTEF := false;
+
+  if Sender is TCustomEdit then
+  begin
+
+    (Sender as TCustomEdit).Brush.Color := clWhite;
+    (Sender as TCustomEdit).Repaint;
+  end;
+
+  if Sender is TCheckBox then
+  begin
+    (Sender as TCheckBox).Color := clBtnFace;
+  end;
+
+  if ((Sender is Tedit and ((Sender as Tedit).Name = 'ed_codigo_forma')) and (trim(ed_codigo_forma.text) <> '')) then
+  begin
+    if trim(ed_codigo_forma.Text) = '' then
+      exit;
+
+    try
+      ed_codigo_forma.Text := FormatFloat('000', StrToFloat(ed_codigo_forma.text));
+
+      if (dm.tbFormasPagamento.Locate('cod_forma', ed_codigo_forma.Text, []) = false) then
+      begin
+        raise Exception.Create('EFormaPagamentoInvalida');
+      end;
+
+    except
+      begin
+        dm.exibe_painel_erro('Código de forma da pagamento inválido!', 'Ok');
+        ed_codigo_forma.Clear;
+        ed_codigo_forma.SetFocus;
+        exit;
+      end;
+    end;
+
+  end;
+
+  if ((Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'ed_valor_tx_serv'))) then
+  begin
+    ed_total_tx_serv.Value := ed_valor_tx_serv.Value;
+    calcula_valores;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.btApagarFormaClick(Sender: TObject);
+begin
+  inherited;
+
+  if tbFormasPagamentoTemp.IsEmpty = false then
+  begin
+    tbFormasPagamentoTemp.DisableControls;
+    tbFormasPagamentoTemp.Last;
+
+    if tbFormasPagamentoTempNSU.Value = '' then
+    begin
+      tbFormasPagamentoTemp.Delete;
+    end;
+    tbFormasPagamentoTemp.EnableControls;
+//    busca_movimento_da_mesa;
+    calcula_valores;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.btDescontoClick(Sender: TObject);
+begin
+  inherited;
+
+  if (dm.verificaPermissaoAcao('B20002016', true, true) = true) then
+  begin
+    pgDesconto.Show;
+    edValorDesconto.SelectAll;
+    edValorDesconto.SetFocus;
+  end;
+
+
+{
+   if (dm.verificaPermissaoAcao('B20002016',true, true) = true) then
+     begin
+      Application.CreateForm(TfrmDesconto,frmDesconto);
+      frmDesconto.ShowModal;
+      frmDesconto.Free;
+      calcula_valores();
+     end
+ }
+end;
+
+procedure Tfrm_encerramento.btEncerrarVendaClick(Sender: TObject);
+begin
+  inherited;
+  encerrarVenda(true);
+end;
+
+procedure Tfrm_encerramento.PngSpeedButton1Click(Sender: TObject);
+begin
+  inherited;
+  frm_principal.setNFE55VendaAtual(true);
+  modeloComprovanteFiscal := 3;
+  pgOpcoes.Show;
+
+end;
+
+procedure Tfrm_encerramento.PngSpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  frm_principal.setNFE55VendaAtual(false);
+  modeloComprovanteFiscal := 2;
+  pgOpcoes.Show;
+end;
+
+procedure Tfrm_encerramento.PngSpeedButton3Click(Sender: TObject);
+begin
+  inherited;
+  ACBrCalculadora1.Execute;
+end;
+
+procedure Tfrm_encerramento.PngSpeedButton4Click(Sender: TObject);
+begin
+  inherited;
+  pgModeloNFE.Show;
+end;
+
+procedure Tfrm_encerramento.PngSpeedButton5Click(Sender: TObject);
+begin
+  inherited;
+  close;
+end;
+
+procedure Tfrm_encerramento.btCpfNotaClick(Sender: TObject);
+begin
+  inherited;
+
+  nomeClienteCupom := '';
+  enderecoClienteCupomFiscal := '';
+  cpfClienteCupomFiscal := '';
+//    Application.CreateForm(TfrmIdentificaClienteECF,frmIdentificaClienteECF);
+//    frmIdentificaClienteECF.ShowModal;
+  //  frmIdentificaClienteECF.Free;
+  pgCPFCliente.Show;
+  edCpf.SetFocus;
+end;
+
+function Tfrm_encerramento.verificaValidadeForma(cod_forma: string): boolean;
+begin
+  try
+    cod_forma := FormatFloat('000', StrToFloat(cod_forma))
+  except
+    begin
+      ShowMessage('Código de forma de pagamento inválido!');
+      ed_codigo_forma.Clear;
+      ed_codigo_forma.SetFocus;
+      result := false;
+      exit;
+    end;
+  end;
+
+  if ((ed_total_pago.value) >= (ed_total_conta.value)) then
+  begin
+    dm.exibe_painel_erro('Valor pago já excedeu o total da conta!', 'Tecle enter para continuar');
+    result := false;
+    exit;
+  end;
+
+  result := true;
+end;
+
+function Tfrm_encerramento.gettotalVenda(): double;
+begin
+  result := ed_total_conta.Value;
+end;
+
+function Tfrm_encerramento.getTotalPago(): double;
+begin
+  Result := ed_total_pago.Value;
+end;
+
+function Tfrm_encerramento.verificaDisponibilidadeDeTroco(ATrocoNecessario: Double): Boolean;
+var
+  LTrocoDisponivel: double;
+begin
+  if (tbFormasPagamentoTemp.Locate('codForma', '001', [loPartialKey])) then
+  begin
+    LTrocoDisponivel := tbFormasPagamentoTempvalorForma.Value;
+  end;
+
+  if (LTrocoDisponivel < ATrocoNecessario) then
+  begin
+    exibe_painel_erro('Não há troco disponível em dinheiro informado para concluir esta operação.' + slinebreak + 'O sistema não pode aceitar soma de  valores em cartões ou formas que não são possíveis de troco que ultrapassem o total da conta!' + slinebreak + slinebreak + 'Excedente: R$' + FormatFloat('#0.00', ATrocoNecessario), '');
+    ed_codigo_forma.Clear;
+    ed_valor_forma.Clear;
+    ed_codigo_forma.SetFocus;
+    Result := False;
+    exit;
+  end;
+
+  Result := true;
+
+end;
+
+procedure Tfrm_encerramento.actAdicionaFormaPagamentoExecute(Sender: TObject);
+var
+  LTrocoNecessario: double;
+  LTrocoDisponivel: double;
+  statusTransacaoTEF: boolean;
+  operacaoTEF: string;
+  LFormaPagamentoController: TFormaPagamentoController;
+  LRecebimento: TRecebimento;
+begin
+  inherited;
+
+  LRecebimento := TRecebimento.Create;
+  LFormaPagamentoController := TFormaPagamentoController.Create;
+
+  try
+    try
+
+      if (ed_codigo_forma.Text = '') then
+        exit;
+      if ed_valor_forma.Value = 0 then
+        exit;
+
+      LTrocoNecessario := 0;
+      LTrocoDisponivel := 0;
+      valorForma := ed_valor_forma.Value;
+
+      LRecebimento.FormaPagamento.CodForma := ed_codigo_forma.Text;
+      LFormaPagamentoController.getDados(LRecebimento.FormaPagamento);
+
+      if LRecebimento.FormaPagamento.PermiteTroco = false then
+      begin
+        LTrocoNecessario := trunc((ed_total_pago.value + ed_valor_forma.Value) - ed_total_conta.Value);
+        if LTrocoNecessario > 0 then
+          if (verificaDisponibilidadeDeTroco(LTrocoNecessario) = false) then
+            exit;
+      end;
+
+      if (LRecebimento.FormaPagamento.isTEF) then
+      begin
+        dm.setTipoOperacaoTEF(LRecebimento.FormaPagamento.TipoOperacaoTEF);
+        if (dm.TEFautenticou = true) then
+        begin
+          statusTransacaoTEF := dm.ACBrTEFD1.CRT(StringToFloatDef(ed_valor_forma.value, 0), Inttostr(tbFormasPagamentoTemp.RecordCount + 1), '');
+
+          if statusTransacaoTEF then
+          begin
+            transacaoTEFIniciada := true;
+            dm.GravarTransacaoTEF(LRecebimento.FormaPagamento.CodForma, lb_mesa.Caption, ed_valor_forma.value);
+            registraFormaPagtoTEF(LRecebimento.FormaPagamento);
+            dm.ACBrTEFD1.ConfirmarTransacoesPendentes(true);
+          end
+          else
+          begin
+                   // dm.exibe_painel_erro('TRANSAÇÃO RECUSADA!','Ok');
+          end;
+
+        end
+        else
+        begin
+          EXIT;
+        end;
+
+      end
+      else
+      begin
+        LRecebimento.IdConfiguracaoPagamento := 0;
+        if (LRecebimento.FormaPagamento.QtdeAdquirentes > 0) then
+        begin
+          LRecebimento.IdConfiguracaoPagamento := -1;
+          Application.CreateForm(TfrmSelecionaAdquirente, frmSelecionaAdquirente);
+          frmSelecionaAdquirente.setRecebimento(LRecebimento);
+          frmSelecionaAdquirente.ShowModal;
+          frmSelecionaAdquirente.Free;
+        end;
+        dm.setTipoOperacaoTEF(0);
+        LRecebimento.Valor := ed_valor_forma.Value;
+        dm.adicionaLog('Antes de chamar o registro da forma');
+        registraFormaPagto(LRecebimento);
+      end;
+    except
+      on E: Exception do
+      begin
+        dm.exibe_painel_erro('Erro ao adicionar forma de pagamento!' + sLineBreak + sLineBreak + E.Message, 'Ok');
+
+      end;
+
+    end;
+  finally
+    FreeAndNil(LFormaPagamentoController);
+    FreeAndNil(LRecebimento);
+  end;
+end;
+
+procedure Tfrm_encerramento.encerrarVenda(ASolicitaConfirmacao: boolean);
+var
+  LRespostaConfirmacao: Boolean;
+begin
+
+  try
+    try
+
+      if jaChamouFinalizacaoVenda = false then
+      begin
+        if verificaValidadeEncerramentoDaVenda then
+        begin
+          if (ASolicitaConfirmacao) then
+            LRespostaConfirmacao := (ShowRealDialog(Self, tmConfirmacao, 'Confirme', 'Confirma o encerramento da conta ?') = teSim)
+          else
+            LRespostaConfirmacao := True;
+
+          if LRespostaConfirmacao = true then
+          begin
+            jaChamouFinalizacaoVenda := true;
+            finalizarVenda;
+            close;
+          end;
+
+        end;
+
+        timer1.Enabled := false;
+        Timer2.Enabled := false;
+        timerTempoMensagem.Enabled := false;
+
+      end
+      else
+      begin
+        dm.exibe_painel_erro('Tentativa de finalização da venda já foi efetuada!', 'Ok');
+      end;
+    except
+      on E: Exception do
+      begin
+        raise Exception.Create(E.Message);
+      end;
+
+    end;
+  finally
+    jaChamouFinalizacaoVenda := false;
+    podeFecharFormulario := true;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.adicionar_pagamento(ARecebimento: TRecebimento);
+begin
+
+  if ARecebimento.FormaPagamento.Faturado then
+  begin
+    ARecebimento.ObservacoesFaturamento := 'Faturado para o cliente: ' + ARecebimento.CodigoCliente;
+  end;
+
+  if ((trim(ARecebimento.FormaPagamento.CodForma) = '001') and (tbFormasPagamentoTemp.Locate('codForma', '001', [loPartialKey]))) then
+  begin
+    tbFormasPagamentoTemp.Edit;
+    tbFormasPagamentoTempvalorForma.Value := tbFormasPagamentoTempvalorForma.Value + ARecebimento.Valor;
+    tbFormasPagamentoTemp.Post;
+  end
+  else
+  begin
+    tbFormasPagamentoTemp.Append;
+    tbFormasPagamentoTempcodForma.Value := ARecebimento.FormaPagamento.CodForma;
+    tbFormasPagamentoTempdescricaoForma.value := ARecebimento.FormaPagamento.Descricao;
+    tbFormasPagamentoTempvalorForma.value := ARecebimento.Valor;
+    tbFormasPagamentoTempCodCliFaturado.Value := ARecebimento.CodigoCliente;
+    tbFormasPagamentoTempobservacoesFaturado.Value := ARecebimento.ObservacoesFaturamento;
+    tbFormasPagamentoTempDataVencimento.Value := ARecebimento.DataVencimento;
+    tbFormasPagamentoTempNSU.Value := ARecebimento.NSU;
+    tbFormasPagamentoTemprede.Value := ARecebimento.NomeRedeAdquirente;
+    tbFormasPagamentoTempbandeira.value := ARecebimento.Bandeira;
+    tbFormasPagamentoTempAutorizacaoTEF.Value := ARecebimento.Autorizacao;
+    tbFormasPagamentoTempidConfigPagamento.Value := ARecebimento.IdConfiguracaoPagamento;
+    tbFormasPagamentoTemp.Post;
+    cxGrid1.Refresh;
+  end;
+
+  codClienteFaturado := '';
+  observacaoFaturamento := '';
+
+  ed_total_pago.Value := ARecebimento.Valor + ed_total_pago.Value;
+  ed_valor_troco.Value := ed_total_pago.Value - ed_total_conta.value;
+
+end;
+
+procedure Tfrm_encerramento.rdPercentualClick(Sender: TObject);
+begin
+  inherited;
+  edValorDesconto.SetFocus;
+end;
+
+procedure Tfrm_encerramento.rdValorClick(Sender: TObject);
+begin
+  inherited;
+  edValorDesconto.SetFocus;
+end;
+
+procedure Tfrm_encerramento.registraFormaPagto(ARecebimento: TRecebimento);
+begin
+
+  try
+
+    ARecebimento.CodigoCliente := '';
+    ARecebimento.ObservacoesFaturamento := '';
+    ARecebimento.Data := now;
+    ARecebimento.DataVencimento := now;
+
+    try
+
+      if (verificaValidadeForma(ARecebimento.FormaPagamento.CodForma) = true) then
+      begin
+        setRetornoForma(false);
+
+        if (ARecebimento.FormaPagamento.Faturado) then
+        begin
+
+          if (trim(lb_mesa.caption) <> trim(mesaDelivery)) then
+          begin
+            codClienteFaturado := '';
+            observacaoFaturamento := '';
+
+            Application.CreateForm(Tfrm_pagamento_faturado, frm_pagamento_faturado);
+            frm_pagamento_faturado.localOrigem := 1;
+            frm_pagamento_faturado.ShowModal;
+            frm_pagamento_faturado.Free;
+
+            if (getRetornoForma() = true) then
+            begin
+
+              ARecebimento.CodigoCliente := codClienteFaturado;
+              ARecebimento.ObservacoesFaturamento := observacaoFaturamento;
+              dm.adicionaLog('Antes de adicionar a forma...');
+              adicionar_pagamento(ARecebimento);
+              dm.adicionaLog('adicionou a forma');
+
+            end
+            else
+            begin
+              codClienteFaturado := '';
+              observacaoFaturamento := '';
+              ed_codigo_forma.SetFocus;
+              ed_codigo_forma.clear;
+              showRealDialog(self, tmErro, 'Erro', 'Nenhum cliente para faturamento foi selecionado!', 22, false);
+            end;
+          end
+
+        end
+        else
+        begin
+          dm.adicionaLog('Antes de adicionar a forma...');
+          adicionar_pagamento(ARecebimento);
+          dm.adicionaLog('adicionou a forma');
+
+        end;
+
+        if ((ed_total_pago.Value >= ed_total_conta.value)) then
+        begin
+          if ed_valor_tx_serv.Visible = false then
+            encerrarVenda(true)
+          else
+            ed_valor_tx_serv.SetFocus;
+        end
+        else
+        begin
+          ed_codigo_forma.clear;
+
+          ed_codigo_forma.SetFocus;
+          ed_valor_forma.text := FormatFloat('#0.00', ed_total_conta.value - ed_total_pago.Value);
+        end;
+
+      end;
+
+    except
+      on E: exception do
+      begin
+        raise Exception.Create('Erro ao registrar forma de pagamento! ' + sLineBreak + sLineBreak + E.Message);
+      end;
+
+    end;
+  finally
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.registraFormaPagtoTEF(AFormaPagamento: TFormaPagamento);
+var
+  LTransacaoTEF: TACBrTEFResp;
+begin
+
+  LTransacaoTEF := dm.ACBrTEFD1.RespostasPendentes[dm.ACBrTEFD1.RespostasPendentes.Count - 1];
+  tbFormasPagamentoTemp.Append;
+  tbFormasPagamentoTempcodForma.Value := AFormaPagamento.CodForma;
+  tbFormasPagamentoTempdescricaoForma.value := AFormaPagamento.Descricao;
+  tbFormasPagamentoTempvalorForma.value := LTransacaoTEF.ValorTotal;
+  tbFormasPagamentoTempCodCliFaturado.Value := '';
+  tbFormasPagamentoTempobservacoesFaturado.Value := '';
+  tbFormasPagamentoTempNSU.Value := LTransacaoTEF.NSU;
+  tbFormasPagamentoTemprede.Value := LTransacaoTEF.Rede;
+  tbFormasPagamentoTempbandeira.Value := LTransacaoTEF.CodigoBandeiraPadrao;
+  tbFormasPagamentoTempAutorizacaoTEF.Value := LTransacaoTEF.CodigoAutorizacaoTransacao;
+  tbFormasPagamentoTempComprovanteEstabelecimento.Value := LTransacaoTEF.ImagemComprovante1aVia.Text;
+  tbFormasPagamentoTempComprovanteCliente.Value := LTransacaoTEF.ImagemComprovante2aVia.Text;
+  tbFormasPagamentoTemp.Post;
+
+  codClienteFaturado := '';
+  observacaoFaturamento := '';
+
+  ed_total_pago.Value := LTransacaoTEF.ValorTotal + ed_total_pago.Value;
+  ed_valor_troco.Value := ed_total_pago.Value - ed_total_conta.value;
+  dm.InsereChavesMovimento(numero_caixa, lb_mesa.Caption);
+
+  if ((ed_total_pago.Value >= ed_total_conta.value)) then
+  begin
+    if verificaValidadeEncerramentoDaVenda then
+    begin
+      encerrarVenda(false);
+    end;
+  end
+  else
+  begin
+    ed_codigo_forma.clear;
+
+    ed_codigo_forma.SetFocus;
+    ed_valor_forma.text := FormatFloat('#0.00', ed_total_conta.value - ed_total_pago.Value);
+  end;
+
+end;
+
+procedure Tfrm_encerramento.calcula_valores();
+begin
+
+  valor_tx_serv := 0;
+  valor_tx_serv := ed_valor_tx_serv.Value;
+  ed_total_tx_serv.Value := valor_tx_serv;
+
+  ed_total_pago.Value := 0;
+
+  tbFormasPagamentoTemp.First;
+  while not tbFormasPagamentoTemp.Eof do
+  begin
+    ed_total_pago.Value := ed_total_pago.Value + tbFormasPagamentoTempvalorForma.Value;
+    tbFormasPagamentoTemp.Next;
+  end;
+
+  if ed_total_pago.value < ed_total_conta.value then
+    ed_valor_forma.Value := ed_total_conta.Value - ed_total_pago.Value
+  else
+  begin
+    ed_valor_forma.value := 0;
+  end;
+
+  ed_total_conta.Value := (ed_valor_bruto.value + ed_total_tx_serv.value + ed_total_entrega.value) - ed_total_desconto.Value;
+  ed_valor_troco.Value := ed_total_pago.Value - ed_total_conta.Value;
+
+end;
+
+procedure Tfrm_encerramento.DBCtrlGrid1Click(Sender: TObject);
+begin
+  inherited;
+  ed_codigo_forma.Text := dm.tbFormasPagamento.FieldByName('COD_FORMA').Value;
+  edValorFormaTouch.Value := ed_valor_forma.Value;
+  pgControles.ActivePage := pgValorForma;
+  edValorFormaTouch.SetFocus;
+
+//  ed_valor_forma.Value :=0;
+//  ed_valor_forma.SetFocus;
+
+
+end;
+
+procedure Tfrm_encerramento.DBCtrlGrid1PaintPanel(DBCtrlGrid: TDBCtrlGrid; Index: Integer);
+var
+  imgFormaPagto: TImage;
+  LDescricaoForma: string;
+begin
+  inherited;
+  imgFormaPagto := TImage.Create(self);
+
+  try
+    if (dm.tbFormasPagamento.IsEmpty = false) then
+    begin
+      imgFormaPagto.Tag := strToInt(dm.tbFormasPagamento.FieldByName('cod_forma').Value);
+      imgFormaPagto.Picture := nil;
+
+      if (dm.tbFormasPagamento.FieldByName('imagem').Value <> null) and (dm.tbFormasPagamento.FieldByName('imagem').Value <> '') then
+      begin
+        try
+          imgFormaPagto.picture.LoadFromFile(patchAplicacao + 'imagens\formas pagto\' + dm.tbFormasPagamento.FieldByName('imagem').Value);
+        except
+          ////dm.adicionalog('Erro ao adicionar imagem de forma de pagamento ' + dm.tbFormasPagamento.FieldByName('descricao').Value);
+          imgFormaPagto.Picture := nil;
+        end;
+      end;
+
+      DBCtrlGrid1.Canvas.Draw(31, 0, imgFormaPagto.Picture.Graphic);
+      DBCtrlGrid1.Canvas.Pen.Color := 12615680;
+      DBCtrlGrid1.Canvas.Font.Size := 16;
+
+      DBCtrlGrid1.Canvas.TextOut(2, 0, Inttostr(StrToInt(dm.tbFormasPagamento.FieldByName('cod_forma').Value)));
+      DBCtrlGrid1.Canvas.Font.Size := 12;
+
+//      LDescricaoForma := QuebrarString(dm.tbFormasPagamento.FieldByName('descricao').Value, 13);
+      LDescricaoForma := dm.tbFormasPagamento.FieldByName('descricao').Value;
+//      LDescricaoForma := PadCenter(LDescricaoForma, 13, ' ');
+//      DBCtrlGrid1.Canvas.TextOut(0, 30, PadCenter(LDescricaoForma, 20, ' '));
+//      DBCtrlGrid1.Canvas.TextOut(0, 30, LDescricaoForma);
+
+      DesenharTextoComQuebraManual(DBCtrlGrid1.Canvas, LDescricaoForma, 15, 0, 50);
+      imgFormaPagto.Repaint;
+    end;
+  finally
+    FreeAndNil(imgFormaPagto);
+  end;
+end;
+
+function Tfrm_encerramento.QuebrarEmLinhas(const Texto: string; MaxCaracteresPorLinha: Integer): TArray<string>;
+var
+  Palavras: TArray<string>;
+  LinhaAtual: string;
+  I: Integer;
+begin
+  Palavras := Texto.Split([' ']);
+  LinhaAtual := '';
+  for I := 0 to High(Palavras) do
+  begin
+    if Length(LinhaAtual) + Length(Palavras[I]) + 1 > MaxCaracteresPorLinha then
+    begin
+      Result := Result + [LinhaAtual];
+      LinhaAtual := Palavras[I];
+    end
+    else
+    begin
+      if LinhaAtual = '' then
+        LinhaAtual := Palavras[I]
+      else
+        LinhaAtual := LinhaAtual + ' ' + Palavras[I];
+    end;
+  end;
+  if LinhaAtual <> '' then
+    Result := Result + [LinhaAtual];
+end;
+
+procedure Tfrm_encerramento.DesenharTextoComQuebraManual(Canvas: TCanvas; const Texto: string; MaxCaracteresPorLinha: Integer; X, Y: Integer);
+var
+  Linhas: TArray<string>;
+  I: Integer;
+  AlturaLinha: Integer;
+  LStr: string;
+begin
+  Linhas := QuebrarEmLinhas(Texto, MaxCaracteresPorLinha);
+  AlturaLinha := Canvas.TextHeight('Wg'); // Altura aproximada de uma linha de texto
+  for I := 0 to High(Linhas) do
+  begin
+    LStr := PadCenter(Linhas[I], 15, ' ');
+    Canvas.TextOut(X, Y + (I * AlturaLinha), LStr);
+  end;
+end;
+
+procedure Tfrm_encerramento.DrawTextWithWordWrap(Canvas: TCanvas; const Rect: TRect; const Text: string);
+begin
+
+end;
+
+function Tfrm_encerramento.QuebrarString(const Texto: string; MaximoCaracteresPorLinha: Integer): string;
+begin
+  Result := WrapText(Texto, sLineBreak, [' '], MaximoCaracteresPorLinha);
+end;
+
+procedure Tfrm_encerramento.imprimirDanfe(AModeloNota: TpcnModeloDF);
+var
+  LImprimir: Boolean;
+  XMLDocumentoFiscal: string;
+begin
+  LImprimir := false;
+
+  try
+
+    XMLDocumentoFiscal := dm.ACBrNFe1.NotasFiscais[0].XML;
+    if (StrToInt(dm.LeIni(2, 'ENCERRAMENTO', 'visualizarDanfeNFCE')) = 1) then
+    begin
+      dm.parametrizaAcbrNFE(moNFCe, true, True);
+      dm.ACBrNFe1.NotasFiscais.LoadFromString(XMLDocumentoFiscal);
+      dm.ACBrNFe1.NotasFiscais[0].Imprimir;
+    end;
+
+    if (StrToInt(dm.LeIni(2, 'ENCERRAMENTO', 'perguntaImpressaoDanfe')) = 1) then
+    begin
+      if (ShowRealDialog(Self, tmConfirmacao, 'Confirme', 'Imprimir o danfe ?') = teSim) then
+      begin
+        LImprimir := true;
+      end;
+
+    end
+    else
+      LImprimir := True;
+
+    if LImprimir then
+    begin
+      if AModeloNota = moNFCe then
+        dm.configuraImpressoraNFCE;
+      dm.parametrizaAcbrNFE(moNFCe, false, True);
+      dm.ACBrNFe1.NotasFiscais.LoadFromString(XMLDocumentoFiscal);
+//      dm.ACBrPosPrinter1.LinhasEntreCupons := StrToInt(dm.LeIni(1, 'IMPRESSORA_NFCE', 'linhasAposCupom'));
+      dm.ACBrPosPrinter1.PularLinhas(StrToInt(dm.LeIni(1, 'IMPRESSORA_NFCE', 'linhasAposCupom')));
+
+      dm.ACBrNFe1.NotasFiscais[0].Imprimir;
+
+    end;
+  except
+    on E: Exception do
+    begin
+      dm.exibe_painel_erro('Erro ao imprimir o DANFE ' + sLineBreak + sLineBreak + E.Message, 'Ok');
+    end;
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.finalizarVenda();
+var
+  emitido: boolean;
+  total_linhas_memo, linha_atual: integer;
+  segundosEnvioNFCE: smallint;
+begin
+  podeFecharFormulario := false;
+  tipo_comprovante := StrtoInt(dm.LeIni(1, 'ENCERRAMENTO', 'tipo_comprovante'));
+
+  dm.adicionaLog('Iniciou a finalização da venda - Mesa ' + lb_mesa.Caption);
+
+  if tipo_comprovante = 1 then
+  begin
+    if tipo_cupom = 2 then
+      tipo_comprovante := 2
+    else
+      tipo_comprovante := 1;
+  end;
+
+  if ((tipo_comprovante = 1)) then
+  begin
+
+    case modeloComprovanteFiscal of
+      2:
+        begin  // se for NFCE
+
+          if ((ed_total_conta.Value > valorMaxNFCESemCPF) and (trim(cpfClienteCupomFiscal) = '')) then
+          begin
+            segundosEnvioNFCE := 3;
+            exibirMensagemPainelInformacoes('Identifique o cliente!', '', segundosEnvioNFCE, 5, true);
+            frm_encerramento.SetMensagemPainelInformacoes('Identifique o cliente!.', ' Notas com valores acima de ' + Formatfloat('#0.00', valorMaxNFCESemCPF) + '´devem ter dados do cliente informados (CPF/ CNPJ).', segundosEnvioNFCE, 5, true);
+
+            while (segundosEnvioNFCE >= 0) do
+            begin
+
+              frm_encerramento.SetMensagemPainelInformacoes('Identifique o cliente!.', ' Notas com valores acima de ' + Formatfloat('#0.00', valorMaxNFCESemCPF) + '´devem ter dados do cliente informados (CPF/ CNPJ).', segundosEnvioNFCE, 5, true);
+              Sleep(1000);
+              Application.ProcessMessages();
+              segundosEnvioNFCE := segundosEnvioNFCE - 1;
+            end;
+
+            fecharPainelInformacoes();
+            close;
+            exit;
+          end;
+
+          dm.parametrizaAcbrNFE(moNFCe, false, true);
+          dm.adicionaLog('Iniciou a emissão da NFe- Mesa ' + lb_mesa.Caption);
+          if (emitirNFCE('')) then
+          begin
+            dm.adicionaLog('Emitiu a NFE e vai tentar gravar a venda- Mesa ' + lb_mesa.Caption);
+            codigo_venda := dm.geraCodigo('G_VENDAS', 8);
+            gravar_venda;
+            dm.adicionaLog('Gravou a venda- Mesa ' + lb_mesa.Caption);
+            btEncerrarVenda.Enabled := false;
+
+            if (StrtoInt(dm.LeIni(1, 'ENCERRAMENTO', 'imprimirEncerramento')) = 1) then
+            begin
+              try
+                begin
+                  dm.adicionaLog('Tenta emitir o comprovante de encerramento após nfce');
+                  if emitir_comprovante(codigo_venda) = true then
+                    emitido := true
+                  else
+                    emitido := false
+                end;
+              except
+                begin
+                  emitido := true;
+                end;
+
+              end;
+            end;
+            dm.adicionaLog('Vai limpar as informações da mesa - Mesa ' + lb_mesa.Caption);
+            dm.LimpaInformacoesDaMesa(lb_mesa.Caption, numero_caixa);
+            dm.adicionaLog('Limpou as informações da mesa - Mesa ' + lb_mesa.Caption);
+            imprimirDanfe(moNFCe);
+            dm.adicionaLog('Imprimiu o Danfe - Mesa ' + lb_mesa.Caption);
+
+            try
+              dm.imprimirPromissorias(marca_impressora_fiscal, codigo_venda);
+            except
+              ////dm.adicionalog('Erro ao imprimir promissórias');
+            end;
+
+          end
+          else
+          begin
+            exibirMensagemInformacao('ERRO AO ENCERRAR A CONTA', 6000, 25, true);
+            podeFecharFormulario := true;
+            dm.transacao.Commit;
+            dm.transacao.Active := false;
+            dm.transacao.Active := true;
+            exit;
+          end;
+
+        end;
+
+      3:
+        begin  // se for NF-E MODELO 55
+          dm.parametrizaAcbrNFE(moNFe, false, true);
+          if (emitirNFE() = true) then
+          begin
+
+            codigo_venda := dm.geraCodigo('G_VENDAS', 8);
+            gravar_venda;
+            btEncerrarVenda.Enabled := false;
+
+            imprimirDanfe(moNFe);
+
+            if (StrtoInt(dm.LeIni(1, 'ENCERRAMENTO', 'imprimirEncerramento')) = 1) then
+            begin
+              if emitir_comprovante(codigo_venda) = true then
+                emitido := true
+              else
+                emitido := false;
+            end;
+            dm.LimpaInformacoesDaMesa(lb_mesa.Caption, numero_caixa);
+
+            dm.imprimirPromissorias(marca_impressora_fiscal, codigo_venda);
+            podeFecharFormulario := True;
+
+          end
+          else
+          begin
+            exibirMensagemInformacao('ERRO AO ENCERRAR A CONTA', 6000, 25, true);
+            podeFecharFormulario := true;
+            dm.transacao.Commit;
+            dm.transacao.Active := false;
+            dm.transacao.Active := true;
+            exit;
+          end;
+        end;
+
+      4:
+        begin  // se for SAT
+          emitirCupomSAT;
+        end;
+    end;
+
+  end
+  else
+  begin
+
+    codigo_venda := dm.geraCodigo('G_VENDAS', 8);
+    gravar_venda;
+
+    if (StrtoInt(dm.LeIni(1, 'ENCERRAMENTO', 'imprimirEncerramento')) = 1) then
+    begin
+      if emitir_comprovante(codigo_venda) = true then
+        emitido := true
+      else
+        emitido := false;
+    end
+    else
+    begin
+      emitido := true;
+    end;
+
+    dm.LimpaInformacoesDaMesa(lb_mesa.Caption, numero_caixa);
+    dm.imprimirPromissorias(marca_impressora_nao_fiscal_01, codigo_venda);
+  end;
+
+  dm.adicionaLog('Finaliza os comprovantes de TEF');
+  ;
+  FinalizaTransacoesDeTEF();
+  dm.adicionaLog('Finalizou os comprovantes de tef');
+
+  if (tipo_comprovante = 1) then
+  begin
+    case modeloComprovanteFiscal of
+      2:
+        dm.apagaNotaCarregadaACBRdaTabelaDeErros();
+      3:
+        dm.apagaNotaCarregadaACBRdaTabelaDeErros();
+    end;
+  end;
+
+  if (lb_mesa.Caption = mesaBalcao) then
+  begin
+    dm.imprimirFichas(codigo_venda);
+  end;
+
+  exibirMensagemDeTroco;
+  abrirGaveta;
+
+  podeFecharFormulario := true;
+  transacaoTEFIniciada := false;
+end;
+
+procedure Tfrm_encerramento.FinalizaTransacoesDeTEF();
+begin
+
+  try
+    try
+      imprimirComprovantesTEF();
+    except
+      dm.exibe_painel_erro('Erro ao imprimir transações de TEF', 'Ok');
+    end;
+
+  finally
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.imprimirComprovantesTEF();
+var
+  LOperadora: string;
+  LComprovanteEmpresa: string;
+  LComprovanteCliente: string;
+begin
+
+  try
+    tbFormasPagamentoTemp.First;
+    while not tbFormasPagamentoTemp.Eof do
+    begin
+      LOperadora := tbFormasPagamentoTemprede.Value;
+      LComprovanteEmpresa := tbFormasPagamentoTempComprovanteEstabelecimento.Text;
+      LComprovanteCliente := tbFormasPagamentoTempComprovanteCliente.Text;
+
+      LComprovanteEmpresa := dm.CorrigeImpressaoComprovanteTEF(LOperadora, LComprovanteEmpresa);
+      LComprovanteCliente := dm.CorrigeImpressaoComprovanteTEF(LOperadora, LComprovanteCliente);
+
+      if (trim(tbFormasPagamentoTempNSU.Value) <> '') then
+      begin
+
+        if (StrToInt(dm.LeIni(2, 'TEF', 'imprimeViaEmpresa')) = 1) then
+        begin
+          dm.adicionalogTEF(LComprovanteEmpresa);
+          dm.imprimeTextoMiniPrinter(LComprovanteEmpresa);
+        end;
+
+        if (StrToInt(dm.LeIni(2, 'TEF', 'imprimeViaCliente')) = 1) then
+        begin
+          dm.adicionalogTEF(LComprovanteCliente);
+          dm.imprimeTextoMiniPrinter(LComprovanteCliente);
+        end
+      end;
+      tbFormasPagamentoTemp.Next;
+    end;
+  except
+    on E: Exception do
+    begin
+      dm.exibe_painel_erro('Erro ao imprimir comprovantes de TEF.' + sLineBreak + sLineBreak + E.Message, 'Ok');
+    end;
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.emitirCupomSAT();
+begin
+  dm.parametrizaAcbrNFE(moNFCe, false, true);
+  dm.configuraImpressoraNFCE();
+  if (emitirCupomSATCFE() = true) then
+  begin
+
+    codigo_venda := dm.geraCodigo('G_VENDAS', 8);
+    gravar_venda;
+    dm.LimpaInformacoesDaMesa(lb_mesa.Caption, numero_caixa);
+    btEncerrarVenda.Enabled := false;
+                  //Imprime o Danfe
+    try
+      begin
+
+        if (StrToInt(dm.LeIni(2, 'ENCERRAMENTO', 'perguntaImpressaoDanfe')) = 1) then
+        begin
+
+          if (ShowRealDialog(Self, tmConfirmacao, 'Confirme', 'Imprimir o danfe  ?') = teSim) then
+          begin
+            dm.sat.ImprimirExtrato();
+          end;
+        end
+        else
+        begin
+          dm.sat.ImprimirExtrato();
+        end;
+        dm.ACBrPosPrinter1.AbrirGaveta;
+        dm.ACBrPosPrinter1.Desativar;
+      end;
+
+    except
+      begin
+        while (ShowRealDialog(Self, tmConfirmacao, 'Confirme', 'Tentar imprimir novamente   ?') = teSim) do
+        begin
+
+          try
+            begin
+              dm.ACBrPosPrinter1.AbrirGaveta;
+              dm.ACBrPosPrinter1.Desativar;
+            end;
+          except
+            begin
+              dm.exibe_painel_erro('Erro ao Imprimir o DANFE. Verifique os cabos da impressora e tente novamente.', 'Ok');
+            end;
+          end;
+
+        end
+      end;
+    end;
+    podeFecharFormulario := True;
+  end
+  else
+  begin
+    exibirMensagemInformacao('ERRO AO ENCERRAR A CONTA', 6000, 25, true);
+    podeFecharFormulario := true;
+    dm.transacao.Commit;
+    dm.transacao.Active := false;
+    dm.transacao.Active := true;
+    exit;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.exibirMensagemDeTroco();
+begin
+  try
+    if (ed_valor_troco.Value > 0) then
+    begin
+      frm_principal.escreveExtenso.Valor := ed_valor_troco.VALUE;
+      dm.exibe_painel_troco('TROCO A REPASSAR ' + #13#10 + #13#10 + StrUpper(pchar(frm_principal.escreveExtenso.Texto)), FormatFloat('R$ ###,###,##0.00', ed_valor_troco.Value));
+    end;
+  finally
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.abrirGaveta;
+begin
+  try
+    if (StrToInt(dm.LeIni(1, 'GAVETA', 'instalada')) = 1) then
+    begin
+      try
+        dm.AbreGaveta(1, 1);
+      except
+        dm.exibe_painel_erro('Erro ao abrir a gaveta!', 'Ok');
+
+      end;
+    end;
+  except
+    on E: Exception do
+    begin
+      ////dm.adicionalog('Ocorreu um erro ao abrir a gaveta: ' + E.Message);
+    end;
+  end;
+
+end;
+
+function Tfrm_encerramento.gravar_venda: boolean;
+var
+  modeloComprovante: smallint;
+  chave_nfce: string;
+  numeroNFCE: integer;
+  serieNFCE: integer;
+  protocoloNFCE: string;
+  sessaoSAT: integer;
+  CnfSAT: integer;
+  total_baixa: double;
+  codClienteVenda: string;
+  quantidade_atual: double;
+  linha_atual, total_linhas_memo: integer;
+  iconta: smallint;
+  valor_recebido: double;
+  percentual_desconto: double;
+  ctRegistro: integer;
+  numeroReducaoZ: integer;
+  codAlteracaoDelivery: string;
+  pagamentos: string;
+  XMLDocumentoFiscal: WideString;
+  reciboNFCE: string;
+  idRecebimento: Largeint;
+  idChaveMovimentoVenda: LargeInt;
+begin
+  chave_nfce := '0';
+  numeroNFCE := 0;
+  serieNFCE := 0;
+  protocoloNFCE := '00000';
+  sessaoSAT := 0;
+  CnfSAT := 0;
+
+  if ((tipo_comprovante = 1)) then
+  begin
+    case modeloComprovanteFiscal of
+      1:
+        begin
+        end;
+      2:
+        begin
+          dataMovimentoEcf := FormatDateTime('DD.MM.YYY', date);
+          numeroReducaoZ := 0;
+          HoraEcf := FormatDateTime('HH:MM:SS', time);
+          chave_nfce := copy(dm.ACBrNFe1.NotasFiscais[0].NFe.infNFe.ID, 4, 60);
+          numeroNFCE := dm.ACBrNFe1.NotasFiscais[0].NFe.Ide.nNF;
+          serieNFCE := dm.ACBrNFe1.NotasFiscais[0].NFe.Ide.serie;
+          protocoloNFCE := dm.ACBrNFe1.NotasFiscais[0].NFe.procNFe.nProt;
+          reciboNFCE := '0';
+          codClienteVenda := '';
+
+         //         dm.ACBrNFe1.NotasFiscais[0].GravarStream(XMLDocumentoFiscal);
+
+          XMLDocumentoFiscal := dm.ACBrNFe1.NotasFiscais[0].XML;
+
+          modeloComprovante := 2;
+        end;
+
+      3:
+        begin
+          dataMovimentoEcf := FormatDateTime('DD.MM.YYY', date);
+          numeroReducaoZ := 0;
+          HoraEcf := FormatDateTime('HH:MM:SS', time);
+          chave_nfce := copy(dm.ACBrNFe1.NotasFiscais[0].NFe.infNFe.ID, 4, 60);
+          numeroNFCE := dm.ACBrNFe1.NotasFiscais[0].NFe.Ide.nNF;
+          serieNFCE := dm.ACBrNFe1.NotasFiscais[0].NFe.Ide.serie;
+          protocoloNFCE := dm.ACBrNFe1.NotasFiscais[0].NFe.procNFe.nProt;
+          reciboNFCE := '0';
+          XMLDocumentoFiscal := dm.ACBrNFe1.NotasFiscais[0].XML;
+          modeloComprovante := 3;
+          codClienteVenda := codClienteNFE55;
+          nomeClienteCupom := nomeClienteNFE55;
+        end;
+
+      4:
+        begin
+          reciboNFCE := '0';
+          dataMovimentoEcf := FormatDateTime('DD.MM.YYY', date);
+         //num_serie_ecf  := Inttostr(dm.sat.CFe.ide.nserieSAT);
+          numeroReducaoZ := 0;
+          HoraEcf := FormatDateTime('HH:MM:SS', time);
+          chave_nfce := dm.sat.CFe.infCFe.ID;
+          numeroNFCE := dm.sat.CFe.ide.nCFe;
+          serieNFCE := dm.getSerieNFCE();
+          sessaoSAT := dm.sat.numeroSessao;
+          CnfSAT := dm.sat.cfe.ide.cNF;
+          XMLDocumentoFiscal := dm.sat.CFe.AsXMLString;
+          modeloComprovante := 4;
+        end;
+
+    end;
+
+  end
+  else
+  begin
+    chave_nfce := '0';
+    numeroNFCE := 0;
+    serieNFCE := 0;
+    protocoloNFCE := '00000';
+    reciboNFCE := '0';
+    dataMovimentoEcf := FormatDateTime('DD.MM.YYY', date);
+    HoraEcf := FormatDateTime('HH:MM:SS', time);
+    numeroReducaoZ := 0;
+    modeloComprovante := 0;
+  end;
+
+  dmVEndas.qryVendas.Active := true;
+  dmVendas.qryVendas.Append;
+  dmVendas.qryVendasCOD_EMPRESA.Value := codEmpresa;
+  dmVendas.qryVendasIMP.Value := 0;
+  dmVendas.qryVendasCOD_GARCON_ABRIU.Value := dm.getCodGarconAbriuMesa(lb_mesa.Caption);
+  dmVendas.qryVendasCOD_VENDA.Value := codigo_venda;
+  dmVendas.qryVendasDATA.Value := data_do_sistema;
+  dmVendas.qryVendasDATA_SO.Value := Date;
+  dmVendas.qryVendasHORA.Value := Time;
+  dmVendas.qryVendasMODELO_COMPROVANTE.Value := modeloComprovante;
+
+
+   // Campos Relativos a daodos d ECF (Emissor de cupom fiscal)
+  dmVendas.qryVendasDATA_ECF.Value := StrToDate(dataMovimentoEcf.Replace('.', '/'));
+  dmVendas.qryVendasHORA_ECF.Value := StrToTime(HoraEcf);
+  dmVendas.qryVendasREDUCAO_Z.Value := numeroReducaoZ;
+
+
+
+   //Campos Relativos a NF-e / NFC-e
+  dmVendas.qryVendasNUMERO_NFCE.Value := numeroNFCE;
+  dmVendas.qryVendasSERIE_NFCE.Value := serieNFCE;
+  dmVEndas.qryVendasCHAVE_NFCE.Value := chave_nfce;
+  dmVendas.qryVendasPROTOCOLO_NFCE.Value := protocoloNFCE;
+  dmVendas.qryVendasRECIBO_NFCE.value := reciboNFCE;
+
+
+   //Campos Relativos ao SAT
+  dmVendas.qryVendasSESSAO_SAT.Value := sessaoSAT;
+  dmVEndas.qryVendasCNF_SAT.Value := CnfSAT;
+
+
+
+   // Campos dos totais de venda
+  dmVendas.qryVendasVALOR_BRUTO.Value := ed_valor_bruto.Value;
+  dmVendas.qryVendasVALOR_DESCONTO.Value := ed_total_desconto.Value;
+  dmVendas.qryVendasVALOR_TXSERV.Value := ed_total_tx_serv.Value;
+  dmVendas.qryVendasVALOR_TX_ENTREGA.Value := ed_total_entrega.Value;
+  dmVendas.qryVendasVALOR_TOTAL.Value := ed_total_conta.Value;
+  dmVendas.qryVendasTOTAL_PAGO.Value := ed_total_pago.Value;
+  dmVendas.qryVendasVALOR_TROCO.Value := ed_valor_troco.Value;
+  dmVendas.qryVendasCOD_USUARIO.Value := getCodOperadorCaixa(ultimoCaixaAberto);
+  dmVendas.qryVendasNUMERO_CAIXA.Value := numero_caixa;
+  dmVendas.qryVendasMESA.Value := trim(lb_mesa.Caption);
+  dmVendas.qryVendasCOD_CAIXA.Value := ultimoCaixaAberto;
+  dmVendas.qryVendasTIPO_VENDA.Value := tipoVenda;
+  dmVendas.qryVendasQTDE_PESSOAS.Value := nPessoas;
+  dmVendas.qryVendasCOD_PEDIDO_DELIVERY.Value := getCodPedidoDelivery();
+  dmVendas.qryVendasXML_DOC.Value := XMLDocumentoFiscal;
+  dmVendas.qryVendasCNPJ_CPF_CLIENTE_NF.Value := cpfClienteCupomFiscal;
+  dmVendas.qryVendasNOME_CLIENTE_NF.Value := nomeClienteCupom;
+  dmVendas.qryVendasCOD_FORNECEDOR.Value := codClienteVenda;
+  dmVendas.qryVendasTENTATIVAS_ENVIO_NFCE.Value := 0;
+  dmVendas.qryVendasTEMPO_EMISSAO_NFCE.Value := tempoEmissaoNota;
+  dmVendas.qryVendasTABELA_PRECO.Value := dm.getTabelaPrecoAtual.codigo;
+  dmVendas.qryVendasSTATUS.Value := 0;
+  dmVendas.qryVendas.Post;
+
+  if (lb_mesa.caption = mesaDelivery) then
+  begin
+    dm.efetuaBaixaNoPedidoDelivery(getCodPedidoDelivery(), codigo_venda, ultimoCaixaAberto);
+    tbFormasPagamentoTemp.First;
+    while not (tbFormasPagamentoTemp.Eof) do
+    begin
+      pagamentos := pagamentos + tbFormasPagamentoTempdescricaoForma.Value + ': ' + FormatFloat('R$ ###,###,##0.00 ', tbFormasPagamentoTempvalorForma.Value) + ' ';
+      tbFormasPagamentoTemp.Next;
+    end;
+
+    codAlteracaoDelivery := dm.geraCodigo('G_ALT_PEDIDOS_DELIVERY', 10);
+    dm.qryauxiliar.sql.Clear;
+    dm.qryauxiliar.SQL.add(' insert into PEDIDOS_DELIVERY_ALTERACAO (codigo, cod_pedido,cod_cliente,cod_caixa, ');
+    dm.qryauxiliar.SQL.add('  cod_usuario, cod_usuario_autorizou, valor_total,numero_caixa,tipo_alteracao,usuario_operador,usuario_autorizador,pagamentos )');
+    dm.qryauxiliar.sql.add(' select ' + QuotedStr(codAlteracaoDelivery) + ',p.codigo,p.cod_cliente,' + QuotedStr(ultimoCaixaAberto) + ',' + Quotedstr(codigo_usuario));
+    dm.qryauxiliar.sql.add(',' + QuotedStr(codigo_usuario_responsavel) + ',');
+    dm.qryauxiliar.sql.add('' + dm.TrocaVirgPPto(FloatToStr(ed_total_conta.value)) + ',');
+    dm.qryauxiliar.sql.add('' + Quotedstr(numero_caixa) + ',');
+    dm.qryauxiliar.sql.add('' + IntToStr(4) + ',');
+    dm.qryauxiliar.sql.add('' + Quotedstr(nome_usuario) + ',');
+    dm.qryauxiliar.sql.add('' + Quotedstr(nome_usuario_responsavel) + ',');
+    dm.qryauxiliar.sql.add('' + Quotedstr(pagamentos) + ' from pedidos_delivery p where p.codigo=' + Quotedstr(getCodPedidoDelivery));
+   //////dm.adicionalog(dm.qryauxiliar.SQL.Text );
+    dm.qryauxiliar.ExecSQL;
+
+    dm.qryauxiliar.Active := false;
+    dm.qryauxiliar.SQL.Clear;
+    dm.qryauxiliar.SQL.add('  insert into it_ped_del_pos_alt (cod_alteracao,cod_produto,quantidade,valor_unitario) ');
+    dm.qryauxiliar.SQL.add('   select ' + Quotedstr(codAlteracaoDelivery) + ',' + ' it.cod_produto, it.quantidade,it.valor_unitario ');
+    dm.qryauxiliar.sql.add(' from itens_pedido_delivery  it where it.cod_pedido=' + Quotedstr(getCodPedidoDelivery));
+    dm.qryauxiliar.ExecSQL;
+  end;
+
+  dm.qryauxiliar.Active := false;
+  dm.qryauxiliar.SQL.Clear;
+  dm.qryauxiliar.SQL.Add(' update movimento_mesa mv ');
+  dm.qryauxiliar.SQL.Add('   set mv.valor_unitario=0  ');
+  dm.qryauxiliar.SQL.Add('   where mv.id in   (select distinct sb.id_mov_mesa from sabores_pizza_movimento_mesa  sb ) ');
+  dm.qryauxiliar.SQL.Add('   and mv.cod_mesa=' + Quotedstr(lb_mesa.Caption));
+   //////dm.adicionalog(dm.qryauxiliar.SQL.Text);
+  dm.qryauxiliar.ExecSQL;
+
+  //gravar produtos da venda e efetua baixa no estoque;
+
+  dm.qryauxiliar2.Active := false;
+  dm.qryauxiliar2.SQL.clear;
+
+  dm.qryauxiliar2.SQL.add(' select * from (');
+  dm.qryauxiliar2.SQL.add(' select p.cod_barras, p.cod_produto, p.descricao,p.cfop_saida,p.ncm,p.cest, p.un_ecf,p.cst_saida, al.percentual_icms,vm.quantidade as quantidade,');
+  dm.qryauxiliar2.SQL.add(' vm.valor_unitario, vm.cancelado, vm.cod_garcon, p.cod_aliquota, vm.id,  al.percentagem as aliquota,');
+  dm.qryauxiliar2.SQL.add(' p.reducao_base_icms as percentual_red_base_icms, ');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt((vm.valor_unitario * vm.quantidade),2) as total_produto,');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt( (vm.valor_unitario * vm.quantidade) * (p.reducao_base_icms  /100),2) as total_reducao_base_icms, ');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt( (udf_roundabnt((vm.valor_unitario * vm.quantidade),2) -  udf_roundabnt( (vm.valor_unitario * vm.quantidade) * (p.reducao_base_icms  /100),2)),2) AS base_icms_total, ');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt( ((udf_roundabnt((vm.valor_unitario * vm.quantidade),2) -  udf_roundabnt( (vm.valor_unitario * vm.quantidade) * (p.reducao_base_icms  /100),2)) * (al.percentual_icms /100) ),2) as valor_icms, ');
+  dm.qryauxiliar2.SQL.Add(' coalesce(vm.desconto,0) as desconto, vm.hora_lancamento,vm.id_combo,');
+  dm.qryauxiliar2.SQL.Add(' coalesce(vm.guid_lancamento,' + Quotedstr('') + ') as guid_lancamento, ');
+  dm.qryauxiliar2.SQL.Add(' coalesce(vm.guid_order ,' + Quotedstr('') + ') as guid_order,');
+  dm.qryauxiliar2.SQL.Add(' coalesce(vm.guid_pagamento ,' + Quotedstr('') + ') as guid_pagamento');
+  dm.qryauxiliar2.SQL.add(' from movimento_mesa vm');
+  dm.qryauxiliar2.SQL.add(' inner join produtos p on (p.cod_produto = vm.cod_produto)');
+  dm.qryauxiliar2.SQL.add(' inner join aliquotas al on (al.cod_aliquota = p.cod_aliquota)');
+  dm.qryauxiliar2.SQL.add(' where vm.cancelado=0 and  vm.cod_mesa=' + Quotedstr(lb_mesa.Caption));
+//   dm.qryauxiliar2.SQL.add(' and vm.id not in (select distinct sb.id_mov_mesa from sabores_pizza_movimento_mesa  sb ) ');
+  dm.qryauxiliar2.SQL.add(' union all ');
+  dm.qryauxiliar2.SQL.add(' select p.cod_barras, p.cod_produto, p.descricao,p.cfop_saida,p.ncm,p.cest, p.un_ecf,p.cst_saida, al.percentual_icms,(vm.quantidade * ms.quantidade) as quantidade,');
+  dm.qryauxiliar2.SQL.add(' vm.valor_unitario_sabor, ms.cancelado, ms.cod_garcon, p.cod_aliquota, ms.id,  al.percentagem as aliquota,');
+  dm.qryauxiliar2.SQL.add(' p.reducao_base_icms as percentual_red_base_icms,');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt((vm.valor_unitario_sabor  * (vm.quantidade * ms.quantidade)),2) as total_produto,');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt((vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)) * (p.reducao_base_icms / 100),2) as total_reducao_base_icms,');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt( (udf_roundabnt((vm.valor_unitario_sabor *(vm.quantidade * ms.quantidade)),2) -  udf_roundabnt( (vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)) * (p.reducao_base_icms  /100),2)),2) AS base_icms_total,');
+  dm.qryauxiliar2.SQL.add(' udf_roundabnt( ((udf_roundabnt((vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)),2) -  udf_roundabnt( (vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)) * (p.reducao_base_icms  /100),2)) * (al.percentual_icms /100) ),2) as valor_icms,');
+  dm.qryauxiliar2.SQL.Add(' coalesce(vm.desconto,0) as desconto, vm.hora_lancamento,vm.id_combo,');
+  dm.qryauxiliar2.SQL.Add(' coalesce(ms.guid_lancamento,' + Quotedstr('') + ') as guid_lancamento, ');
+  dm.qryauxiliar2.SQL.Add(' coalesce(ms.guid_order ,' + Quotedstr('') + ') as guid_order,');
+  dm.qryauxiliar2.SQL.Add(' coalesce(ms.guid_pagamento ,' + Quotedstr('') + ') as guid_pagamento');
+  dm.qryauxiliar2.SQL.add(' from sabores_pizza_movimento_mesa  vm');
+  dm.qryauxiliar2.SQL.add(' inner join produtos p on (p.cod_produto = vm.cod_produto)');
+  dm.qryauxiliar2.SQL.add(' inner join aliquotas al on (al.cod_aliquota = p.cod_aliquota)');
+  dm.qryauxiliar2.SQL.add(' inner join movimento_mesa ms on (ms.id = vm.id_mov_mesa)');
+  dm.qryauxiliar2.SQL.add(' where ms.cancelado=0 and ms.cod_mesa=' + Quotedstr(lb_mesa.Caption) + ')');
+
+  dm.adicionalog(dm.qryauxiliar2.SQL.Text);
+  dm.qryauxiliar2.Active := true;
+  dm.qryauxiliar2.First;
+
+  while not dm.qryauxiliar2.eof do
+  begin
+
+    idChaveMovimentoVenda := strToInt(dm.geraCodigo('g_id_chave_mov_venda', 15));
+    dm.qryauxiliar.sql.Clear;
+    dm.qryauxiliar.sql.add('insert into movimento_venda (cod_empresa,cod_venda,id_chave, cod_mesa,cod_produto,');
+    dm.qryauxiliar.sql.add('quantidade,valor_unitario,cod_garcon,data,hora_lancamento,cod_usuario,numero_caixa,processada,cod_aliquota,cod_caixa,acresimo,desconto,');
+    dm.qryauxiliar.sql.add('data_ecf,hora_ecf,id,cfop,cst,base_icms_unit, tabela_preco,id_combo,guid_lancamento,guid_order,guid_pagamento) values (');
+    dm.qryauxiliar.SQL.add('' + QuotedStr(codEmpresa) + ',');
+    dm.qryauxiliar.SQL.add('' + QuotedStr(codigo_venda) + ',');
+    dm.qryauxiliar.SQL.add(IntToStr(idChaveMovimentoVenda) + ',');
+    dm.qryauxiliar.SQL.add('' + QuotedStr(lb_mesa.Caption) + ',');
+    dm.qryauxiliar.SQL.add('' + Quotedstr(dm.qryauxiliar2.fieldbyname('cod_produto').value) + ',');
+    dm.qryauxiliar.sql.add('' + dm.TrocaVirgPPto(dm.qryauxiliar2.fieldbyname('quantidade').value) + ',');
+    dm.qryauxiliar.sql.add('' + dm.removeVirgula(dm.TrocaVirgPPto(dm.qryauxiliar2.fieldbyname('valor_unitario').value)) + ',');
+    dm.qryauxiliar.sql.add('' + Quotedstr(dm.qryauxiliar2.fieldbyname('cod_garcon').value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(FormatDateTime('DD.MM.YY', data_do_sistema)) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(FormatDateTime('DD.MM.YY HH:MM:SS', dm.qryauxiliar2.fieldbyname('hora_lancamento').value)) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(getCodOperadorCaixa(ultimoCaixaAberto)) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(numero_caixa) + ',0,');
+    dm.qryauxiliar.sql.add('' + QuotedStr(dm.qryauxiliar2.fieldbyname('cod_aliquota').value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(ultimoCaixaAberto) + ',');
+    dm.qryauxiliar.sql.add('' + dm.TrocaVirgPPto(FloatToStr(0)) + ',');
+    dm.qryauxiliar.sql.add('' + dm.TrocaVirgPPto(FloatToStr(dm.qryauxiliar2.fieldbyname('desconto').value)) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(dataMovimentoEcf) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(HoraEcf) + ',');
+    dm.qryauxiliar.sql.add('' + inttostr(dm.qryauxiliar2.fieldbyname('ID').Value) + ',');
+
+    dm.qryauxiliar.sql.add('' + QuotedStr(dm.qryauxiliar2.fieldbyname('cfop_saida').value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(dm.qryauxiliar2.fieldbyname('cst_saida').value) + ',');
+    dm.qryauxiliar.sql.add('' + dm.removeVirgula(dm.TrocaVirgPPto(dm.qryauxiliar2.fieldbyname('base_icms_total').value)) + ',');
+    dm.qryauxiliar.SQL.add(IntToStr(dm.getTabelaPrecoAtual.codigo) + ',');
+    dm.qryauxiliar.SQL.add(IntToStr(dm.qryauxiliar2.fieldbyname('id_combo').value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr('guid_lancamento') + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr('guid_order') + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr('guid_pagamento') + ')');
+
+    dm.adicionalog('SQL DE INSERCAO: ' + dm.qryauxiliar.SQL.Text);
+
+    try
+      begin
+        dm.qryauxiliar.ExecSQL;
+      end;
+
+    except
+      begin
+        ShowMessage('Ocorreu um erro no sistema!  Um log de erros foi criado no formato DATA+HORA na pasta logs do Sistema. Abra o arquivo e envio por fax ou email para a Real Systems');
+        dm.cria_log_de_erros(dm.qryauxiliar.sql, 'Módulo de caixa', 'Erro ao gravar movimento da venda', codigo_usuario);
+        Result := false;
+        exit;
+      end;
+    end;
+
+
+     /// Execução da procedure de baixa no estoque automática
+    dm.transacaoProcedure.Active := false;
+    dm.transacaoProcedure.Active := true;
+    dm.proc_abate_estoque.Active := false;
+    dm.proc_abate_estoque.Params[0].Value := dm.qryauxiliar2.fieldbyname('cod_produto').value;
+    dm.proc_abate_estoque.Params[1].Value := dm.qryauxiliar2.fieldbyname('quantidade').value;
+    dm.proc_abate_estoque.ExecProc;
+    dm.transacaoProcedure.commit;
+
+    dm.qryauxiliar2.Next;
+  end;
+
+     //gravar pagamentos da venda
+  ctRegistro := 0;
+  tbFormasPagamentoTemp.First;
+  while not tbFormasPagamentoTemp.Eof do
+  begin
+    valor_recebido := 0;
+    valor_recebido := tbFormasPagamentoTempvalorForma.Value;
+    if tbFormasPagamentoTempcodForma.value = '001' then
+      valor_recebido := valor_recebido - ed_valor_troco.Value;
+
+    case dm.verificaTipoFormaPagamento(tbFormasPagamentoTempcodForma.value) of
+      1:
+        begin
+        end;
+      2:
+        begin
+          dm.gerarFatura(tbFormasPagamentoTempCodCliFaturado.value, codigo_venda, valor_recebido, tbFormasPagamentoTempobservacoesFaturado.value, tbFormasPagamentoTempDataVencimento.value);
+        end;
+    end;
+
+    idRecebimento := strToInt(dm.geraCodigo('g_id_recebimentos', 15));
+
+    dm.qryauxiliar.active := false;
+    dm.qryauxiliar.sql.clear;
+    dm.qryauxiliar.sql.add('insert into recebimentos (cod_empresa,cod_venda,id,cod_forma,valor,data,cod_usuario,numero_caixa,processado,cod_caixa,cod_cliente,nsu,rede, autorizacao_tef,tabela_preco, id_config_pagamento) values (');
+    dm.qryauxiliar.SQL.add('' + QUotedstr(codEmpresa) + ',');
+    dm.qryauxiliar.SQL.add('' + QUotedstr(codigo_venda) + ',');
+    dm.qryauxiliar.SQL.add(IntToStr(idRecebimento) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(tbFormasPagamentoTempcodForma.value) + ',');
+    dm.qryauxiliar.sql.add('' + dm.TrocaVirgPPto(Floattostr(valor_recebido)) + ',');
+    dm.qryauxiliar.sql.add('' + Quotedstr(FormatDateTime('DD.MM.YYY', data_do_sistema)) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(getCodOperadorCaixa(ultimoCaixaAberto)) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(numero_caixa) + ',0,');
+    dm.qryauxiliar.sql.add('' + QuotedStr(ultimoCaixaAberto) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(tbFormasPagamentoTempCodCliFaturado.Value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(tbFormasPagamentoTempNSU.Value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(tbFormasPagamentoTemprede.Value) + ',');
+    dm.qryauxiliar.sql.add('' + QuotedStr(tbFormasPagamentoTempAutorizacaoTEF.Value) + ',');
+    dm.qryauxiliar.SQL.add(IntToStr(dm.getTabelaPrecoAtual.codigo) + ',');
+    dm.qryauxiliar.SQL.add(IntToStr(tbFormasPagamentoTempidConfigPagamento.Value) + ')');
+
+    try
+      begin
+        dm.qryauxiliar.ExecSQL;
+      end;
+
+    except
+      begin
+        ShowMessage('Ocorreu um erro no sistema!  Um log de erros foi criado no formato DATA+HORA na pasta logs do Sistema. Abra o arquivo e envio por fax ou email para a Real Systems');
+        dm.cria_log_de_erros(dm.qryauxiliar.sql, 'Módulo de caixa', 'Erro ao gravar forma de pagamento', codigo_usuario);
+        Result := false;
+        exit;
+      end;
+    end;
+    tbFormasPagamentoTemp.Next;
+    ctRegistro := ctRegistro + 1;
+  end;
+  dm.transacao.Commit;
+
+  dm.AtualizarCustosDaVenda(codigo_venda);
+
+  if ((trim(lb_mesa.Caption) = mesaBalcao)) then
+  begin
+    LCodPedidoBalcaoAtual := dm.geraCodigo('G_PEDIDOS_BALCAO', 4);
+
+    if (trim(edNomeClienteProducaoComanda.Text) = '') then
+    begin
+      edNomeClienteProducaoComanda.Text := LCodPedidoBalcaoAtual;
+    end
+    else
+    begin
+      LCodPedidoBalcaoAtual := edNomeClienteProducaoComanda.Text;
+    end;
+
+//    dm.danfeESCPos. := LCodPedidoBalcaoAtual;
+    dm.imprimePedidoProducaoBalcao(mesaBalcao, LCodPedidoBalcaoAtual);
+  end;
+
+end;
+
+procedure Tfrm_encerramento.ed_valor_tx_servEnter(Sender: TObject);
+begin
+  if Sender is TCustomEdit then
+  begin
+    (Sender as TCustomEdit).Brush.Color := clMoneyGreen;
+    (Sender as TCustomEdit).Repaint;
+
+  end;
+end;
+
+procedure Tfrm_encerramento.setTipoVenda(ATipoVenda: smallint);
+begin
+  tipoVenda := ATipoVenda;
+end;
+
+procedure Tfrm_encerramento.busca_movimento_da_mesa;
+var
+  LQryConsulta: TIBquery;
+  Ltransacao: TIBTransaction;
+begin
+  Ltransacao := TIBTransaction.Create(nil);
+  Ltransacao.Params.Add('read_committed');
+  Ltransacao.Params.Add('rec_version');
+  Ltransacao.Params.Add('nowait');
+  valorTaxaServicoCalculada := 0;
+  Ltransacao.DefaultDatabase := dm.dbrestaurante;
+  Ltransacao.Active := false;
+  Ltransacao.Active := true;
+  LQryConsulta := TIBquery.Create(nil);
+  LQryConsulta.Database := dm.dbrestaurante;
+  LQryConsulta.Transaction := Ltransacao;
+
+  try
+    dm.carregarFormasDePagamento(false);
+
+    case tipoVenda of
+      1:
+        begin
+          LQryConsulta.Active := false;
+          LQryConsulta.sql.clear;
+          LQryConsulta.sql.add('select * from rodapeextrato3(' + Quotedstr(lb_mesa.caption) + ',' + dm.TrocaVirgPPto(Floattostr(percentualTaxaServico)) + ')');
+          LQryConsulta.Active := true;
+          ed_valor_bruto.Value := LQryConsulta.fieldbyname('VALORBRUTO').Value;
+          ed_valor_tx_serv.Value := LQryConsulta.fieldbyname('VALORTXSERV').Value;
+          ed_total_tx_serv.Value := LQryConsulta.fieldbyname('VALORTXSERV').Value;
+          ed_total_entrega.Value := 0;
+          ed_total_desconto.Value := LQryConsulta.fieldbyname('VALORTOTALDESCONTO').Value;
+          ed_total_pago.Value := 0;
+          ed_total_conta.Value := LQryConsulta.fieldbyname('VALORTOTAL').Value;
+          nPessoas := LQryConsulta.fieldbyname('QTDPESSOAS').Value;
+          valorTaxaServicoCalculada := LQryConsulta.fieldbyname('VALORTXSERV').Value;
+
+          ed_valor_tx_serv.Visible := true;
+          lbTaxaServico.Visible := true;
+          buscaRecebimentosParciaisMesa();
+        end;
+
+      2:
+        begin   // Venda balcão
+          valorTaxaServicoCalculada := 0;
+          LQryConsulta.Active := false;
+          LQryConsulta.sql.clear;
+          LQryConsulta.sql.add('select * from rodapeextrato3(' + Quotedstr(lb_mesa.caption) + ',' + dm.TrocaVirgPPto(Floattostr(percentualTaxaServico)) + ')');
+          LQryConsulta.Active := true;
+          ed_valor_bruto.Value := LQryConsulta.fieldbyname('VALORBRUTO').Value;
+          ed_valor_tx_serv.Value := 0;
+          ed_total_tx_serv.Value := 0;
+          ed_total_entrega.Value := 0;
+          ed_total_desconto.Value := LQryConsulta.fieldbyname('VALORTOTALDESCONTO').Value;
+          ed_total_pago.Value := 0;
+          ed_total_conta.Value := LQryConsulta.fieldbyname('VALORTOTAL').Value;
+          nPessoas := 1;
+          ed_valor_tx_serv.Visible := false;
+          lbTaxaServico.Visible := false;
+          ed_valor_forma.Width := 216;
+          buscaRecebimentosParciaisMesa();
+        end;
+
+      3:
+        begin  // Delivery
+          valorTaxaServicoCalculada := 0;
+          LQryConsulta.Active := false;
+          LQryConsulta.sql.clear;
+          LQryConsulta.sql.add(' select p.valor_bruto, p.valor_desconto, p.valor_entrega, p.valor_total, p.valor_troco, ');
+          LQryConsulta.sql.add(' coalesce(p.cpf_nota,' + Quotedstr('') + ') as cpf_nota, coalesce(p.nome_nota,' + Quotedstr('') + ') as nome_nota, ');
+          LQryConsulta.SQL.Add(' p.tabela_preco ');
+          LQryConsulta.sql.add('  from pedidos_delivery p where p.codigo=' + Quotedstr(codigoPedidoDelivery));
+          LQryConsulta.Active := true;
+          ed_valor_bruto.Value := LQryConsulta.fieldbyname('valor_bruto').Value;
+          ed_valor_tx_serv.Value := 0;
+          ed_total_tx_serv.Value := 0;
+          ed_total_entrega.Value := LQryConsulta.fieldbyname('valor_entrega').Value;
+          ed_total_desconto.Value := LQryConsulta.fieldbyname('valor_desconto').Value;
+          ed_total_pago.Value := 0;
+          ed_total_conta.Value := LQryConsulta.fieldbyname('valor_total').Value;
+          edCpf.Text := LQryConsulta.fieldbyname('cpf_nota').Value;
+          edNomeCliente.Text := LQryConsulta.fieldbyname('nome_nota').Value;
+          if (trim(edCpf.Text) <> '') then
+          begin
+            cpfClienteCupomFiscal := edCpf.Text;
+//            setCPFCliente();
+//            pgFormasPagamentoPrincipal.Show;
+          end;
+          nPessoas := 1;
+          ed_valor_tx_serv.Visible := false;
+          lbTaxaServico.Visible := false;
+          ed_valor_forma.Width := 216;
+          buscaRecebimentosParciaisMesa();
+          btDesconto.Enabled := false;
+          pnFormasPagamento.Enabled := false;
+          btApagarForma.Enabled := false;
+          dm.setTabelaPrecoAtual(LQryConsulta.FieldByName('tabela_preco').Value);
+          lblTitulo.Caption := 'Recebimentos ( ' + dm.getTabelaPrecoAtual.descricao + ' )';
+        end;
+    end;
+
+    if valorTaxaServicoCalculada = 0 then
+    begin
+      ed_valor_tx_serv.Visible := false;
+      lbTaxaServico.Visible := false;
+      ed_valor_forma.Width := 216;
+    end;
+
+  finally
+    LQryConsulta.Active := false;
+    Ltransacao.Active := false;
+
+    FreeAndNil(LQryConsulta);
+    FreeAndNil(Ltransacao);
+  end;
+
+  calcula_valores();
+end;
+
+procedure Tfrm_encerramento.bt_adicionarKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if Key = vk_escape then
+  begin
+    close;
+  end;
+end;
+
+function Tfrm_encerramento.emitir_comprovante(codVenda: string): boolean;
+var
+  retorno: string;
+  codCliente: string;
+  nomeCliente: string;
+  segundosMensagem: smallint;
+begin
+
+  segundosMensagem := 1;
+  exibirMensagemPainelInformacoes('Imprimindo comprovante...', '', segundosMensagem, 5, true);
+  frm_encerramento.SetMensagemPainelInformacoes('Imprimindo comprovante...', '´Aguarde a impressão do comprovante.', segundosMensagem, 7, true);
+
+  while (segundosMensagem >= 0) do
+  begin
+
+    frm_encerramento.SetMensagemPainelInformacoes('Imprimindo comprovante...', '´Aguarde a impressão do comprovante.', segundosMensagem, 7, true);
+    Sleep(1000);
+    Application.ProcessMessages();
+    segundosMensagem := segundosMensagem - 1;
+  end;
+  fecharPainelInformacoes();
+
+  result := false;
+  if FileExists(caminhoArquivoExtrato) then
+    DeleteFile(caminhoArquivoExtrato);
+  if FileExists(caminhoArquivoExtrato) then
+    DeleteFile(caminhoArquivoExtrato);
+
+  if (mesaDelivery = trim(lb_mesa.caption)) then
+    dm.imprimeCabecalhoECF(marca_impressora_nao_fiscal_01, 2, lb_mesa.Caption, codVenda, getCodPedidoDelivery(), codCliente, nomeCliente, 1)
+  else
+    dm.imprimeCabecalhoECF(marca_impressora_nao_fiscal_01, 2, lb_mesa.Caption, codVenda, codPedidoBalcaoAtual, codCliente, nomeCliente, 1);
+
+  dm.adicionalog('Vai Chamou a função de impressão do movimento');
+
+  if StrToInt(dm.LeIni(1, 'ENCERRAMENTO', 'imprime_movimento')) = 1 then
+  begin
+    dm.adicionalog('Vai chamar a função impressão de ítens de encerramento');
+    dm.imprimeMovimentoContaECF(marca_impressora_nao_fiscal_01, lb_mesa.Caption, codVenda);
+    dm.adicionalog('Chamou a função de impressão do movimento');
+  end;
+
+  imp_FormasPagtoComprovante(marca_impressora_nao_fiscal_01, modelo_impressora_nao_fiscal_01);
+  dm.imprimeRodapeExtratoContaECF(lb_mesa.Caption, codVenda, marca_impressora_nao_fiscal_01, 2, 1, ed_valor_bruto.value, 0, ed_total_tx_serv.Value, 0, ed_total_desconto.Value, ed_total_conta.Value, ed_total_pago.Value, ed_valor_troco.Value, 0);
+  frm_principal.memo_avisos.Lines.LoadFromFile(caminhoArquivoExtrato);
+  dm.adicionalog(frm_principal.memo_avisos.Lines.Text);
+
+  if (localDeEmissaoEncerramento = 1) then
+  begin
+
+    case modeloComprovanteFiscal of
+
+      2:
+        begin
+          dm.imprimeTextoMiniPrinter(frm_principal.memo_avisos.Lines.Text);
+        end;
+
+    end;
+  end
+  else
+  begin
+
+    if (localDeEmissaoEncerramento = 2) then
+    begin
+
+      try
+
+        dm.imprimeTextoMiniPrinter(frm_principal.memo_avisos.Lines.Text);
+
+      except
+        dm.exibe_painel_erro('Erro ao imprimir o comprovante de encerramento', 'Ok');
+      end;
+
+    end;
+
+    if (localDeEmissaoEncerramento = 3) then
+    begin
+
+      try
+        dm.imprimeTexoImpressoraNFCE();
+        dm.adicionalog('Imprimiu na impressora de NFCE o encerramento');
+
+      except
+        dm.exibe_painel_erro('Erro ao imprimir o comprovante de encerramento', 'Ok');
+      end;
+
+    end;
+
+  end;
+
+  result := true;
+end;
+
+function Tfrm_encerramento.imp_FormasPagtoComprovante(marca: integer; modelo: integer): boolean;
+var
+  total_formas: integer;
+  ct: integer;
+  str: Widestring;
+  tamStr: integer;
+begin
+  tbFormasPagamentoTemp.First;
+  while not tbFormasPagamentoTemp.Eof do
+  begin
+    if (tbFormasPagamentoTemp.Bof) then
+    begin
+      dm.imprimeLinhaECF(marca, linhaExtrato, true, false, false, false, false, false, false);
+      dm.imprimeLinhaECF(marca, dm.centralizar('FORMAS DE PAGAMENTO', qtdColunasNormalECF), true, false, false, false, false, false, false);
+    end;
+    str := formatoRodapeExtrato;
+    str := dm.organizarCupom(str, tbFormasPagamentoTempdescricaoForma.value, '#');
+    str := dm.organizarCupom(str, '', '*');
+    str := dm.organizarCupom(str, '', '%');
+    tamStr := alinhamentoDireitaTotal - length(trim(str));
+    str := trim(str) + dm.alinha_valor_a_direita(tamStr, FormatFloat('R$ ###,###,##0.00 ', (tbFormasPagamentoTempvalorForma.value)));
+    dm.imprimeLinhaECF(marca, trim(str), false, false, false, false, false, false, false);
+    tbFormasPagamentoTemp.Next;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.bt_pesquisa_formaClick(Sender: TObject);
+begin
+  dm.qryauxiliar.Active := false;
+  dm.qryauxiliar.SQL.clear;
+  dm.qryauxiliar.sql.add('select * from formas_pagamento');
+  dm.qryauxiliar.Active := true;
+  if dm.qryauxiliar.IsEmpty then
+  begin
+    ShowMessage('Não existem formas de pagamento cadastrados!');
+    Exit;
+  end;
+  Application.CreateForm(Tfrm_cs_formas_pagto, frm_cs_formas_pagto);
+  ;
+  frm_cs_formas_pagto.ShowModal;
+  frm_cs_formas_pagto.free;
+  ed_codigo_forma.Text := string_auxiliar;
+end;
+
+procedure Tfrm_encerramento.buscaRecebimentosParciaisMesa;
+var
+  LQryConsulta: TIBquery;
+  Ltransacao: TIBTransaction;
+  LRecebimento: TRecebimento;
+  LFormaPagamentoController: TFormaPagamentoController;
+begin
+
+  LRecebimento := TRecebimento.Create;
+  LFormaPagamentoController := TFormaPagamentoController.Create;
+
+  Ltransacao := TIBTransaction.Create(nil);
+  Ltransacao.Params.Add('read_committed');
+  Ltransacao.Params.Add('rec_version');
+  Ltransacao.Params.Add('nowait');
+
+  Ltransacao.DefaultDatabase := dm.dbrestaurante;
+  Ltransacao.Active := false;
+  Ltransacao.Active := true;
+  LQryConsulta := TIBquery.Create(nil);
+  LQryConsulta.Database := dm.dbrestaurante;
+  LQryConsulta.Transaction := Ltransacao;
+
+  try
+    tbFormasPagamentoTemp.Active := false;
+    tbFormasPagamentoTemp.Active := true;
+    LQryConsulta.Active := false;
+    LQryConsulta.SQL.clear;
+    LQryConsulta.SQL.Add('select r.cod_forma,f.descricao , r.valor, r.cod_cli_faturamento,');
+    LQryConsulta.SQL.Add('r.obs_faturamento, r.guid_pagamento,');
+    LQryConsulta.SQL.Add('coalesce(r.tef_nsu,' + quotedstr('') + ') as tef_nsu,');
+    LQryConsulta.SQL.Add(' coalesce(r.tef_rede,' + quotedstr('') + ') as tef_rede,');
+    LQryConsulta.SQL.Add(' coalesce(r.tef_autorizacao,' + quotedstr('') + ') as  tef_autorizacao,');
+    LQryConsulta.SQL.Add(' coalesce(r.tef_comprovante_empresa,' + quotedstr('') + ') as tef_comprovante_empresa,');
+    LQryConsulta.SQL.Add(' coalesce(r.tef_comprovante_cliente,' + quotedstr('') + ') as tef_comprovante_cliente ');
+    LQryConsulta.SQL.Add(' from recebimento_parcial r ');
+    LQryConsulta.sql.add(' inner join formas_pagamento f on (f.cod_forma = r.cod_forma)');
+    LQryConsulta.SQL.add('where mesa=' + quotedstr(lb_mesa.Caption));
+    LQryConsulta.sql.add(' order by r.cod_forma');
+    LQryConsulta.Active := true;
+    LQryConsulta.first;
+
+    if LQryConsulta.IsEmpty = false then
+    begin
+
+      while not LQryConsulta.Eof do
+      begin
+
+        codClienteFaturado := LQryConsulta.fieldbyname('cod_cli_faturamento').Value;
+        observacaoFaturamento := LQryConsulta.fieldbyname('obs_faturamento').Value;
+        LRecebimento.ObservacoesFaturamento := codClienteFaturado;
+        LRecebimento.CodigoCliente := codClienteFaturado;
+        LRecebimento.FormaPagamento.CodForma := LQryConsulta.fieldbyname('cod_forma').Value;
+        LRecebimento.Valor := LQryConsulta.fieldbyname('valor').Value;
+        LFormaPagamentoController.getDados(LRecebimento.FormaPagamento);
+        LRecebimento.IdConfiguracaoPagamento := 0;
+        LRecebimento.NSU := LQryConsulta.fieldbyname('tef_nsu').Value;
+        LRecebimento.Autorizacao := LQryConsulta.fieldbyname('tef_autorizacao').Value;
+        LRecebimento.NomeRedeAdquirente := LQryConsulta.fieldbyname('tef_rede').Value;
+        adicionar_pagamento(LRecebimento);
+        LQryConsulta.Next;
+      end;
+
+      if ((ed_total_pago.Value >= ed_total_conta.value)) then
+      begin
+
+//              btEncerrarVenda.Click;
+      end
+      else
+      begin
+        ed_codigo_forma.clear;
+
+        ed_codigo_forma.SetFocus;
+        ed_valor_forma.text := FormatFloat('#0.00', ed_total_conta.value - ed_total_pago.Value);
+      end;
+    end;
+
+  finally
+    LQryConsulta.Active := false;
+    FreeAndNil(LQryConsulta);
+    FreeAndNil(Ltransacao);
+    FreeAndNil(LFormaPagamentoController);
+    FreeAndNil(LRecebimento);
+  end;
+
+end;
+
+procedure Tfrm_encerramento.bt_imprimir_cupomKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if Key = vk_escape then
+    close;
+
+end;
+
+function Tfrm_encerramento.verificaSeTemMovimento(): boolean;
+var
+  q: TIBQuery;
+begin
+  q := TIBQuery.Create(self);
+  q.Database := dm.dbrestaurante;
+  q.Transaction := dm.transacao;
+  q.active := false;
+  q.sql.clear;
+  q.SQL.Add('select movimento_mesa.cod_mesa,movimento_mesa.cod_movimento,movimento_mesa.cod_produto,produtos.cod_produto,produtos.descricao,movimento_mesa.quantidade,produtos.valor_unitario,movimento_mesa.comanda,movimento_mesa.cod_garcon,movimento_mesa.numero_caixa');
+  q.SQL.Add('  from movimento_mesa,produtos where');
+  q.sql.add(' produtos.cod_produto=movimento_mesa.cod_produto and movimento_mesa.cod_mesa=' + Quotedstr(lb_mesa.caption) + ' and numero_caixa=' + Quotedstr(numero_caixa) + ' order by cod_movimento');
+  q.active := true;
+
+  if q.IsEmpty then
+    Result := false
+  else
+    Result := true;
+
+end;
+
+function Tfrm_encerramento.verificaValidadeFaturamento(): boolean;
+begin
+
+  if (frm_modelo_vazio.verificaExistenciaCliente(ed_cod_cliente.Text) = false) then
+  begin
+    ShowMessage('Cliente informado não existe!');
+    Result := false;
+    ed_cod_cliente.SetFocus;
+    exit;
+  end;
+
+  if (frm_modelo_vazio.verificaClienteAtivo(ed_cod_cliente.Text) = false) then
+  begin
+    ShowMessage('Cliente informado encontra-se inativo!');
+    Result := false;
+    ed_cod_cliente.SetFocus;
+    exit;
+  end;
+
+  if (frm_modelo_vazio.verificaClienteTemCredito(ed_cod_cliente.Text, StrToFloat(ed_valor_forma.text)) = false) then
+  begin
+    Showmessage('Cliente não possui crédito suficiente para efetuar faturamento.');
+    Result := false;
+    ed_cod_cliente.SetFocus;
+    exit;
+  end;
+
+  Result := true;
+end;
+
+procedure Tfrm_encerramento.bt_confirma_faturaClick(Sender: TObject);
+begin
+  if (verificaValidadeFaturamento = true) then
+    pn_faturamento.Visible := false;
+
+end;
+
+procedure Tfrm_encerramento.bt_cancelarClick(Sender: TObject);
+begin
+  pn_faturamento.Visible := false;
+end;
+
+procedure Tfrm_encerramento.setRetornoForma(ret: boolean);
+begin
+  self.retornoForma := ret;
+end;
+
+function Tfrm_encerramento.getRetornoForma(): boolean;
+begin
+  result := self.retornoForma;
+end;
+
+function Tfrm_encerramento.getValorFormaPagamento(): double;
+begin
+  valorForma := ed_valor_forma.Value;
+  result := valorForma;
+end;
+
+procedure Tfrm_encerramento.setCodPedidoDelivery(codPedido: string);
+begin
+  self.codigoPedidoDelivery := codPedido;
+end;
+
+function Tfrm_encerramento.getCodPedidoDelivery(): string;
+begin
+  result := self.codigoPedidoDelivery;
+end;
+
+procedure Tfrm_encerramento.edValorFormaTouchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if Key = VK_RETURN then
+  begin
+
+    if ((Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'edValorFormaTouch'))) then
+    begin
+      if edValorFormaTouch.Value < 0 then
+      begin
+        dm.exibe_painel_erro('Valor inválido!', 'Ok');
+        pgControles.ActivePage := pgValorForma;
+        edValorFormaTouch.Value := ed_valor_forma.Value;
+        edValorFormaTouch.SelectAll;
+        edValorFormaTouch.SetFocus;
+        Exit;
+      end
+      else
+      begin
+        pgControles.ActivePage := pgOpcoes;
+        ed_valor_forma.Value := edValorFormaTouch.value;
+        actAdicionaFormaPagamento.Execute;
+      end;
+    end;
+  end;
+end;
+
+procedure Tfrm_encerramento.ed_valor_formaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vk_return then
+  begin
+    Perform(WM_NEXTDLGCTL, 0, 0)
+  end;
+end;
+
+function Tfrm_encerramento.emitirNFCE(NumNFe: string): boolean;
+var
+  numNFCE: integer;
+  vSincrono: string;
+  Sincrono: boolean;
+  segundosEnvioNFCE: smallint;
+  horaInicioEmissao: TDateTime;
+  horaFimEmissao: TDateTime;
+begin
+
+  result := false;
+  dm.tb_parametros.Active := true;
+  Sincrono := true;
+  dm.ACBrNFe1.NotasFiscais.Clear;
+  dm.ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFCe;
+
+  with dm.ACBrNFe1.NotasFiscais.Add.NFe do
+  begin
+
+
+
+
+    // Dados do Responsável Técnico
+    if (StrToInt(dm.LeIni(1, 'NFCE', 'RespTec')) = 1) then
+    begin
+      infRespTec.CNPJ := '08101553000142';
+      infRespTec.xContato := 'JOÃO MARCOS SANTOS DA SILVA';
+      infRespTec.email := 'joao@realsoftwares.com.br';
+      infRespTec.fone := '71999882928';
+    end;
+
+
+
+//   Ide.cNF       := 1;
+    Ide.natOp := 'VENDA';
+    Ide.indPag := ipVista;
+    Ide.modelo := 65;
+    Ide.serie := 1;
+    Ide.nNF := 1;
+    Ide.dEmi := now;
+    Ide.dSaiEnt := now;
+    Ide.hSaiEnt := now;
+
+    Ide.tpNF := tnSaida;
+
+    case StrToInt(dm.LeIni(1, 'NFCE', 'ambienteEmissao')) of
+      1:
+        begin
+          Ide.tpAmb := taHomologacao;
+          dm.ACBrNFe1.Configuracoes.WebServices.Ambiente := taHomologacao;
+
+        end;
+      2:
+        begin
+          dm.ACBrNFe1.Configuracoes.WebServices.Ambiente := taProducao;
+          Ide.tpAmb := taProducao;
+
+        end;
+    end;
+
+    Ide.cUF := UFtoCUF(dm.tb_parametrosUF.Value);
+    Ide.cMunFG := StrToInt(dm.tb_parametrosCOD_MUNICIPIO_IBGE.value);
+    Ide.finNFe := fnNormal;
+    Ide.tpImp := tiNFCe;
+    Ide.indFinal := cfConsumidorFinal;
+
+    Ide.indPres := pcPresencial;
+
+    Emit.CNPJCPF := dm.tb_parametrosCNPJ.Value;
+    Emit.IE := dm.tb_parametrosIE.Value;
+    Emit.xNome := dm.tb_parametrosRAZAO_SOCIAL.Value;
+    Emit.xFant := dm.tb_parametrosNOME_FANTASIA.Value;
+
+    Emit.EnderEmit.fone := dm.tb_parametrosTELEFONE_EMPRESA.Value;
+    Emit.EnderEmit.CEP := StrToInt(dm.tb_parametrosCEP.value);
+    Emit.EnderEmit.xLgr := dm.tb_parametrosLOGRADOURO.Value;
+    Emit.EnderEmit.nro := dm.tb_parametrosNUMERO.Value;
+    Emit.EnderEmit.xCpl := dm.tb_parametrosCOMPLEMENTO.Value;
+    Emit.EnderEmit.xBairro := dm.tb_parametrosBAIRRO.Value;
+    Emit.EnderEmit.cMun := StrToInt(dm.tb_parametrosCOD_MUNICIPIO_IBGE.Value);
+    Emit.EnderEmit.xMun := dm.tb_parametrosNOME_CIDADE_CONTRIBUINTE.Value;
+    Emit.EnderEmit.UF := dm.tb_parametrosUF.Value;
+    Emit.enderEmit.cPais := 1058;
+    Emit.enderEmit.xPais := 'BRASIL';
+
+    Emit.IEST := '';
+
+    if simplesNacional then
+      Emit.CRT := crtSimplesNacional // (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
+    else
+      Emit.CRT := crtRegimeNormal;
+
+    Dest.indIEDest := inNaoContribuinte;
+    Dest.CNPJCPF := cpfClienteCupomFiscal;
+    Dest.ISUF := '';
+    Dest.xNome := nomeClienteCupom;
+
+    Dest.EnderDest.Fone := '';
+//      Dest.EnderDest.CEP     := ;
+    Dest.EnderDest.xLgr := enderecoClienteCupomFiscal;
+    Dest.EnderDest.nro := '';
+    Dest.EnderDest.xCpl := '';
+    Dest.EnderDest.xBairro := '';
+//      Dest.EnderDest.cMun    := 3554003;
+    Dest.EnderDest.xMun := '';
+    Dest.EnderDest.UF := '';
+    Dest.EnderDest.cPais := 1058;
+    Dest.EnderDest.xPais := 'BRASIL';
+    Transp.modFrete := mfSemFrete; // NFC-e não pode ter FRETE
+
+
+    RegistrarItensDaNotaFiscal(lb_mesa.Caption);
+
+    tbFormasPagamentoTemp.First;
+    while not tbFormasPagamentoTemp.Eof do
+    begin
+
+      with pag.Add do
+      begin
+        tpIntegra := tiNaoInformado;
+        tPag := dm.getTipoPagamentoNFCE(tbFormasPagamentoTempcodForma.Value);
+        vPag := tbFormasPagamentoTempvalorForma.Value;
+
+        if tpag in ([fpSemPagamento, fpCartaoCredito, fpCartaoDebito, fpValeAlimentacao, fpValeRefeicao, fpValePresente, fpValeCombustivel, fpBoletoBancario, fpPagamentoInstantaneo, fpTransfBancario]) then
+        begin
+          tpIntegra := tiPagNaoIntegrado;
+        end;
+
+        if tpag in ([fpOutro]) then
+        begin
+          xPag := tbFormasPagamentoTempdescricaoForma.value;
+        end;
+
+        if tpag in ([fpSemPagamento]) then
+        begin
+          vPag := 0;
+        end;
+
+      end;
+      tbFormasPagamentoTemp.Next;
+    end;
+
+    InfAdic.infCpl := LInformacoesComplementaresNFE;
+    InfAdic.infAdFisco := '';
+
+
+{      with InfAdic.obsCont.Add do
+       begin
+         xCampo := 'ObsCont';
+         xTexto := 'Texto';
+       end;
+
+      with InfAdic.obsFisco.Add do
+       begin
+         xCampo := 'ObsFisco';
+         xTexto := 'Texto';
+       end; }
+
+  end;
+
+  if ed_valor_troco.Value > 0 then
+    dm.ACBrNFe1.NotasFiscais[0].NFe.pag.vTroco := ed_valor_troco.Value;
+
+  if (StrToInt(dm.LeIni(2, 'NFCE', 'forçarContingenciaOffline')) = 0) then
+  begin
+    ////dm.adicionalog('Tenta fazer a emissão da NFC-e de forma online');
+    if ((dm.VerificaConexaoInternet() = false)) then // Verifica a conexão com a internet
+    begin
+      ////dm.adicionalog('Conexão com a internet falhou. Emitindo em contingência!');
+      segundosEnvioNFCE := 3;
+      exibirMensagemPainelInformacoes('Emissão em contingência', '', segundosEnvioNFCE, 4, true);
+      frm_encerramento.SetMensagemPainelInformacoes('Emitindo em modo de contingência offline.', ' O Sistema não conseguiu se conectar com o servidor da SEFAZ.' + '´Possivelmente sua conexão está instável ou o servidor está congestionado.', segundosEnvioNFCE, 4, true);
+
+      while (segundosEnvioNFCE >= 0) do
+      begin
+
+        frm_encerramento.SetMensagemPainelInformacoes('Emitindo em modo de contingência offline.', ' O Sistema não conseguiu se conectar com o servidor da SEFAZ.' + '´Possivelmente sua conexão está instável ou o servidor está congestionado.', segundosEnvioNFCE, 4, true);
+        Sleep(1000);
+        Application.ProcessMessages();
+        segundosEnvioNFCE := segundosEnvioNFCE - 1;
+      end;
+
+      fecharPainelInformacoes();
+
+      horaInicioEmissao := now;
+      if dm.enviaNFCEContingencia() = true then
+      begin
+        result := true;
+        horaFimEmissao := Now;
+        tempoEmissaoNota := SecondsBetween(horaInicioEmissao, horaFimEmissao);
+        ////dm.adicionalog('Tempo de emissão: ' + IntToStr(tempoEmissaoNota) + ' segundos');
+
+      end
+      else
+      begin
+        Result := false;
+        exit;
+      end;
+
+    end
+    else
+    begin
+      ////dm.adicionalog('Conexão com a internet ativa. Emitindo nota on-line');
+      horaInicioEmissao := Now;
+      segundosEnvioNFCE := 15;
+      dm.terminouEnvioNFCE := false;
+      dm.tentandoEmissaoContingencia := false;
+      dm.nfceEnviada := false;
+      exibirMensagemPainelInformacoes('Enviando NFC-e ...', '', segundosEnvioNFCE, 0, true);
+      frm_encerramento.Enabled := false;
+      dm.nfceEnviada := false;
+      dm.terminouEnvioNFCE := false;
+      application.ProcessMessages();
+      dm.nfceEnviada := dm.EnviaNFCE();
+
+      if dm.nfceEnviada then
+      begin
+        horaFimEmissao := Now;
+        tempoEmissaoNota := SecondsBetween(horaInicioEmissao, horaFimEmissao);
+        ////dm.adicionalog('Tempo de emissão: ' + IntToStr(tempoEmissaoNota) + ' segundos');
+        fecharPainelInformacoes();
+        result := true;
+      end
+      else
+      begin
+        segundosEnvioNFCE := 20;
+        while segundosEnvioNFCE >= 0 do
+        begin
+          SetMensagemPainelInformacoes(lbTituloMensagem.Caption, trim(lbMensagemErro.lines.Text), segundosEnvioNFCE, 2, false);
+          Sleep(1000);
+          Application.ProcessMessages();
+          segundosEnvioNFCE := segundosEnvioNFCE - 1
+        end;
+
+        fecharPainelInformacoes();
+        podeFecharFormulario := true;
+        Close;
+
+        Result := false;
+        exit;
+      end;
+
+    end;
+
+  end
+  else
+  begin
+    segundosEnvioNFCE := 6;
+    ////dm.adicionalog('Modo forçado de contingência está ativado.');
+    exibirMensagemPainelInformacoes('Emissão em contingência', '', segundosEnvioNFCE, 4, true);
+    frm_encerramento.SetMensagemPainelInformacoes('Emitindo em modo de contingência offline.', ' O modo fixo de contingência está ativado. Esse modo só deve ser usado' + '´em casos de URGÊNCIA autorizados pela Real Softwares.', segundosEnvioNFCE, 4, true);
+
+    while (segundosEnvioNFCE >= 0) do
+    begin
+
+      exibirMensagemPainelInformacoes('Emissão em contingência', '', segundosEnvioNFCE, 4, true);
+      frm_encerramento.SetMensagemPainelInformacoes('Emitindo em modo de contingência offline.', ' O modo fixo de contingência está ativado. Esse modo só deve ser usado' + '´em casos de URGÊNCIA autorizados pela Real Softwares.', segundosEnvioNFCE, 4, true);
+      Sleep(1000);
+      Application.ProcessMessages();
+      segundosEnvioNFCE := segundosEnvioNFCE - 1;
+    end;
+
+    fecharPainelInformacoes();
+
+    if dm.enviaNFCEContingencia() = true then
+    begin
+      ////dm.adicionalog('Limite da contingência está em ' + dm.LeIni(2, 'NFCE', 'limiteContingencia'));
+      if StrToInt(dm.LeIni(2, 'NFCE', 'qtdeEmitidasContingencia')) >= StrToInt(dm.LeIni(2, 'NFCE', 'limiteContingencia')) then
+      begin
+        dm.desativarModoContingenciaOFFlineNFCE();
+      end;
+
+      result := true
+    end
+    else
+    begin
+      Result := false;
+      exit;
+    end;
+
+  end;
+
+  result := true;
+end;
+
+function Tfrm_encerramento.emitirNFE(): boolean;
+var
+  numNFCE: integer;
+  Sincrono: boolean;
+  LSQL: Tstringlist;
+  LMemTable: TFDMemTable;
+  LCNPJEmitente, LCNPJDestinatario: string;
+begin
+  result := false;
+  string_auxiliar := '';
+  string_auxiliar2 := '';
+  LSQL := TStringList.Create;
+  LMemTable := TFDMemTable.Create(self);
+
+  try
+    try
+      application.CreateForm(TfrmEmissaoNFEEncerramento, frmEmissaoNFEEncerramento);
+
+      if (trim(codigoPedidoDelivery) <> '') then
+      begin
+        LSQL.Clear;
+        LSQL.Add(' select f.razao_social, f.cod_fornecedor, f.nome_fantasia, f.cgc_cpf from pedidos_delivery p ');
+        LSQL.Add('  inner join clientes_delivery cd on (cd.codigo = p.cod_cliente)    ');
+        LSQL.Add('  inner join fornecedor f on (f.cod_fornecedor = cd.cod_participante)');
+        LSQL.Add('    where p.codigo = ' + Quotedstr(codigoPedidoDelivery));
+        dm.getMemTable(LMemTable, LSQL.Text);
+
+        if LMemTable.IsEmpty = false then
+        begin
+          frmEmissaoNFEEncerramento.ed_cod_fornecedor.Text := LMemTable.FieldByName('cod_fornecedor').Value;
+          frmEmissaoNFEEncerramento.ed_razao_social_fornecedor.Text := LMemTable.FieldByName('nome_fantasia').Value;
+          frmEmissaoNFEEncerramento.ed_razao_social_fornecedor.ReadOnly := true;
+
+          frmEmissaoNFEEncerramento.ed_cod_fornecedor.ReadOnly := true;
+        end;
+        LMemTable.Active := false;
+      end;
+
+      frmEmissaoNFEEncerramento.showmodal;
+      frmEmissaoNFEEncerramento.free;
+
+      if (verificaExistenciaFornecedor(string_auxiliar) = false) then
+      begin
+        exibe_painel_erro('Cliente/Fornecedor inexistente!', 'Clique para continuar');
+        Result := false;
+        exit;
+      end
+      else
+      begin
+        codClienteNFE55 := string_auxiliar;
+      end;
+
+      dm.tb_parametros.Active := true;
+
+      dm.qryauxiliar.Active := false;
+      dm.qryauxiliar.SQL.Clear;
+      dm.qryauxiliar.SQL.add(' select f.*,coalesce(f.INSCRICAO_ESTADUAL,' + Quotedstr('') + ') as IE,  c.nome as nome_cidade, e.nome as nome_estado, e.sigla as UF, ');
+      dm.qryauxiliar.SQL.add('       p.nompais nomePais from fornecedor f ');
+      dm.qryauxiliar.SQL.add('       inner join cidade c on (c.cod_cidade = f.cod_cidade) ');
+      dm.qryauxiliar.SQL.add('       inner join estado e on (e.codigo = f.cod_estado) ');
+      dm.qryauxiliar.SQL.add('       inner join paises p on (p.codpais = f.cod_pais) ');
+      dm.qryauxiliar.SQL.add(' where f.cod_fornecedor=' + Quotedstr(codClienteNFE55));
+      dm.qryauxiliar.Active := true;
+
+      Sincrono := false;
+      dm.ACBrNFe1.NotasFiscais.Clear;
+      dm.ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
+
+      LCNPJEmitente := dm.tb_parametrosCNPJ.Value;
+      LCNPJDestinatario := dm.qryauxiliar.FieldByName('cgc_cpf').Value;
+
+      if (copy(LCNPJEmitente, 0, 8) = copy(LCNPJDestinatario, 0, 8)) then
+      begin
+        LISNFETransferencia := true;
+      end;
+
+      with dm.ACBrNFe1.NotasFiscais.Add.NFe do
+
+      begin
+        with autXML.Add do
+        begin
+          CNPJCPF := dm.tb_parametrosCNPJ_CONTABILISTA.Value;
+        end;
+
+    // Dados do Responsável Técnico
+        if (StrToInt(dm.LeIni(1, 'NFE', 'RespTec')) = 1) then
+        begin
+          infRespTec.CNPJ := '08101553000142';
+          infRespTec.xContato := 'JOÃO MARCOS SANTOS DA SILVA';
+          infRespTec.email := 'joao@realsoftwares.com.br';
+          infRespTec.fone := '71999882928';
+        end;
+
+
+
+//   Ide.cNF       := 1;
+        if LISNFETransferencia = false then
+          Ide.natOp := 'VENDA'
+        else
+          Ide.natOp := 'TRANSF. DE MERC/INSUMOS MATRIZ / FILIAL';
+
+        Ide.indPag := ipVista;
+        Ide.modelo := 55;
+        Ide.serie := 1;
+        Ide.nNF := 1;
+        Ide.dEmi := now;
+        Ide.dSaiEnt := now;
+        Ide.hSaiEnt := now;
+        Ide.tpNF := tnSaida;
+
+        case StrToInt(dm.LeIni(1, 'NFE', 'ambienteEmissao')) of
+          1:
+            begin
+              Ide.tpAmb := taHomologacao;
+              dm.ACBrNFe1.Configuracoes.WebServices.Ambiente := taHomologacao;
+
+            end;
+          2:
+            begin
+              dm.ACBrNFe1.Configuracoes.WebServices.Ambiente := taProducao;
+            end;
+
+        end;
+
+        Ide.cUF := UFtoCUF(dm.tb_parametrosUF.Value);
+        Ide.cMunFG := StrToInt(dm.tb_parametrosCOD_MUNICIPIO_IBGE.value);
+        Ide.finNFe := fnNormal;
+        Ide.tpImp := tiRetrato;
+        Ide.indFinal := cfConsumidorFinal;
+        Ide.indPres := pcPresencial;
+        Ide.idDest := doInterna;
+
+        Emit.CNPJCPF := dm.tb_parametrosCNPJ.Value;
+        Emit.IE := dm.tb_parametrosIE.Value;
+        Emit.xNome := dm.tb_parametrosRAZAO_SOCIAL.Value;
+        Emit.xFant := dm.tb_parametrosNOME_FANTASIA.Value;
+        Emit.EnderEmit.fone := dm.tb_parametrosTELEFONE_EMPRESA.Value;
+        Emit.EnderEmit.CEP := StrToInt(dm.tb_parametrosCEP.value);
+        Emit.EnderEmit.xLgr := dm.tb_parametrosLOGRADOURO.Value;
+        Emit.EnderEmit.nro := dm.tb_parametrosNUMERO.Value;
+        Emit.EnderEmit.xCpl := dm.tb_parametrosCOMPLEMENTO.Value;
+        Emit.EnderEmit.xBairro := dm.tb_parametrosBAIRRO.Value;
+
+     //se for brasileiro
+        Emit.EnderEmit.cMun := StrToInt(dm.tb_parametrosCOD_MUNICIPIO_IBGE.Value);
+        Emit.EnderEmit.xMun := dm.tb_parametrosNOME_CIDADE_CONTRIBUINTE.Value;
+        Emit.EnderEmit.UF := dm.tb_parametrosUF.Value;
+        Emit.enderEmit.cPais := 1058;
+        Emit.enderEmit.xPais := 'BRASIL';
+        Emit.IEST := '';
+
+        if simplesNacional then
+          Emit.CRT := crtSimplesNacional // (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
+        else
+          Emit.CRT := crtRegimeNormal;
+
+        if dm.qryauxiliar.FieldByName('uf').Value <> dm.tb_parametrosUF.Value then
+        begin
+          Ide.idDest := doInterestadual;
+        end;
+
+        if (trim(dm.qryauxiliar.FieldByName('IE').Value) <> '') then
+        begin
+          if (trim(uppercase(dm.qryauxiliar.FieldByName('IE').Value)) = 'ISENTO') then
+          begin
+            Dest.indIEDest := inIsento;
+            Dest.IE := '';
+          end
+          else
+          begin
+            Dest.indIEDest := inContribuinte;
+            Dest.IE := dm.qryauxiliar.FieldByName('inscricao_estadual').Value;
+          end;
+
+        end
+        else
+        begin
+          Dest.indIEDest := inNaoContribuinte;
+          Dest.IE := '';
+        end;
+
+        Dest.CNPJCPF := dm.qryauxiliar.FieldByName('cgc_cpf').Value;
+        Dest.ISUF := '';
+        Dest.xNome := dm.qryauxiliar.FieldByName('razao_social').Value;
+
+        nomeClienteNFE55 := Dest.xNome;
+
+        if (dm.qryauxiliar.FieldByName('telefone').Value <> null) then
+          Dest.EnderDest.Fone := dm.qryauxiliar.FieldByName('telefone').Value
+        else
+          Dest.EnderDest.Fone := '';
+
+        Dest.EnderDest.CEP := dm.qryauxiliar.FieldByName('cep').Value;
+        Dest.EnderDest.xLgr := dm.qryauxiliar.FieldByName('endereco').Value;
+        Dest.EnderDest.nro := dm.qryauxiliar.FieldByName('NUM_ENDERECO').Value;
+
+        if (dm.qryauxiliar.FieldByName('complemento').Value <> null) then
+          Dest.EnderDest.xCpl := dm.qryauxiliar.FieldByName('complemento').Value
+        else
+          Dest.EnderDest.xCpl := '';
+
+        Dest.EnderDest.xBairro := dm.qryauxiliar.FieldByName('bairro').Value;
+        Transp.modFrete := mfSemFrete;
+
+        if (dm.qryauxiliar.FieldByName('COD_PAIS').Value <> '1058') then
+        begin
+          Ide.idDest := doInterna;
+          Ide.indFinal := cfConsumidorFinal;
+          Dest.indIEDest := inNaoContribuinte;
+          Ide.finNFe := fnNormal;
+          Dest.EnderDest.cMun := StrToInt('9999999');
+          Dest.EnderDest.xMun := 'EXTERIOR';
+          Dest.EnderDest.UF := 'EX';
+          dEST.idEstrangeiro := FormatFloat('00000000000000', StrToFloat(dm.qryauxiliar.FieldByName('cgc_cpf').Value));
+          Dest.EnderDest.cPais := StrToInt(dm.qryauxiliar.FieldByName('COD_PAIS').Value);
+          Dest.EnderDest.xPais := dm.qryauxiliar.FieldByName('nomePais').Value;
+          Dest.CNPJCPF := FormatFloat('00000000000000', StrToFloat(dm.qryauxiliar.FieldByName('cgc_cpf').Value));
+        end
+        else
+        begin
+          Dest.EnderDest.cMun := dm.qryauxiliar.FieldByName('cod_cidade').Value;
+          Dest.EnderDest.xMun := dm.qryauxiliar.FieldByName('nome_cidade').Value;
+          Dest.EnderDest.UF := dm.qryauxiliar.FieldByName('uf').Value;
+          Dest.EnderDest.cPais := 1058;
+          Dest.EnderDest.xPais := 'BRASIL';
+        end;
+        RegistrarItensDaNotaFiscal(lb_mesa.Caption);
+
+        tbFormasPagamentoTemp.First;
+        while not tbFormasPagamentoTemp.Eof do
+        begin
+
+          with pag.Add do
+          begin
+            tpIntegra := tiNaoInformado;
+            tPag := dm.getTipoPagamentoNFCE(tbFormasPagamentoTempcodForma.Value);
+            vPag := tbFormasPagamentoTempvalorForma.Value;
+
+            if tpag in ([fpSemPagamento, fpCartaoCredito, fpCartaoDebito, fpValeAlimentacao, fpValeRefeicao, fpValePresente, fpValeCombustivel, fpBoletoBancario, fpPagamentoInstantaneo, fpTransfBancario]) then
+            begin
+              tpIntegra := tiPagNaoIntegrado;
+            end;
+
+            if tpag in ([fpOutro]) then
+            begin
+              xPag := tbFormasPagamentoTempdescricaoForma.value;
+            end;
+
+            if tpag in ([fpSemPagamento]) then
+            begin
+              vPag := 0;
+            end;
+
+          end;
+          tbFormasPagamentoTemp.Next;
+        end;
+
+        InfAdic.infCpl := string_auxiliar2;
+
+      end;
+
+      dm.ACBrNFe1.NotasFiscais[0].NFe.pag.vTroco := (ed_total_pago.Value - dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vNF);
+
+      if dm.setFormaEmissaOnlineNFE() = true then
+        result := true
+      else
+      begin
+        Result := false;
+        exit;
+      end;
+
+      result := true;
+
+    except
+      on E: Exception do
+      begin
+        showRealDialog(self, tmErro, 'Erro', 'Erro ao emitir NF-e ' + sLineBreak + sLineBreak + E.Message, 22, false);
+      end;
+
+    end;
+  finally
+    FreeAndNil(LSQL);
+    FreeAndNil(LMemTable);
+  end;
+
+end;
+
+function Tfrm_encerramento.emitirCupomSATCFE(): boolean;
+var
+  numNFCE: integer;
+  vSincrono: string;
+  Sincrono: boolean;
+begin
+
+  result := false;
+
+  dm.tb_parametros.Active := true;
+
+  with dm.sat do
+  begin
+    dm.inicializarSAT();
+    InicializaCFe;
+
+    with CFe do
+    begin
+      ide.numeroCaixa := strToInt(numero_caixa);
+      Dest.CNPJCPF := cpfClienteCupomFiscal;
+      Dest.xNome := nomeClienteCupom;
+
+      Entrega.xLgr := '';
+      Entrega.nro := '';
+      Entrega.xCpl := '';
+      Entrega.xBairro := '';
+      Entrega.xMun := '';
+      Entrega.UF := '';
+    end;
+  end;
+
+  RegistrarItensDaNotaFiscal(lb_mesa.Caption);
+
+  tbFormasPagamentoTemp.First;
+
+  while not tbFormasPagamentoTemp.Eof do
+  begin
+
+    with dm.sat.CFe.Pagto.add do //PAGAMENTOS apenas para NFC-e
+    begin
+      cMP := dm.getTipoPagamentoSAT(tbFormasPagamentoTempcodForma.Value);
+
+      if tbFormasPagamentoTempcodForma.value = '001' then
+        vMP := tbFormasPagamentoTempvalorForma.Value - ed_valor_troco.Value
+      else
+        vMP := tbFormasPagamentoTempvalorForma.Value;
+    end;
+    tbFormasPagamentoTemp.Next;
+  end;
+  Result := dm.enviarCupomSat();
+
+end;
+
+procedure Tfrm_encerramento.BuscaProdutosDaNota(AQuery: TIBQuery; AMesa: string);
+begin
+
+  AQuery.Active := false;
+  AQuery.SQL.clear;
+  AQuery.SQL.Add('select * from (');
+  AQuery.SQL.Add(' select p.cod_barras, p.descricao,p.cfop_saida,p.ncm,p.cest, p.un_ecf,p.cst_saida,p.ippt, al.percentual_icms,vm.quantidade as quantidade,');
+  AQuery.SQL.Add(' vm.valor_unitario, vm.cancelado, al.percentagem as aliquota, ');
+  AQuery.SQL.Add(' p.reducao_base_icms as percentual_red_base_icms,  p.aliq_pis,p.aliq_cofins, p.cst_pis_cofins, ');
+  AQuery.SQL.Add(' udf_roundabnt((vm.valor_unitario * vm.quantidade),2) as total_produto,');
+  AQuery.SQL.Add(' udf_roundabnt( (vm.valor_unitario * vm.quantidade) * (p.reducao_base_icms  /100),2) as total_reducao_base_icms, ');
+  AQuery.SQL.Add('  udf_roundabnt( (udf_roundabnt((vm.valor_unitario * vm.quantidade),2) -  udf_roundabnt( (vm.valor_unitario * vm.quantidade) * (p.reducao_base_icms  /100),2)),2) AS base_icms_total, ');
+  AQuery.SQL.Add(' udf_roundabnt( ((udf_roundabnt((vm.valor_unitario * vm.quantidade),2) -  udf_roundabnt( (vm.valor_unitario * vm.quantidade) * (p.reducao_base_icms  /100),2)) * (al.percentual_icms /100) ),2) as valor_icms, ');
+  AQuery.SQL.Add(' vm.desconto ');
+
+  AQuery.SQL.Add(' from movimento_mesa vm');
+
+  AQuery.SQL.Add('        inner join produtos p on (p.cod_produto = vm.cod_produto)');
+  AQuery.SQL.Add('        inner join aliquotas al on (al.cod_aliquota = p.cod_aliquota)');
+  AQuery.SQL.Add('         where vm.cod_mesa=' + QuotedStr(AMesa) + 'and vm.valor_unitario > 0  ');
+  AQuery.SQL.Add('         and vm.id not in (select distinct sb.id_mov_mesa from sabores_pizza_movimento_mesa  sb ) ');
+
+  AQuery.SQL.Add(' union all ');
+  AQuery.SQL.Add(' select p.cod_barras, p.descricao,p.cfop_saida,p.ncm,p.cest, p.un_ecf,p.cst_saida,p.ippt, al.percentual_icms,(vm.quantidade * ms.quantidade) as quantidade, ');
+  AQuery.SQL.Add(' vm.valor_unitario_sabor, ms.cancelado, al.percentagem as aliquota,');
+  AQuery.SQL.Add(' p.reducao_base_icms as percentual_red_base_icms,   p.aliq_pis,p.aliq_cofins, p.cst_pis_cofins, ');
+  AQuery.SQL.Add(' udf_roundabnt((vm.valor_unitario_sabor  * (vm.quantidade * ms.quantidade)),3) as total_produto,');
+  AQuery.SQL.Add(' udf_roundabnt((vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)) * (p.reducao_base_icms / 100),3) as total_reducao_base_icms,');
+  AQuery.SQL.Add('  udf_roundabnt( (udf_roundabnt((vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)),3) -  udf_roundabnt( (vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)) * (p.reducao_base_icms  /100),3)),2) aS base_icms_total,');
+  AQuery.SQL.Add('  udf_roundabnt( ((udf_roundabnt((vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)),3) -  udf_roundabnt( (vm.valor_unitario_sabor * (vm.quantidade * ms.quantidade)) * (p.reducao_base_icms  /100),3)) * (al.percentual_icms /100) ),2) as valor_icms,');
+  AQuery.SQL.Add(' vm.desconto ');
+  AQuery.SQL.Add('  from sabores_pizza_movimento_mesa  vm');
+  AQuery.SQL.Add('         inner join produtos p on (p.cod_produto = vm.cod_produto)');
+  AQuery.SQL.Add('         inner join aliquotas al on (al.cod_aliquota = p.cod_aliquota)');
+  AQuery.SQL.Add('         inner join movimento_mesa ms on (ms.id = vm.id_mov_mesa)');
+  AQuery.SQL.Add('         where ms.cod_mesa=' + QuotedStr(AMesa));
+
+  if (ed_total_tx_serv.Value > 0) then
+  begin
+    AQuery.SQL.Add('          union all  ');
+    AQuery.SQL.Add(' select p.cod_barras, p.descricao,p.cfop_saida,p.ncm,' + quotedstr(' ') + ' as cest, p.un_ecf,p.cst_saida, p.ippt, al.percentual_icms,');
+    AQuery.SQL.Add('       1 as quantidade,');
+    AQuery.SQL.Add('' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + ' ');
+    AQuery.SQL.Add(' as valor_unitario, 0 as cancelado, al.percentagem as aliquota,');
+    AQuery.SQL.Add(' p.reducao_base_icms as percentual_red_base_icms,   p.aliq_pis,p.aliq_cofins, p.cst_pis_cofins, ');
+    AQuery.SQL.Add('' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + ' as total_produto, ');
+    AQuery.SQL.Add(' udf_roundabnt( (' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + ') * (p.reducao_base_icms  /100),2) as total_reducao_base_icms, ');
+    AQuery.SQL.Add('  udf_roundabnt( (udf_roundabnt((' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + '),2) -  udf_roundabnt( (' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + ') * (p.reducao_base_icms  /100),2)),2) AS base_icms_total, ');
+    AQuery.SQL.Add(' udf_roundabnt( ((udf_roundabnt((' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + '),2) -  udf_roundabnt( (' + dm.TrocaVirgPPto(Floattostr(ed_total_tx_serv.Value)) + ') * (p.reducao_base_icms  /100),2)) * (al.percentual_icms /100) ),2) as valor_icms, 0 as desconto ');
+
+    AQuery.SQL.Add('         from  produtos p');
+    AQuery.SQL.Add('         inner join aliquotas al on (al.cod_aliquota = p.cod_aliquota)');
+    AQuery.SQL.Add('         where p.cod_produto = ' + Quotedstr('99999'));
+  end;
+
+  if (ed_total_entrega.Value > 0) then
+  begin
+    AQuery.SQL.Add('          union all  ');
+    AQuery.SQL.Add(' select p.cod_barras, p.descricao,p.cfop_saida,p.ncm,' + quotedstr(' ') + ' as cest,p.un_ecf,p.cst_saida, p.ippt, al.percentual_icms,');
+    AQuery.SQL.Add('       1 as quantidade,');
+    AQuery.SQL.Add('' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + ' ');
+    AQuery.SQL.Add(' as valor_unitario, 0 as cancelado, al.percentagem as aliquota,');
+    AQuery.SQL.Add(' p.reducao_base_icms as percentual_red_base_icms,   p.aliq_pis,p.aliq_cofins, p.cst_pis_cofins, ');
+    AQuery.SQL.Add('' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + ' as total_produto, ');
+    AQuery.SQL.Add(' udf_roundabnt( (' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + ') * (p.reducao_base_icms  /100),2) as total_reducao_base_icms, ');
+    AQuery.SQL.Add('  udf_roundabnt( (udf_roundabnt((' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + '),2) -  udf_roundabnt( (' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + ') * (p.reducao_base_icms  /100),2)),2) AS base_icms_total, ');
+    AQuery.SQL.Add(' udf_roundabnt( ((udf_roundabnt((' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + '),2) -  udf_roundabnt( (' + dm.TrocaVirgPPto(Floattostr(ed_total_entrega.Value)) + ') * (p.reducao_base_icms  /100),2)) * (al.percentual_icms /100) ),2) as valor_icms,0 as desconto ');
+
+    AQuery.SQL.Add('         from  produtos p');
+    AQuery.SQL.Add('         inner join aliquotas al on (al.cod_aliquota = p.cod_aliquota)');
+    AQuery.SQL.Add('         where p.cod_produto = ' + Quotedstr('99998'));
+  end;
+
+  AQuery.SQL.Add(') order by cod_barras');
+  dm.adicionaLog(AQuery.sql.Text);
+
+  AQuery.Active := true;
+
+end;
+
+function Tfrm_encerramento.CfopToCSCON(ACFOP: integer): TpcnCSOSNIcms;
+begin
+  case ACFOP of
+    5101:
+      result := csosn102;
+    5102:
+      result := csosn102;
+    5403:
+      result := csosn500;
+    5405:
+      result := csosn500;
+    6102:
+      result := csosn102;
+    6108:
+      result := csosn500;
+    6403:
+      result := csosn500;
+    6404:
+      result := csosn500;
+    6405:
+      result := csosn500;
+
+    5151:
+      result := csosn900;
+    5152:
+      result := csosn900;
+
+    6501:
+      result := csosn400;
+
+  else
+    result := csosn900;
+  end
+end;
+
+function Tfrm_encerramento.RegistrarItensDaNotaFiscal(AMesa: string): boolean;
+var
+  LQryItensNota: TIBQuery;
+  ctItemCupom: integer;
+  baseICMS: real;
+  valorICMS: real;
+  valorProduto: currency;
+  totalProdutos: currency;
+  valorImpostosIBPT: double;
+  valorItemSAt: real;
+  BasePis, baseCofins: currency;
+  totalPis, totalCofins: currency;
+  LTotalICMSDestino: currency;
+  ct: integer;
+  cstIsOK: boolean;
+  LCFOP_SAIDA: string;
+  LCST_ICMS: string;
+  LAliquotaICMS: double;
+  LAliquotaPIS: double;
+  LAliquotaCofins: double;
+  LIsContribuinteICMS: Boolean;
+  LIsConsumidorFinal: Boolean;
+  LIsInterestadual: boolean;
+begin
+
+  totalProdutos := 0;
+  valorICMS := 0;
+  baseICMS := 0;
+  valorImpostosIBPT := 0;
+  valorItemSAt := 0;
+  LTotalICMSDestino := 0;
+  totalPis := 0;
+  totalCofins := 0;
+  BasePis := 0;
+  baseCofins := 0;
+
+  LQryItensNota := TIBQuery.Create(self);
+  LQryItensNota.Database := dm.dbrestaurante;
+  LQryItensNota.Transaction := dm.transacao;
+
+  if not (dm.ACBrNFe1.NotasFiscais[0].NFe.Dest.indIEDest in [inContribuinte]) then
+    LIsContribuinteICMS := false
+  else
+    LIsContribuinteICMS := True;
+
+  if not (dm.ACBrNFe1.NotasFiscais[0].NFe.IDE.indFinal = cfConsumidorFinal) then
+    LIsConsumidorFinal := false
+  else
+    LIsConsumidorFinal := True;
+
+  if not (dm.ACBrNFe1.NotasFiscais[0].NFe.IDE.idDest = doInterestadual) then
+    LIsInterestadual := false
+  else
+    LIsInterestadual := true;
+
+  try
+    try
+
+      BuscaProdutosDaNota(LQryItensNota, AMesa);
+      LQryItensNota.First;
+
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vProd := 0;
+      ctItemCupom := 1;
+      while not LQryItensNota.Eof do
+      begin
+        valorProduto := 0;
+        valorProduto := RoundABNT(LQryItensNota.fieldbyname('total_produto').Value, -2);
+
+        if (LISNFETransferencia = false) then
+        begin
+
+          LCFOP_SAIDA := LQryItensNota.fieldbyname('cfop_saida').Value;
+          LCST_ICMS := LQryItensNota.fieldbyname('CST_SAIDA').Value;
+          LAliquotaICMS := LQryItensNota.fieldbyname('percentual_icms').Value;
+          LAliquotaPIS := LQryItensNota.fieldbyname('aliq_pis').Value;
+          LAliquotaCofins := LQryItensNota.fieldbyname('aliq_cofins').Value;
+        end
+        else
+        begin
+          case LQryItensNota.fieldbyname('ippt').Value of
+            0:
+              begin
+                LCFOP_SAIDA := '5151';
+                LCST_ICMS := '040';
+              end;
+            1:
+              begin
+                LCFOP_SAIDA := '5152';
+                LCST_ICMS := '040';
+              end;
+          end;
+          LAliquotaICMS := 0;
+          LAliquotaPIS := 0;
+          LAliquotaCofins := 0;
+
+        end;
+
+        totalProdutos := totalProdutos + valorProduto;
+        with dm.ACBrNFe1.NotasFiscais[0].NFe.det.Add do
+        begin
+          Prod.nItem := ctItemCupom;
+          Prod.cProd := LQryItensNota.fieldbyname('cod_barras').Value;
+          Prod.cEAN := '';
+          Prod.xProd := LQryItensNota.fieldbyname('descricao').Value;
+          Prod.NCM := LQryItensNota.fieldbyname('ncm').Value;
+          Prod.cEAN := 'SEM GTIN';
+          Prod.cEANTrib := 'SEM GTIN';
+
+          if ((LQryItensNota.FieldByName('cest').Value <> null) and (trim(LQryItensNota.FieldByName('cest').Value) <> '')) then
+          begin
+            Prod.CEST := trim(LQryItensNota.FieldByName('cest').Value);
+          end;
+
+          Prod.EXTIPI := '';
+          Prod.CFOP := LCFOP_SAIDA;
+
+          Prod.uCom := LQryItensNota.fieldbyname('UN_ECF').Value;
+          Prod.qCom := LQryItensNota.fieldbyname('quantidade').Value;
+          Prod.vUnCom := LQryItensNota.fieldbyname('valor_unitario').Value;
+          Prod.vProd := valorProduto;
+
+          dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vProd := RoundABNT((dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vProd + Prod.vProd), -2);
+
+          Prod.uTrib := LQryItensNota.fieldbyname('UN_ECF').Value;
+          Prod.qTrib := LQryItensNota.fieldbyname('quantidade').Value;
+          Prod.vUnTrib := LQryItensNota.fieldbyname('valor_unitario').Value;
+
+          Prod.vOutro := 0;
+          Prod.vFrete := 0;
+          Prod.vSeg := 0;
+          Prod.vDesc := LQryItensNota.fieldbyname('desconto').Value;
+
+          with Imposto do
+          begin
+
+            vTotTrib := 0;
+            with ICMS do
+            begin
+              icms.orig := StrToOrig(cstIsOK, copy(LCST_ICMS, 0, 1));
+              icms.CST := StrToCSTICMS(cstIsOK, formatfloat('00', StrToFloat(copy(LCST_ICMS, 1, 3))));
+              ICMS.modBC := dbiValorOperacao;
+
+              if (simplesNacional = false) then
+              begin
+                if LAliquotaICMS > 0 then
+                begin
+
+                  ICMS.vBC := LQryItensNota.fieldbyname('base_icms_total').Value;
+                  icms.pRedBC := LQryItensNota.fieldbyname('percentual_red_base_icms').Value;
+                  ICMS.pICMS := LAliquotaICMS;
+                  ICMS.vICMS := LQryItensNota.fieldbyname('valor_icms').Value;
+                  baseICMS := baseICMS + LQryItensNota.fieldbyname('base_icms_total').Value;
+                  valorICMS := ICMS.vICMS + valorICMS;
+
+                end
+                else
+                begin
+                  ICMS.vBC := 0;
+                  ICMS.pICMS := 0;
+                  ICMS.vICMS := 0;
+                end;
+
+                ICMS.pMVAST := 0;
+                ICMS.pRedBCST := 0;
+                ICMS.vBCST := 0;
+                ICMS.pICMSST := 0;
+                ICMS.vICMSST := 0;
+                ICMS.pRedBCST := 0;
+              end
+              else
+              begin
+
+                if ((destacaImpostoNFCE) and (LAliquotaICMS > 0)) then
+                begin
+                  ICMS.vBC := LQryItensNota.fieldbyname('base_icms_total').Value;
+                  icms.pRedBC := LQryItensNota.fieldbyname('total_reducao_base_icms').Value;
+                  ICMS.pICMS := LAliquotaICMS;
+                  ICMS.vICMS := LQryItensNota.fieldbyname('valor_icms').Value;
+                  baseICMS := baseICMS + LQryItensNota.fieldbyname('base_icms_total').Value;
+                  valorICMS := ICMS.vICMS + valorICMS;
+                end
+                else
+                begin
+                  ICMS.vBC := 0;
+                  ICMS.pICMS := 0;
+                  ICMS.vICMS := 0;
+                  baseICMS := 0;
+                  valorICMS := 0;
+                end;
+
+                ICMS.CSOSN := CfopToCSCON(StrToInt(LCFOP_SAIDA));
+                ICMS.vBC := 0;
+                ICMS.pICMS := 0;
+                ICMS.vICMS := 0;
+                baseICMS := 0;
+                valorICMS := 0;
+                ICMS.pMVAST := 0;
+                ICMS.pRedBCST := 0;
+                ICMS.vBCST := 0;
+                ICMS.pICMSST := 0;
+                ICMS.vICMSST := 0;
+                ICMS.pRedBCST := 0;
+              end
+            end;
+            if ((LIsInterestadual) and (LIsContribuinteICMS = false) and (LIsConsumidorFinal) and (LAliquotaICMS > 0)) then
+            begin
+              with ICMSUFDest do
+              begin
+                vBCUFDest := LQryItensNota.fieldbyname('base_icms_total').Value;
+                vBCFCPUFDest := 0;
+                pFCPUFDest := 0;
+                pICMSUFDest := 18.00;     // Alíquota interna em SP
+                pICMSInter := 12.00;     // Alíquota interestadual
+                pICMSInterPart := 100;
+                vFCPUFDest := 0;
+                vICMSUFDest := (((pICMSUFDest - pICMSInter) / 100) * LQryItensNota.fieldbyname('base_icms_total').Value);
+                vICMSUFRemet := 0.00;      // partilha do remetente
+                LTotalICMSDestino := LTotalICMSDestino + vICMSUFDest;
+              end;
+
+            end;
+
+            if (LAliquotaPIS > 0) then
+            begin
+
+              PIS.CST := StrToCSTPIS(cstIsOK, formatfloat('00', StrToFloat(LQryItensNota.fieldbyname('cst_pis_cofins').Value)));
+              BasePis := RoundABNT(valorProduto, -2);
+              PIS.vBC := BasePis;
+              PIS.pPIS := LAliquotaPIS;
+              pis.vPIS := RoundABNT((BasePis * (LAliquotaPIS / 100)), -2);
+              totalPis := totalPis + PIS.vPIS;
+            end;
+
+            if (LAliquotaCofins > 0) then
+            begin
+              baseCofins := RoundABNT(valorProduto, -2);
+              COFINS.CST := StrToCSTCOFINS(cstIsOK, formatfloat('00', StrToFloat(LQryItensNota.fieldbyname('cst_pis_cofins').Value)));
+              COFINS.vBC := baseCofins;
+              COFINS.pCOFINS := LAliquotaCofins;
+              COFINS.vCOFINS := RoundABNT((baseCofins * (LAliquotaCofins / 100)), -2);
+              totalCofins := totalCofins + COFINS.vCOFINS;
+            end;
+          end;
+        end;
+
+        ctItemCupom := ctItemCupom + 1;
+        LQryItensNota.Next;
+      end;
+
+      valorImpostosIBPT := (baseICMS * aliquotaIBPT) / 100;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.InfAdic.infCpl := 'Valor aprox. dos tributos (' + FormatFloat('#0.00', aliquotaIBPT) + ') = ' + FormatFloat('R$ #0.00', valorImpostosIBPT) + ' fonte: IBPT' + #13#10;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vBC := baseICMS;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vICMS := valorICMS;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vBCST := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vST := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vFrete := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vSeg := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vDesc := ed_total_desconto.Value;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vII := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vIPI := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vPIS := RoundABNT(totalPis, -2);
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vCOFINS := RoundABNT(totalCofins, -2);
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vOutro := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vNF := ed_total_conta.Value;  //totalProdutos -  ed_total_desconto.Value;
+
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ICMSTot.vICMSUFDest := LTotalICMSDestino;
+
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ISSQNtot.vServ := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ISSQNTot.vBC := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ISSQNTot.vISS := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ISSQNTot.vPIS := 0;
+      dm.ACBrNFe1.NotasFiscais[0].NFe.Total.ISSQNTot.vCOFINS := 0;
+      LQryItensNota.Active := false;
+      Result := true;
+    except
+      on E: Exception do
+      begin
+        showRealDialog(frm_principal, tmErro, 'Erro ao registrar ítens', 'Ocorreu um erro ao registrar os ítens na NF-e/NFC-e.' + sLineBreak + E.Message, 16, false);
+      end;
+    end;
+  finally
+    FreeAndNil(LQryItensNota);
+  end;
+
+end;
+
+procedure Tfrm_encerramento.FormCreate(Sender: TObject);
+var
+  SpeedButton4: TSpeedButton;
+  x: integer;
+begin
+  inherited;
+  jaChamouFinalizacaoVenda := false;
+  modeloComprovanteFiscal := StrToInt(dm.LeIni(2, 'ENCERRAMENTO', 'modeloComprovantefiscal'));
+  frm_principal.setNFE55VendaAtual(false);
+
+  frm_principal.memoPagamentosTEF.Clear;
+  dm.setOperacaoADMTEF(false);
+  transacaoTEFIniciada := false;
+  dm.setEstadoSimuladoECF(tpsLivre);
+  dm.setEstadoSimuladoECF(tpsVenda);
+  codClienteNFE55 := '';
+
+  if (StrToInt(dm.LeIni(2, 'TEF', 'instalado')) = 1) then
+  begin
+    dm.autenticaTEF();
+  end;
+
+  tempoEmissaoNota := 0;
+  dm.parametrizaAcbrNFE(moNFCe, false, true);
+  veioDoCheckin := false;
+  jaChamouActivate := false;
+  pgFormasPagamentoPrincipal.Show;
+
+end;
+
+procedure Tfrm_encerramento.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  dm.tbFormasPagamento.Active := false;
+
+end;
+
+procedure Tfrm_encerramento.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+
+  if Key = VK_F5 then
+  begin
+    btDesconto.Click;
+  end;
+
+  if Key = vk_f6 then
+  begin
+    btCpfNota.Click;
+  end;
+end;
+
+procedure Tfrm_encerramento.FormShow(Sender: TObject);
+var
+  mesa: string;
+  segundosMensagem: smallint;
+begin
+  try
+
+    if not (jaChamouActivate) then
+    begin
+      timerFecharForm.enabled := false;
+      pgOpcoes.Show;
+      LCodPedidoBalcaoAtual := '';
+
+      Self.Width := 1027;
+      Self.Top := 1;
+      pgList.ActivePage := pgTotais;
+      pgControles.ActivePage := pgOpcoes;
+
+      if ((StrtoInt(dm.LeIni(1, 'ENCERRAMENTO', 'tipo_comprovante')) = 1) and (dm.ACBrNFe1.Configuracoes.WebServices.Ambiente = taHomologacao)) then
+      begin
+        segundosMensagem := 3;
+        exibirMensagemPainelInformacoes('Modo de treinamento!', '', segundosMensagem, 5, true);
+        frm_encerramento.SetMensagemPainelInformacoes('Modo de treinamento!.', ' O sistema está operando em modo de treinamento.' + '´Toda a movimentação feita nesse modo, não é tributada' + '´ou contabilizada.' + LineBreak + LineBreak + '  NÃO UTILIZE EM PRODUÇÃO!', segundosMensagem, 5, true);
+
+        while (segundosMensagem >= 0) do
+        begin
+
+          frm_encerramento.SetMensagemPainelInformacoes('Modo de treinamento!.', ' O sistema está operando em modo de treinamento.' + '´Toda a movimentação feita nesse modo, não é tributada' + '´ou contabilizada.' + LineBreak + LineBreak + '  NÃO UTILIZE EM PRODUÇÃO!', segundosMensagem, 5, true);
+          Sleep(1000);
+          Application.ProcessMessages();
+          segundosMensagem := segundosMensagem - 1;
+        end;
+        fecharPainelInformacoes();
+        jaChamouActivate := True;
+
+      end;
+
+      podeFecharFormulario := false;
+      nomeClienteCupom := '';
+      enderecoClienteCupomFiscal := '';
+      cpfClienteCupomFiscal := '';
+      tbFormasPagamentoTemp.Active := false;
+      tbFormasPagamentoTemp.Active := true;
+      LDataHoraInicioPagamento := FormatFloat('DD.MM.YYY HH:MM:SS', Now);
+
+      dm.InsereChavesMovimento(numero_caixa, lb_mesa.Caption);
+      busca_movimento_da_mesa;
+      iniciarEncerramentoDaConta();
+      calcula_valores();
+      podeFecharFormulario := true;
+
+      case tipoVenda of
+        3:
+          begin
+            tmEncerrarConta.Enabled := true;
+          end;
+      end;
+
+      if ((trim(lb_mesa.Caption) = mesaBalcao) and identificaClienteBalcao) then
+      begin
+        pgNomeClienteProducao.Show;
+        edNomeClienteProducaoComanda.SetFocus;
+      end;
+
+    end;
+  except
+    on E: Exception do
+    begin
+      showRealDialog(self, tmErro, 'Erro', E.message, 22, false);
+      podeFecharFormulario := true;
+      timerFecharForm.enabled := true;
+
+    end;
+  end;
+end;
+
+procedure Tfrm_encerramento.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  segundosExibicaoMensagem: smallint;
+begin
+  inherited;
+
+  if (podeFecharFormulario = True) then
+  begin
+    Action := caFree;
+  end
+  else
+  begin
+    Action := caNone;
+    exibirMensagemInformacao('VENDA EM ANDAMENTO' + #13#10 + 'CANCELE PARA PROSSEGUIR!', 6000, 25, True);
+  end;
+
+end;
+
+procedure Tfrm_encerramento.BitBtn5Click(Sender: TObject);
+begin
+  inherited;
+   //btIniciaEmissaoCupom.SetFocus;
+end;
+
+procedure Tfrm_encerramento.edNomeClienteProducaoComandaEnter(Sender: TObject);
+begin
+  inherited;
+
+  if ((Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'ed_valor_tx_serv'))) then
+  begin
+    if ed_valor_forma.Value > 0 then
+      ed_valor_forma.value := 0;
+
+    recalculavalorTaxaServico;
+    ed_valor_tx_serv.SelectAll;
+  end;
+end;
+
+procedure Tfrm_encerramento.recalculavalorTaxaServico();
+begin
+  if valorTaxaServicoCalculada > 0 then
+  begin
+    if ((ed_total_pago.Value - (ed_valor_bruto.Value - ed_total_desconto.Value)) < valorTaxaServicoCalculada) then
+    begin
+      if ((ed_total_pago.Value - (ed_valor_bruto.Value - ed_total_desconto.Value)) > 0) then
+      begin
+        if ((ed_valor_tx_serv.Value > 0)) then
+        begin
+          if (ed_valor_forma.value = 0) then
+          begin
+            ed_valor_tx_serv.Value := ed_total_pago.Value - (ed_valor_bruto.Value - ed_total_desconto.Value);
+            ed_total_tx_serv.Value := ed_valor_tx_serv.Value;
+            calcula_valores();
+          end;
+        end
+        else
+        begin
+          ed_total_tx_serv.Value := 0;
+          calcula_valores;
+        end;
+      end;
+    end
+    else
+    begin
+      if ed_valor_tx_serv.Value = 0 then
+      begin
+        ed_total_tx_serv.Value := 0;
+        calcula_valores();
+      end;
+    end;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.edNomeClienteProducaoComandaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  editSelcionado: string;
+begin
+
+  if Key = VK_RETURN then
+  begin
+
+    if (Key = VK_RETURN) and (Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'edCpf')) then
+    begin
+      setCPFCliente();
+      pgOpcoes.Show;
+      ed_codigo_forma.SetFocus;
+    end;
+
+    if (Key = VK_RETURN) and (Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'edNomeClienteProducaoComanda')) then
+    begin
+      edNomeClienteProducaoComanda.text := trim(edNomeClienteProducaoComanda.text);
+      pgOpcoes.Show;
+      ed_codigo_forma.SetFocus;
+    end;
+
+    if ((Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'ed_valor_tx_serv'))) then
+    begin
+      if ed_valor_tx_serv.Value < 0 then
+      begin
+        dm.exibe_painel_erro('Valor da taxa de serviço inválido!', 'Ok');
+        ed_valor_tx_serv.Value := ed_total_pago.Value - (ed_valor_bruto.Value - ed_total_desconto.Value);
+        ed_valor_tx_serv.Value := ed_total_tx_serv.Value;
+        calcula_valores;
+        ed_valor_tx_serv.SelectAll;
+        Exit;
+      end
+      else
+      begin
+        ed_total_tx_serv.Value := ed_valor_tx_serv.Value;
+        calcula_valores;
+        encerrarVenda(true);
+      end;
+    end;
+
+    if ((Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'ed_valor_forma'))) then
+    begin
+
+      if (ed_valor_forma.Value < 0) then
+      begin
+        exibe_painel_erro('Valor de pagamento inválido!', 'OK');
+        ed_valor_forma.Clear;
+        ed_valor_forma.SetFocus;
+        exit;
+      end;
+
+      actAdicionaFormaPagamento.Execute;
+    end;
+
+    if ((Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'ed_codigo_forma')) or (Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'edCpf')) or (Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'edNomeCliente'))) then
+      Perform(WM_NEXTDLGCTL, 0, 0);
+
+    if (Sender is TCustomEdit and ((Sender as TCustomEdit).Name = 'ed_valor_forma')) then
+    begin
+      if (ed_valor_tx_serv.Visible = True) then
+      begin
+
+        if ed_total_pago.Value >= ed_total_conta.Value then
+        begin
+          ed_valor_tx_serv.SetFocus
+        end
+        else
+        begin
+          if ed_valor_forma.Value > 0 then
+            ed_codigo_forma.SetFocus
+          else
+            ed_valor_tx_serv.setfocus;
+        end;
+      end;
+    end;
+
+  end;
+
+  if ((Key = VK_F9) and (pgControles.ActivePage = pgCPFCliente)) then
+  begin
+    if (trim(edCpf.Text) <> '') then
+    begin
+
+      setCPFCliente();
+
+    end;
+
+  end;
+
+  if Key = VK_ESCAPE then
+  begin
+    close;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.setCPFCliente();
+begin
+
+  if ((Length(trim(edCpf.Text)) = 11) or (Length(trim(edCpf.Text)) = 14)) then
+  begin
+
+    if Length(trim(edCpf.Text)) = 11 then
+    begin
+      ACBrValidador1.TipoDocto := docCPF;
+      ACBrValidador1.Documento := trim(edCpf.text);
+      if ACBrValidador1.Validar = false then
+      begin
+        dm.exibe_painel_erro('CPF INVÁLIDO!', 'Ok');
+        edCpf.Clear;
+        edCpf.SetFocus;
+        exit;
+      end
+      else
+      begin
+        edNomeCliente.SetFocus;
+      end;
+    end;
+
+    if Length(trim(edCpf.Text)) = 14 then
+    begin
+      ACBrValidador1.TipoDocto := docCNPJ;
+      ACBrValidador1.Documento := trim(edCpf.text);
+      if ACBrValidador1.Validar = false then
+      begin
+        dm.exibe_painel_erro('CNPJ INVÁLIDO!', 'Ok');
+        edCpf.Clear;
+        edCpf.SetFocus;
+        exit;
+      end
+      else
+      begin
+        edNomeCliente.SetFocus;
+      end;
+    end;
+  end
+  else
+  begin
+    dm.exibe_painel_erro('Número de documento inválido', 'Ok');
+    edCpf.Clear;
+    edCpf.SetFocus;
+    exit;
+  end;
+  nomeClienteCupom := edNomeCliente.Text;
+  enderecoClienteCupomFiscal := edEndereco.Text;
+  cpfClienteCupomFiscal := edCpf.Text;
+end;
+
+procedure Tfrm_encerramento.iniciarEncerramentoDaConta();
+begin
+  inherited;
+  tipo_comprovante := StrtoInt(dm.LeIni(1, 'ENCERRAMENTO', 'tipo_comprovante'));
+
+  if tipo_comprovante = 1 then
+  begin
+    if tipo_cupom = 2 then
+      tipo_comprovante := 2
+    else
+      tipo_comprovante := 1;
+  end;
+
+  if frm_principal.getNFE55VendaAtual then
+    modeloComprovanteFiscal := 3;
+
+  if (StrToInt(dm.LeIni(2, 'CAIXA', 'permiteEncerrarContas')) = 0) then
+  begin
+    showmessage('Não é possível encerrar contas nesta estação!');
+    exit;
+  end;
+
+  dm.atualizaDataDoSistema();
+
+  if getDataSistemaCaixa(ultimoCaixaAberto) <> data_do_sistema then
+  begin
+    dm.exibe_painel_erro('A data em que o caixa atual foi aberto difere da data atual do sistema.' + ' Efetue o fechamento do caixa atual e abra um novo caixa!', 'Ok');
+    exit;
+  end;
+
+  if StrToInt(dm.LeIni(2, 'ENCERRAMENTO', 'abrirIdentificacaoClienteAntes')) = 1 then
+  begin
+//    btIdCliente.Click;
+  end;
+
+  calcula_valores();
+
+  case tipoVenda of
+    1:
+      ed_codigo_forma.SetFocus;
+    2:
+      ed_codigo_forma.SetFocus;
+    3:
+
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.edValorDescontoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  qtdItens: integer;
+  descontoMaximo: double;
+  LQryConsulta: TIBquery;
+  Ltransacao: TIBTransaction;
+  valorDescontoCalculado: double;
+  tipoDesconto: smallint;
+begin
+  inherited;
+
+  Ltransacao := TIBTransaction.Create(nil);
+  LQryConsulta := TIBquery.Create(nil);
+  Ltransacao.Params.Add('read_committed');
+  Ltransacao.Params.Add('rec_version');
+  Ltransacao.Params.Add('nowait');
+
+  Ltransacao.DefaultDatabase := dm.dbrestaurante;
+  Ltransacao.Active := false;
+  Ltransacao.Active := true;
+  LQryConsulta.Database := dm.dbrestaurante;
+  LQryConsulta.Transaction := Ltransacao;
+  LQryConsulta := TIBQuery.Create(Self);
+  LQryConsulta.Database := dm.dbrestaurante;
+  LQryConsulta.Transaction := Ltransacao;
+  LQryConsulta.Active := false;
+  LQryConsulta.SQL.clear;
+
+  try
+    if Key = VK_RETURN then
+    begin
+      try
+        LQryConsulta.SQL.Add('select count(*) as ct  from movimento_mesa ms where ms.cod_mesa=' + Quotedstr(lb_mesa.Caption));
+        LQryConsulta.Active := true;
+        LQryConsulta.FetchAll;
+        qtdItens := LQryConsulta.FieldByName('ct').Value;
+        descontoMaximo := ed_valor_bruto.Value - 0.01;
+        if (edValorDesconto.Value < 0) then
+        begin
+          raise Exception.Create('Desconto não pode ser negativo!');
+
+        end;
+
+        if rdPercentual.Checked then
+        begin
+          tipoDesconto := 0;
+          valorDescontoCalculado := RoundABNT(((ed_valor_bruto.Value * edValorDesconto.Value) / 100), 2);
+        end
+        else
+        begin
+          tipoDesconto := 1;
+          valorDescontoCalculado := edValorDesconto.Value;
+        end;
+
+        if valorDescontoCalculado > descontoMaximo then
+        begin
+          raise Exception.Create('Valor máximo de desconto para essa venda não pode ultrapassar ' + FormatFloat('R$ ###,###,##0.00 ', descontoMaximo));
+        end;
+
+        LQryConsulta.Active := false;
+        LQryConsulta.SQL.Clear;
+        LQryConsulta.SQL.Add('execute procedure distribui_descontos(' + QuotedstR(lb_mesa.Caption) + ',' + Inttostr(tipoDesconto) + ',' + dm.TrocaVirgPPto(Floattostr(edValorDesconto.Value)) + ')');
+
+        LQryConsulta.ExecSQL;
+        Ltransacao.Commit;
+        pgOpcoes.Show;
+        busca_movimento_da_mesa;
+        calcula_valores;
+        ed_codigo_forma.SetFocus;
+
+      except
+        on E: Exception do
+        begin
+          raise Exception.Create('Erro ao executar desconto! ' + e.Message);
+          edValorDesconto.SetFocus;
+          edValorDesconto.SelectAll;
+        end;
+      end;
+
+    end;
+  finally
+    LQryConsulta.Active := false;
+    FreeAndNil(LQryConsulta);
+    FreeAndNil(Ltransacao);
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.ed_valor_tx_servChange(Sender: TObject);
+begin
+  inherited;
+  ed_valor_tx_serv.SelStart := length(ed_valor_tx_serv.text);
+end;
+
+procedure Tfrm_encerramento.ed_valor_tx_servExit(Sender: TObject);
+begin
+  inherited;
+  calcula_valores();
+end;
+
+procedure Tfrm_encerramento.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+
+  memoMensagens.Color := clRed;
+  memoMensagens.font.Color := clWhite;
+  Timer1.Enabled := false;
+  Timer2.Enabled := true;
+
+end;
+
+procedure Tfrm_encerramento.Timer2Timer(Sender: TObject);
+begin
+  inherited;
+
+  memoMensagens.Color := clBlack;
+  memoMensagens.font.Color := clYellow;
+  Timer2.Enabled := false;
+  Timer1.Enabled := true;
+
+end;
+
+procedure Tfrm_encerramento.setMensagemOperador(mensagem: string);
+begin
+  exibirMensagemInformacao(mensagem, 2000, 22, true);
+
+end;
+
+procedure Tfrm_encerramento.exibirMensagemPainelInformacoes(titulo: string; mensagem: string; tempo: smallint; tipoMensagem: smallint; progresso: boolean);
+begin
+
+  pgMensagensErro.Show;
+  pnMensagensErro.Left := 52;
+  pnMensagensErro.Top := 95;
+  ActivityIndicator.Active := progresso;
+  SetMensagemPainelInformacoes(titulo, mensagem, tempo, tipoMensagem, progresso);
+  pnMensagensErro.Visible := true;
+  frm_encerramento.Enabled := false;
+end;
+
+procedure Tfrm_encerramento.SetMensagemPainelInformacoes(titulo: string; mensagem: string; tempo: smallint; tipoMensagem: smallint; progresso: boolean);
+begin
+
+  case tipoMensagem of
+    0:
+      begin
+         // Imagem da NFC-e
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\nfce.png');
+        except
+          ////dm.adicionalog('Imagem da NFC-e não localizada.');
+        end;
+
+      end;
+
+    1:
+      begin
+         // Imagem da NF-e
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\nfce.png');
+        except
+          ////dm.adicionalog('Imagem da NF-e não localizada.');
+        end;
+
+      end;
+
+    2:
+      begin
+         // Imagem de erro
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\erro256.png');
+        except
+          ////dm.adicionalog('Imagem de erro não localizada.');
+        end;
+
+      end;
+
+    3:
+      begin
+         // Imagem de aviso
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\atencao.png');
+        except
+          ////dm.adicionalog('Imagem da NF-e não localizada.');
+        end;
+
+      end;
+
+    4:
+      begin
+         // Imagem offline
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\offline256.png');
+        except
+          ////dm.adicionalog('Imagem da NF-e não localizada.');
+        end;
+
+      end;
+
+    5:
+      begin
+         // Imagem identifica cliente
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\idcliente.png');
+        except
+          ////dm.adicionalog('Imagem de identificação do cliente não localizada!');
+        end;
+
+      end;
+
+    6:
+      begin
+         // Imagem treinamento
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\classroom256.png');
+        except
+          ////dm.adicionalog('Imagem de treinamento não localizada!');
+        end;
+
+      end;
+
+    7:
+      begin
+         // Imagem treinamento
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\printer256.png');
+        except
+          ////dm.adicionalog('Imagem de impressão não localizada!');
+        end;
+
+      end;
+
+    8:
+      begin
+         // Imagem tef
+        try
+          imgPainelErro.Picture.LoadFromFile(patchAplicacao + 'imagens\tef.png');
+        except
+          ////dm.adicionalog('Imagem de impressão não localizada!');
+        end;
+
+      end;
+  end;
+
+  lbMensagemErro.Lines.Clear;
+  lbMensagemErro.lines.Add(trim(mensagem));
+  lbTituloMensagem.Caption := titulo;
+
+  if tempo > 0 then
+    lbTempoMensagem.Caption := Inttostr(tempo) + 's'
+  else
+    lbTempoMensagem.Caption := '';
+
+  ActivityIndicator.Active := progresso;
+end;
+
+procedure Tfrm_encerramento.fecharPainelInformacoes();
+begin
+  pnMensagensErro.Left := -1000;
+  pnMensagensErro.Top := -1000;
+  pnMensagensErro.Visible := false;
+  pgFormasPagamentoPrincipal.Show;
+  ActivityIndicator.Active := false;
+  frm_encerramento.Enabled := true;
+
+end;
+
+function Tfrm_encerramento.getMensagemOperador(): string;
+begin
+//  Result := memoMensagens.Lines.Text ;
+
+end;
+
+procedure Tfrm_encerramento.exibirMensagemInformacao(mensagem: string; tempo: Integer; fonte: Integer; urgencia: Boolean);
+begin
+
+  pgList.ActivePage := pgMensagens;
+  memoMensagens.Lines.Clear;
+  memoMensagens.Lines.Add(mensagem);
+  memoMensagens.Font.Size := fonte;
+
+  if (tempo <> 0) then
+  begin
+    timerTempoMensagem.Enabled := true;
+    timerTempoMensagem.Interval := tempo;
+    Timer1.Enabled := True;
+  end
+  else
+  begin
+    timerTempoMensagem.Interval := 6000;
+    timerTempoMensagem.Enabled := true;
+    Timer1.Enabled := True;
+  end;
+
+end;
+
+procedure Tfrm_encerramento.btCancelarClick(Sender: TObject);
+begin
+  if (verificaPossibilidadeCancelarVenda = True) then
+  begin
+    podeFecharFormulario := true;
+
+    Close;
+  end
+  else
+  begin
+    podeFecharFormulario := false;
+    exibe_painel_erro('Não foi possível cancelar a venda', 'OK');
+  end;
+
+end;
+
+function Tfrm_encerramento.verificaPossibilidadeCancelarVenda(): Boolean;
+var
+  Est: TACBrECFEstado;
+  segundosExibicaoMensagem: smallint;
+begin
+
+  if transacaoTEFIniciada then
+  begin
+    result := False;
+    segundosExibicaoMensagem := 20;
+    ExibirMensagemPainelInformacoes('Transação de TEF já iniciada. ', '', segundosExibicaoMensagem, 8, true);
+
+    while (segundosExibicaoMensagem >= 0) do
+    begin
+
+      frm_encerramento.SetMensagemPainelInformacoes('Erro: Transação TEF já iniciada!', 'Uma transação de TEF foi iniciciada e aprovada.' + 'Caso deseje sair, será necessário cancelar a transação já aprovada e reiniciar o processo de pagamento. ' + LineBreak + 'Na janela à seguir, confirme se deseja cancelar a transação TEF atual', segundosExibicaoMensagem, 8, true);
+      Sleep(1000);
+      Application.ProcessMessages();
+      segundosExibicaoMensagem := segundosExibicaoMensagem - 1;
+    end;
+
+    fecharPainelInformacoes();
+    if dm.verificaPermissaoAcao('I20002019', true, true) = true then
+    begin
+      string_auxiliar := '';
+
+      if (ShowRealDialog(Self, tmConfirmacao, 'Confirme', 'Confirma o cancelamento da transação de TEF pendente  ?') = teSim) then
+      begin
+
+        try
+          dm.ACBrTEFD1.CancelarTransacoesPendentes;
+          transacaoTEFIniciada := false;
+          ////dm.adicionalog('Transação de TEF cancelada!');
+          Result := true;
+
+        except
+          dm.exibe_painel_erro('Erro ao cancelar transação TEF', 'Ok');
+          ////dm.adicionalog('Erro ao cancelar transação TEF');
+        end;
+
+      end;
+    end
+    else
+    begin
+      Result := false;
+    end;
+
+  end;
+
+end;
+
+procedure Tfrm_encerramento.timerTempoMensagemTimer(Sender: TObject);
+begin
+  inherited;
+  Timer2.Enabled := false;
+  Timer1.Enabled := False;
+
+  memoMensagens.Color := clRed;
+  memoMensagens.font.Color := clWhite;
+  memoMensagens.Clear;
+  pgTotais.Show;
+
+end;
+
+procedure Tfrm_encerramento.tmEncerrarContaTimer(Sender: TObject);
+begin
+  inherited;
+  tmEncerrarConta.Enabled := false;
+  btEncerrarVenda.Click;
+
+end;
+
+procedure Tfrm_encerramento.btIniciaEmissaoCupomClick(Sender: TObject);
+begin
+  inherited;
+
+  iniciarEncerramentoDaConta();
+
+end;
+
+function Tfrm_encerramento.verificaValidadeEncerramentoDaVenda(): boolean;
+begin
+
+  result := false;
+
+  recalculavalorTaxaServico();
+
+  if tbFormasPagamentoTemp.IsEmpty = true then
+  begin
+    dm.exibe_painel_erro('Nenhuma forma de pagamento foi informada', 'Continuar');
+    result := false;
+    exit;
+  end;
+
+  if (ed_total_pago.Value < ed_total_conta.Value) then
+  begin
+    dm.exibe_painel_erro('Total de pagamentos é inferior ao total da conta', 'Continuar');
+    result := false;
+    exit;
+
+  end;
+
+  if (verificaDisponibilidadeDeTroco(ed_valor_troco.Value) = false) then
+  begin
+    result := false;
+    exit;
+  end;
+
+  result := true;
+
+end;
+
+procedure Tfrm_encerramento.botaoClickFormaClick(Sender: TObject);
+var
+  x: integer;
+begin
+  inherited;
+  x := 0;
+  while ((x < ComponentCount - 1)) do
+  begin
+    if (Components[x] is Tedit) and ((Components[x] as Tedit).Name = 'ed_codigo_forma') then
+    begin
+      (Components[x] as Tedit).Text := Trim(copy((Sender as TJvImgBtn).Name, 6, 10));
+      ed_valor_forma.SetFocus;
+
+    end;
+    x := x + 1;
+  end;
+end;
+
+procedure Tfrm_encerramento.btSelecionarClick(Sender: TObject);
+begin
+
+  if (trim(edCpf.Text) <> '') then
+  begin
+    setCPFCliente();
+  end;
+
+  pgOpcoes.Show;
+  ed_codigo_forma.SetFocus;
+end;
+
+procedure Tfrm_encerramento.edCpfExit(Sender: TObject);
+begin
+
+  if (trim(edCpf.Text) <> '') then
+  begin
+    if (trim((Sender as TCustomEdit).Text) <> '') then
+      setCPFCliente();
+
+  end;
+end;
+
+procedure Tfrm_encerramento.edNomeClienteExit(Sender: TObject);
+begin
+
+  if (trim(edCpf.Text) <> '') then
+  begin
+    if (trim((Sender as TCustomEdit).Text) <> '') then
+      setCPFCliente();
+  end;
+end;
+
+procedure Tfrm_encerramento.MakeRounded(Control: TWinControl);
+var
+  R: TRect;
+  Rgn: HRGN;
+begin
+  with Control do
+  begin
+    R := ClientRect;
+    Rgn := CreateRoundRectRgn(R.Left, R.Top, R.Right, R.Bottom, 20, 20);
+    Perform(EM_GETRECT, 0, lParam(@R));
+    InflateRect(R, -5, -5);
+    Perform(EM_SETRECTNP, 0, lParam(@R));
+    SetWindowRgn(Handle, Rgn, True);
+    Invalidate;
+  end;
+end;
+
+end.
+
